@@ -62,14 +62,14 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 text-accent flex-shrink-0" />
-                <a href="tel:+918884184647" className="hover:text-foreground transition-colors">
-                  +91 88841 84647
+                <a href="tel:+918867050606" className="hover:text-foreground transition-colors">
+                  +91 88670 50606
                 </a>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4 text-accent flex-shrink-0" />
-                <a href="mailto:hello@zimarix.com" className="hover:text-foreground transition-colors">
-                  hello@zimarix.com
+                <a href="mailto:contact@zimarix.com" className="hover:text-foreground transition-colors">
+                  contact@zimarix.com
                 </a>
               </div>
             </div>
