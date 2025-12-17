@@ -36,28 +36,41 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-gold-light flex items-center justify-center">
                 <span className="text-charcoal font-bold text-lg">Z</span>
               </div>
               <span className="font-bold text-xl tracking-tight">Zimarix</span>
             </div>
+            <p className="text-xs text-muted-foreground mb-4 font-medium">
+              ZIMARIX IOT PRIVATE LIMITED
+            </p>
             <p className="text-muted-foreground mb-6 max-w-sm leading-relaxed">
               Intelligence Built Into Your Walls. Premium smart switch panels
               designed specifically for Indian homes.
             </p>
             <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4 text-accent flex-shrink-0" />
-                <span>Bangalore, India</span>
+              <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                <MapPin className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                <span className="leading-relaxed">
+                  Plot No 77, JBR Tech Park,<br />
+                  6th Road, EPIP Layout,<br />
+                  Bangalore South, Whitefield,<br />
+                  Bangalore - 560066,<br />
+                  Karnataka, India
+                </span>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 text-accent flex-shrink-0" />
-                <span>+91 98765 43210</span>
+                <a href="tel:+918884184647" className="hover:text-foreground transition-colors">
+                  +91 88841 84647
+                </a>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4 text-accent flex-shrink-0" />
-                <span>hello@zimarix.com</span>
+                <a href="mailto:hello@zimarix.com" className="hover:text-foreground transition-colors">
+                  hello@zimarix.com
+                </a>
               </div>
             </div>
           </div>
@@ -117,7 +130,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Zimarix. All rights reserved.
+            © {new Date().getFullYear()} Zimarix IoT Private Limited. All rights reserved.
           </p>
 
           {/* Social Links */}
