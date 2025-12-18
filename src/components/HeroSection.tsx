@@ -13,7 +13,7 @@ export function HeroSection() {
       </div>
 
       <div className="container-tight relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -103,18 +103,18 @@ export function HeroSection() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative"
+            className="relative lg:scale-150 lg:translate-x-12"
           >
             <div className="relative">
               {/* Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-gold-light/20 rounded-3xl blur-3xl scale-110" />
 
               {/* Product Image Container */}
-              <div className="relative bg-gradient-to-br from-card to-muted rounded-3xl p-8 shadow-elevated border border-border/50">
+              <div className="relative bg-gradient-to-br from-card to-muted rounded-xl shadow-elevated border border-border/50 overflow-hidden">
                 <img
                   src="/hero-switch-panel.png"
                   alt="Zimarix Smart Switch Panel"
-                  className="w-full h-auto rounded-2xl"
+                  className="w-full h-auto object-cover"
                 />
 
                 {/* Floating Feature Tags */}
@@ -126,7 +126,7 @@ export function HeroSection() {
                 >
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                      <span className="text-accent text-xs font-bold">4</span>
+                      <span className="text-accent text-xs font-bold">8</span>
                     </div>
                     <div>
                       <p className="text-xs font-medium">Touch Controls</p>
