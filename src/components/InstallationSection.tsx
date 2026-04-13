@@ -92,7 +92,7 @@ export function InstallationSection() {
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
               Simple Setup,{" "}
-              <span className="bg-gradient-to-r from-accent to-gold-light bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-accent to-blue-light bg-clip-text text-transparent">
                 Powerful Results
               </span>
             </h2>

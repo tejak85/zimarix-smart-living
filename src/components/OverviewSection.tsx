@@ -41,7 +41,7 @@ export function OverviewSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-accent via-gold-light to-accent bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-accent via-blue-light to-accent bg-clip-text text-transparent"
           >
             Good Isn't Enough
           </motion.h2>
