@@ -4,7 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
-/* Zimarix Premium Design System */
+/* Zimarix Premium Design System — Blue/Silver Theme */
 
 @layer base {
   :root {
@@ -20,45 +20,47 @@
     --primary: 220 20% 12%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 40 30% 96%;
+    --secondary: 210 20% 96%;
     --secondary-foreground: 220 20% 12%;
 
-    --muted: 220 10% 96%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 215 15% 96%;
+    --muted-foreground: 215 10% 45%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 220 20% 10%;
+    --accent: 210 100% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 10% 92%;
-    --input: 220 10% 92%;
-    --ring: 38 92% 50%;
+    --border: 215 15% 91%;
+    --input: 215 15% 91%;
+    --ring: 210 100% 55%;
 
     --radius: 1rem;
 
     /* Custom Zimarix tokens */
-    --gold: 38 92% 50%;
-    --gold-light: 40 85% 65%;
-    --gold-glow: 38 92% 50%;
+    --blue: 210 100% 55%;
+    --blue-light: 205 90% 68%;
+    --blue-glow: 210 100% 55%;
+    --silver: 210 10% 75%;
+    --silver-light: 210 8% 88%;
     --charcoal: 220 20% 12%;
     --charcoal-light: 220 15% 20%;
-    --warm-white: 40 20% 98%;
-    --soft-grey: 220 10% 94%;
+    --cool-white: 210 20% 98%;
+    --soft-grey: 215 10% 94%;
     --glass: 0 0% 100%;
 
     /* Gradients */
-    --gradient-gold: linear-gradient(135deg, hsl(38 92% 50%), hsl(45 90% 60%));
+    --gradient-blue: linear-gradient(135deg, hsl(210 100% 55%), hsl(205 90% 68%));
     --gradient-dark: linear-gradient(180deg, hsl(220 20% 12%), hsl(220 25% 8%));
     --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
-    --gradient-hero: linear-gradient(180deg, hsl(40 20% 98%) 0%, hsl(220 10% 96%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(210 20% 98%) 0%, hsl(215 15% 96%) 100%);
 
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(220 20% 12% / 0.08);
     --shadow-card: 0 8px 32px -8px hsl(220 20% 12% / 0.12);
     --shadow-elevated: 0 20px 50px -12px hsl(220 20% 12% / 0.15);
-    --shadow-gold: 0 8px 30px -8px hsl(38 92% 50% / 0.35);
+    --shadow-blue: 0 8px 30px -8px hsl(210 100% 55% / 0.35);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -67,7 +69,7 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 38 92% 50%;
+    --sidebar-ring: 210 100% 55%;
   }
 
   .dark {
@@ -87,26 +89,26 @@
     --secondary-foreground: 0 0% 95%;
 
     --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 60%;
+    --muted-foreground: 215 10% 60%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 220 20% 10%;
+    --accent: 210 100% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 220 15% 18%;
     --input: 220 15% 18%;
-    --ring: 38 92% 50%;
+    --ring: 210 100% 55%;
 
     --sidebar-background: 220 20% 8%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary: 210 100% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 15% 12%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 220 15% 15%;
-    --sidebar-ring: 38 92% 50%;
+    --sidebar-ring: 210 100% 55%;
   }
 }
 
@@ -129,8 +131,8 @@
     @apply bg-card/80 backdrop-blur-xl border border-border/50 shadow-card;
   }
 
-  .gold-text {
-    @apply bg-gradient-to-r from-accent to-gold-light bg-clip-text text-transparent;
+  .blue-text {
+    @apply bg-gradient-to-r from-accent to-blue-light bg-clip-text text-transparent;
   }
 
   .section-padding {

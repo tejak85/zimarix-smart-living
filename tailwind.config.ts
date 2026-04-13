@@ -51,10 +51,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: {
-          DEFAULT: "hsl(var(--gold))",
-          light: "hsl(var(--gold-light))",
-          glow: "hsl(var(--gold-glow))",
+        blue: {
+          DEFAULT: "hsl(var(--blue))",
+          light: "hsl(var(--blue-light))",
+          glow: "hsl(var(--blue-glow))",
+        },
+        silver: {
+          DEFAULT: "hsl(var(--silver))",
+          light: "hsl(var(--silver-light))",
         },
         charcoal: {
           DEFAULT: "hsl(var(--charcoal))",
@@ -83,7 +87,7 @@ export default {
         soft: "var(--shadow-soft)",
         card: "var(--shadow-card)",
         elevated: "var(--shadow-elevated)",
-        gold: "var(--shadow-gold)",
+        blue: "var(--shadow-blue)",
       },
       keyframes: {
         "accordion-down": {
@@ -115,8 +119,8 @@ export default {
           "50%": { transform: "translateY(-10px)" },
         },
         glow: {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(38 92% 50% / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(38 92% 50% / 0.5)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(210 100% 55% / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(210 100% 55% / 0.5)" },
         },
       },
       animation: {
