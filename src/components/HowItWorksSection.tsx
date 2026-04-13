@@ -49,7 +49,7 @@ export function HowItWorksSection() {
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Four Simple Steps to a{" "}
-            <span className="bg-gradient-to-r from-accent to-gold-light bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-accent to-blue-light bg-clip-text text-transparent">
               Smarter Home
             </span>
           </h2>
@@ -80,7 +80,7 @@ export function HowItWorksSection() {
                     <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center border border-accent/20 shadow-soft">
                       <step.icon className="w-8 h-8 text-accent" />
                     </div>
-                    <span className="absolute -top-2 -right-2 w-8 h-8 rounded-lg bg-accent text-charcoal text-sm font-bold flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 w-8 h-8 rounded-lg bg-accent text-accent-foreground text-sm font-bold flex items-center justify-center">
                       {step.number}
                     </span>
                   </div>

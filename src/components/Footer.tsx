@@ -37,9 +37,11 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-gold-light flex items-center justify-center">
-                <span className="text-charcoal font-bold text-lg">Z</span>
-              </div>
+              <img
+                src="/zimarix-logo.png"
+                alt="Zimarix"
+                className="w-10 h-10 rounded-xl object-cover"
+              />
               <span className="font-bold text-xl tracking-tight">Zimarix</span>
             </div>
             <p className="text-xs text-muted-foreground mb-4 font-medium">

@@ -43,7 +43,7 @@ export function HeroSection() {
             >
               Intelligence
               <br />
-              <span className="bg-gradient-to-r from-accent via-gold-light to-accent bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-accent via-blue-light to-accent bg-clip-text text-transparent">
                 Built Into
               </span>
               <br />
@@ -107,7 +107,7 @@ export function HeroSection() {
           >
             <div className="relative">
               {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-gold-light/20 rounded-3xl blur-3xl scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-blue-light/20 rounded-3xl blur-3xl scale-110" />
 
               {/* Product Image Container */}
               <div className="relative bg-gradient-to-br from-card to-muted rounded-xl shadow-elevated border border-border/50 overflow-hidden">

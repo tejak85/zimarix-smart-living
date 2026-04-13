@@ -113,9 +113,9 @@ export function SecuritySection() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 }}
-                  className="bg-gradient-to-br from-accent to-gold-light rounded-2xl p-6 mt-8"
+                  className="bg-gradient-to-br from-accent to-blue-light rounded-2xl p-6 mt-8"
                 >
-                  <div className="text-charcoal">
+                  <div className="text-accent-foreground">
                     <div className="text-4xl font-bold mb-2">99.9%</div>
                     <p className="text-sm font-medium">Uptime Guarantee</p>
                   </div>

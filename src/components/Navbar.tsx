@@ -36,9 +36,11 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-gold-light flex items-center justify-center">
-              <span className="text-charcoal font-bold text-lg">Z</span>
-            </div>
+            <img
+              src="/zimarix-logo.png"
+              alt="Zimarix"
+              className="w-10 h-10 rounded-xl object-cover"
+            />
             <span className="font-bold text-xl tracking-tight">Zimarix</span>
           </a>
 
