@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Linkedin, Twitter, Instagram, Youtube } from "lucide-react";
+import { MapPin, Phone, Mail, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 
 const footerLinks = {
   product: [
@@ -23,10 +23,10 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/zimarix-iot-private-limited/", label: "LinkedIn" },
+  { icon: Youtube, href: "https://www.youtube.com/@zimarix1", label: "YouTube" },
+  { icon: Instagram, href: "https://www.instagram.com/zimarix1/", label: "Instagram" },
+  { icon: Facebook, href: "https://www.facebook.com/professional_dashboard/?ref=profile_action", label: "Facebook" },
 ];
 
 export function Footer() {
