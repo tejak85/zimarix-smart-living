@@ -39,7 +39,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Button variant="hero" className="group">
                 Upgrade Your Switchboard
@@ -53,7 +53,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              className="flex items-center justify-center lg:justify-start gap-8 mt-12 pt-8 border-t border-border/50"
+              className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-8 border-t border-border/50"
             >
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Wifi className="w-4 h-4 text-accent" />
@@ -72,10 +72,10 @@ export function HeroSection() {
 
           {/* Right Content - Product Mockup */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative lg:scale-150 lg:translate-x-12"
+            className="relative order-1 lg:order-2 w-full max-w-4xl"
           >
             <div className="relative">
               {/* Glow Effect */}
