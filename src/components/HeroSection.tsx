@@ -13,13 +13,13 @@ export function HeroSection() {
       </div>
 
       <div className="container-tight relative z-10">
-        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-12 items-center">
-          {/* Left Content */}
+        <div className="flex flex-col items-center gap-12">
+          {/* Top Content */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-left"
+            className="text-center order-2 lg:order-1 w-full max-w-3xl"
           >
             {/* Badge */}
             <motion.div
