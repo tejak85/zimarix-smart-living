@@ -34,34 +34,6 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6"
-            >
-              Intelligence
-              <br />
-              <span className="bg-gradient-to-r from-accent via-blue-light to-accent bg-clip-text text-transparent">
-                Built Into
-              </span>
-              <br />
-              Your Walls
-            </motion.h1>
-
-            {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed"
-            >
-              Replace your traditional switchboard with Zimarix Smart Touch
-              Panels. Control lights, fans, AC & appliances via touch, voice, or
-              app — designed for Indian homes.
-            </motion.p>
-
             {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
