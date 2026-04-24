@@ -44,8 +44,8 @@ export function ColorsSection() {
             Finishes &amp; <span className="text-accent">Colors</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Crafted from anodized aluminum and tempered glass. Choose a finish that
-            blends seamlessly with your interior.
+            Crafted from anodized aluminum. Choose a finish that blends seamlessly
+            with your interior.
           </p>
         </motion.div>
 
