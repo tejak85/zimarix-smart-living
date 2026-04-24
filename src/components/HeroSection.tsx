@@ -88,43 +88,6 @@ export function HeroSection() {
                   alt="Zimarix Smart Switch Panel"
                   className="w-full h-auto object-cover"
                 />
-
-                {/* Floating Feature Tags */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8 }}
-                  className="absolute -left-4 top-1/4 glass-card rounded-xl px-4 py-3 shadow-card"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                      <span className="text-accent text-xs font-bold">8</span>
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium">Touch Controls</p>
-                      <p className="text-xs text-muted-foreground">
-                        Capacitive
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1 }}
-                  className="absolute -right-4 bottom-1/4 glass-card rounded-xl px-4 py-3 shadow-card"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium">Status</p>
-                      <p className="text-xs text-green-500">Connected</p>
-                    </div>
-                  </div>
-                </motion.div>
               </div>
             </div>
           </motion.div>
