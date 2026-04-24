@@ -21,18 +21,6 @@ export function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center order-2 lg:order-1 w-full max-w-3xl"
           >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8"
-            >
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-sm font-medium text-accent">
-                Next-Gen Smart Home Technology
-              </span>
-            </motion.div>
 
             {/* CTA Buttons */}
             <motion.div
@@ -48,26 +36,6 @@ export function HeroSection() {
               <Button variant="heroOutline">Book a Demo</Button>
             </motion.div>
 
-            {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-8 border-t border-border/50"
-            >
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Wifi className="w-4 h-4 text-accent" />
-                <span>Works Offline</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Shield className="w-4 h-4 text-accent" />
-                <span>Encrypted</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Smartphone className="w-4 h-4 text-accent" />
-                <span>App Control</span>
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Right Content - Product Mockup */}
