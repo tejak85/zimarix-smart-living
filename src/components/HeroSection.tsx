@@ -12,7 +12,7 @@ export function HeroSection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-accent/5 to-transparent rounded-full" />
       </div>
 
-      <div className="container-tight relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center gap-12">
           {/* Top Content */}
           <motion.div
@@ -75,7 +75,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative order-1 lg:order-2 w-full max-w-4xl"
+            className="relative order-1 lg:order-2 w-full max-w-[1500px]"
           >
             <div className="relative">
               {/* Glow Effect */}
