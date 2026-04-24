@@ -75,7 +75,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative order-1 lg:order-2 w-full max-w-4xl"
+            className="relative order-1 lg:order-2 w-full max-w-[1500px]"
           >
             <div className="relative">
               {/* Glow Effect */}
