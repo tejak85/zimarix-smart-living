@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Wifi, Smartphone, Shield } from "lucide-react";
+import heroImage from "@/assets/hero-switch-panel.png";
 
 export function HeroSection() {
   return (
@@ -52,7 +53,7 @@ export function HeroSection() {
               {/* Product Image Container */}
               <div className="relative bg-gradient-to-br from-card to-muted rounded-xl shadow-elevated border border-border/50 overflow-hidden">
                 <img
-                  src="/hero-switch-panel.png"
+                  src={heroImage}
                   alt="Zimarix Smart Switch Panel"
                   className="w-full h-auto object-cover"
                 />
