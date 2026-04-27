@@ -39,24 +39,8 @@ export function CTASection() {
           </h2>
 
           <p className="text-lg sm:text-xl text-primary-foreground/70 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Join thousands of Indian homeowners who have already upgraded to
-            Zimarix. Experience the future of home automation today.
+            Contact us at
           </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button variant="cta" className="group">
-              Upgrade Your Switchboard
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button
-              variant="heroOutline"
-              className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              <Calendar className="w-5 h-5" />
-              Book a Demo
-            </Button>
-          </div>
 
           {/* Contact Info */}
           <motion.div
