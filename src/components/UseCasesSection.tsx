@@ -17,13 +17,6 @@ const useCases = [
     image: "/usecase-apartment.png",
   },
   {
-    icon: HardHat,
-    title: "Renovations",
-    description:
-      "Upgrade existing homes without major rewiring. Simple and effective.",
-    image: "/usecase-renovation.png",
-  },
-  {
     icon: Hotel,
     title: "Smart Offices & Hotels",
     description:
