@@ -4,28 +4,23 @@ import colorOptionsImg from "@/assets/color-options.jpeg";
 const finishes = [
   {
     name: "Obsidian Black",
-    description: "Glossy black glass with chrome accents.",
     swatch: "linear-gradient(135deg, hsl(0 0% 8%), hsl(0 0% 18%))",
   },
   {
-    name: "Graphite Matte",
-    description: "Soft matte black aluminum, stealth look.",
-    swatch: "linear-gradient(135deg, hsl(0 0% 14%), hsl(0 0% 26%))",
-  },
-  {
-    name: "Brushed Silver",
-    description: "Anodized aluminum with brushed texture.",
+    name: "Silver",
     swatch: "linear-gradient(135deg, hsl(0 0% 78%), hsl(0 0% 92%))",
   },
   {
-    name: "Midnight Blue",
-    description: "Deep blue glass with metallic shimmer.",
-    swatch: "linear-gradient(135deg, hsl(220 60% 12%), hsl(220 50% 24%))",
+    name: "Dark Olive Brown",
+    swatch: "linear-gradient(135deg, hsl(60 15% 12%), hsl(55 20% 22%))",
   },
   {
     name: "Espresso Bronze",
-    description: "Warm bronze for wooden interiors.",
     swatch: "linear-gradient(135deg, hsl(20 30% 15%), hsl(25 35% 28%))",
+  },
+  {
+    name: "Grey",
+    swatch: "linear-gradient(135deg, hsl(0 0% 40%), hsl(0 0% 55%))",
   },
 ];
 
@@ -74,9 +69,8 @@ export function ColorsSection() {
               className="group bg-card border border-border/50 rounded-2xl overflow-hidden hover:shadow-elevated transition-all duration-500"
             >
               <div className="h-32 w-full" style={{ background: finish.swatch }} />
-              <div className="p-6">
-                <h3 className="text-lg font-semibold mb-1.5">{finish.name}</h3>
-                <p className="text-sm text-muted-foreground">{finish.description}</p>
+              <div className="p-6 text-center">
+                <h3 className="font-serif text-lg tracking-wide">{finish.name}</h3>
               </div>
             </motion.div>
           ))}
