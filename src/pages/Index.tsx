@@ -4,7 +4,7 @@ import { OverviewSection } from "@/components/OverviewSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 
 
-import { InstallationSection } from "@/components/InstallationSection";
+
 import { UseCasesSection } from "@/components/UseCasesSection";
 import { ColorsSection } from "@/components/ColorsSection";
 import { CTASection } from "@/components/CTASection";
@@ -20,7 +20,7 @@ const Index = () => {
         <FeaturesSection />
         
         
-        <InstallationSection />
+        
         <UseCasesSection />
         <ColorsSection />
         <CTASection />
