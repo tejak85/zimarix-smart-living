@@ -59,16 +59,6 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" size="sm">
-              Contact
-            </Button>
-            <Button variant="gold" size="sm">
-              Book a Demo
-            </Button>
-          </div>
-
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2"
