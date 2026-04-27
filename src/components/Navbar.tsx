@@ -89,14 +89,6 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <div className="flex flex-col gap-3 pt-4 border-t border-border">
-                <Button variant="outline" className="w-full">
-                  Contact
-                </Button>
-                <Button variant="gold" className="w-full">
-                  Book a Demo
-                </Button>
-              </div>
             </div>
           </motion.div>
         )}
