@@ -15,30 +15,6 @@ export function HeroSection() {
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center gap-12">
-          {/* Top Content */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center order-2 lg:order-1 w-full max-w-3xl"
-          >
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Button variant="hero" className="group">
-                Upgrade Your Switchboard
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button variant="heroOutline">Book a Demo</Button>
-            </motion.div>
-
-          </motion.div>
-
           {/* Right Content - Product Mockup */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
