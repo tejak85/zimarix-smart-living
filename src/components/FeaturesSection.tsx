@@ -7,6 +7,7 @@ import {
   Wrench,
   Clock,
   Eye,
+  Radio,
 } from "lucide-react";
 
 const features = [
@@ -45,6 +46,12 @@ const features = [
     title: "Smart Monitoring",
     description:
       "Intrusion detection and real-time alerts. Know what's happening at home.",
+  },
+  {
+    icon: Radio,
+    title: "Universal IR Control",
+    description:
+      "Record any remote and control TVs, ACs, and appliances from your phone. No more juggling multiple remotes.",
   },
 ];
 
