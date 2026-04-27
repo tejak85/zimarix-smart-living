@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Home, Building2, HardHat, Hotel } from "lucide-react";
+import { Home, Building2, Hotel } from "lucide-react";
 
 const useCases = [
   {
@@ -15,13 +15,6 @@ const useCases = [
     description:
       "Premium automation for premium living. Impress residents with modern amenities.",
     image: "/usecase-apartment.png",
-  },
-  {
-    icon: HardHat,
-    title: "Renovations",
-    description:
-      "Upgrade existing homes without major rewiring. Simple and effective.",
-    image: "/usecase-renovation.png",
   },
   {
     icon: Hotel,
