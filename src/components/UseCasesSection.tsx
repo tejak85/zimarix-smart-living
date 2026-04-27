@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Home, Building2, HardHat, Hotel } from "lucide-react";
+import { Home, Building2, Hotel } from "lucide-react";
 
 const useCases = [
   {
