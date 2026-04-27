@@ -72,9 +72,6 @@ export function ColorsSection() {
               <div className="p-6 text-center">
                 <h3 className="font-serif text-lg tracking-wide">{finish.name}</h3>
               </div>
-                <h3 className="text-lg font-semibold mb-1.5">{finish.name}</h3>
-                <p className="text-sm text-muted-foreground">{finish.description}</p>
-              </div>
             </motion.div>
           ))}
         </div>
