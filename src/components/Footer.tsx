@@ -26,7 +26,7 @@ const socialLinks = [
   { icon: Linkedin, href: "https://www.linkedin.com/company/zimarix-iot-private-limited/", label: "LinkedIn" },
   { icon: Youtube, href: "https://www.youtube.com/@zimarix1", label: "YouTube" },
   { icon: Instagram, href: "https://www.instagram.com/zimarix1/", label: "Instagram" },
-  { icon: Facebook, href: "https://www.facebook.com/professional_dashboard/?ref=profile_action", label: "Facebook" },
+  { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61573271918124", label: "Facebook" },
 ];
 
 export function Footer() {
