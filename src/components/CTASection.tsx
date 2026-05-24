@@ -52,7 +52,7 @@ export function CTASection() {
           >
             <div className="flex items-center gap-2">
               <Phone className="w-4 h-4" />
-              <a href="tel:+918867050606" className="hover:text-primary-foreground transition-colors">+91 88670 50606</a>
+              <a href="tel:+918867050606" className="hover:text-primary-foreground transition-colors">+91 8867050606</a>
             </div>
             <div className="hidden sm:block w-1 h-1 rounded-full bg-primary-foreground/30" />
             <span>sales@zimarix.com</span>
