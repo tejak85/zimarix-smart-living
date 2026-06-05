@@ -11,7 +11,6 @@ const footerLinks = {
   ],
   company: [
     { name: "About Us", href: "#" },
-    { name: "Privacy Policy", href: "/privacy-policy", internal: true },
     { name: "Careers", href: "#" },
     { name: "Press", href: "#" },
     { name: "Blog", href: "#" },
@@ -21,6 +20,7 @@ const footerLinks = {
     { name: "Contact Us", href: "#" },
     { name: "Partners", href: "#" },
     { name: "Warranty", href: "#" },
+    { name: "Privacy Policy", href: "/privacy-policy", internal: true },
   ],
 };
 
@@ -134,12 +134,21 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
+                  {"internal" in link && link.internal ? (
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
