@@ -21,6 +21,7 @@ const footerLinks = {
     { name: "Partners", href: "#" },
     { name: "Warranty", href: "#" },
     { name: "Privacy Policy", href: "/privacy-policy", internal: true },
+    { name: "Terms of Use", href: "/terms", internal: true },
   ],
 };
 
@@ -167,6 +168,12 @@ export function Footer() {
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy Policy
+            </Link>
+            <Link
+              to="/terms"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Terms of Use
             </Link>
 
             {/* Social Links */}

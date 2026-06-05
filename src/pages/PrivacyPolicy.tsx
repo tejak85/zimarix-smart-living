@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import {
   Shield,
   Lock,
@@ -13,6 +14,7 @@ import {
   RefreshCw,
   Mail,
   FileText,
+  Mic,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -36,21 +38,22 @@ const sections: Section[] = [
         <div className="rounded-xl bg-accent/5 border border-accent/20 p-4 mb-4">
           <p>
             By downloading, installing, or using the Zimarix mobile application (the
-            "App") or related services, you acknowledge that we may process your personal
-            information as described in this Privacy Policy. If you do not agree, please do
-            not use the App.
+            "App"), enabling the Zimarix skill on Amazon Alexa, or using our related
+            services, you acknowledge that we may process your personal information as
+            described in this Privacy Policy. If you do not agree, please do not use the
+            App or Skill.
           </p>
         </div>
         <p className="mb-4">
           This Privacy Policy describes how <strong>Zimarix IoT Private Limited</strong>{" "}
           ("Zimarix," "we," "us," or "our") collects, uses, stores, and shares information
-          when you use the Zimarix App to monitor and control compatible smart-home and
+          when you use the Zimarix App, Amazon Alexa Skill, and connected smart-home and
           building-automation devices.
         </p>
         <p>
-          This policy applies to information collected through the App, our cloud services,
-          and customer support channels. It does not apply to third-party websites, apps, or
-          services that we do not operate.
+          This policy applies to information collected through the App, the Alexa Skill, our
+          cloud services, and customer support channels. It does not apply to third-party
+          websites, apps, or services that we do not operate.
         </p>
       </>
     ),
@@ -87,6 +90,7 @@ const sections: Section[] = [
           <li>Push notification tokens</li>
           <li>Device type, operating system version, and app version</li>
           <li>General network and connection metadata</li>
+          <li>Alexa account linking information and voice-request metadata needed to control authorized devices</li>
         </ul>
         <h3 className="font-semibold text-foreground mb-2">Information from your device (with permission)</h3>
         <p className="mb-4">
@@ -146,6 +150,7 @@ const sections: Section[] = [
           <li>Sync device configuration and state across your account</li>
           <li>Send service-related notifications, alerts, and OTP messages</li>
           <li>Diagnose technical issues and improve performance and reliability</li>
+          <li>Enable voice control through the Amazon Alexa Skill where you have linked your account</li>
           <li>Respond to support requests and communicate important updates</li>
           <li>Comply with applicable legal obligations</li>
         </ul>
@@ -198,8 +203,37 @@ const sections: Section[] = [
     ),
   },
   {
+    id: "alexa-integration",
+    title: "5. Amazon Alexa Integration",
+    icon: Mic,
+    content: (
+      <>
+        <p className="mb-4">
+          If you enable the Zimarix skill on Amazon Alexa, the following also applies:
+        </p>
+        <ul className="space-y-2 list-disc pl-5 mb-4">
+          <li>Voice requests are processed through Amazon Alexa services before being sent to Zimarix.</li>
+          <li>Zimarix only accesses devices that you have explicitly linked and authorized through account linking.</li>
+          <li>Zimarix does not store Amazon Alexa voice recordings; voice data is managed by Amazon.</li>
+          <li>
+            Alexa authentication is handled through secure OAuth-based account linking. Zimarix
+            does not receive or store your Amazon account password.
+          </li>
+          <li>We may receive device control commands, linked account identifiers, and related metadata needed to execute voice requests.</li>
+        </ul>
+        <p>
+          Your use of the Alexa Skill is also governed by our{" "}
+          <Link to="/terms#alexa-skill" className="text-accent hover:underline">
+            Terms of Use
+          </Link>
+          .
+        </p>
+      </>
+    ),
+  },
+  {
     id: "sharing",
-    title: "5. Sharing and Disclosure",
+    title: "6. Sharing and Disclosure",
     icon: Share2,
     content: (
       <>
@@ -236,7 +270,7 @@ const sections: Section[] = [
   },
   {
     id: "retention",
-    title: "6. Data Retention",
+    title: "7. Data Retention",
     icon: Clock,
     content: (
       <>
@@ -256,7 +290,7 @@ const sections: Section[] = [
   },
   {
     id: "security",
-    title: "7. Security",
+    title: "8. Security",
     icon: Lock,
     content: (
       <>
@@ -275,7 +309,7 @@ const sections: Section[] = [
   },
   {
     id: "your-rights",
-    title: "8. Your Rights and Choices",
+    title: "9. Your Rights and Choices",
     icon: UserCheck,
     content: (
       <>
@@ -307,7 +341,7 @@ const sections: Section[] = [
   },
   {
     id: "children",
-    title: "9. Children's Privacy",
+    title: "10. Children's Privacy",
     icon: Baby,
     content: (
       <p>
@@ -320,17 +354,17 @@ const sections: Section[] = [
   },
   {
     id: "changes",
-    title: "10. Changes to This Policy",
+    title: "11. Changes to This Policy",
     icon: RefreshCw,
     content: (
       <>
         <p className="mb-4">
           We may update this Privacy Policy from time to time. When we make material changes,
-          we will provide notice through the App, by email, or by posting an updated policy
+          we will provide notice through the App, Alexa Skill, by email, or by posting an updated policy
           on our website with a revised "Last updated" date.
         </p>
         <p>
-          Your continued use of the App after changes take effect constitutes acceptance of
+          Your continued use of the App or Alexa Skill after changes take effect constitutes acceptance of
           the updated policy, unless otherwise required by law.
         </p>
       </>
@@ -342,16 +376,16 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Privacy Policy — Zimarix</title>
+        <title>Privacy Policy — Zimarix App &amp; Alexa Skill</title>
         <meta
           name="description"
-          content="Privacy Policy for the Zimarix mobile application and related services operated by Zimarix IoT Private Limited."
+          content="Privacy Policy for the Zimarix mobile application, Amazon Alexa Skill, and connected services operated by Zimarix IoT Private Limited."
         />
         <link rel="canonical" href="/privacy-policy" />
         <meta property="og:title" content="Zimarix Privacy Policy" />
         <meta
           property="og:description"
-          content="Privacy Policy for the Zimarix mobile application and related services."
+          content="Privacy Policy for the Zimarix mobile application and Amazon Alexa Skill."
         />
         <meta property="og:url" content="/privacy-policy" />
         <meta property="og:type" content="website" />
@@ -359,7 +393,7 @@ export default function PrivacyPolicy() {
           "@context": "https://schema.org",
           "@type": "WebPage",
           name: "Privacy Policy",
-          about: "Zimarix mobile application and connected services",
+          about: "Zimarix mobile application, Amazon Alexa Skill, and connected services",
           dateModified: "2026-06-06",
         })}</script>
       </Helmet>
@@ -391,7 +425,7 @@ export default function PrivacyPolicy() {
 
               <p className="text-lg sm:text-xl text-primary-foreground/70 leading-relaxed mb-6">
                 How Zimarix IoT Private Limited collects, uses, and protects your information
-                when you use our mobile application and connected services.
+                when you use our mobile application, Amazon Alexa Skill, and connected services.
               </p>
 
               <p className="text-sm text-primary-foreground/60">
@@ -443,7 +477,7 @@ export default function PrivacyPolicy() {
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center">
                     <Mail className="w-5 h-5 text-accent" />
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold pt-1.5">11. Contact Us</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold pt-1.5">12. Contact Us</h2>
                 </header>
                 <p className="text-primary-foreground/70 mb-6 sm:pl-16 leading-relaxed">
                   If you have questions about this Privacy Policy or our data practices,
