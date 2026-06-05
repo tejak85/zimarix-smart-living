@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 
 const footerLinks = {
@@ -10,6 +11,7 @@ const footerLinks = {
   ],
   company: [
     { name: "About Us", href: "#" },
+    { name: "Privacy Policy", href: "/privacy-policy", internal: true },
     { name: "Careers", href: "#" },
     { name: "Press", href: "#" },
     { name: "Blog", href: "#" },
@@ -106,12 +108,21 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
+                  {"internal" in link && link.internal ? (
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -141,8 +152,16 @@ export function Footer() {
             © {new Date().getFullYear()} Zimarix IoT Private Limited. All rights reserved.
           </p>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+            <Link
+              to="/privacy-policy"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Privacy Policy
+            </Link>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-4">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
@@ -153,6 +172,7 @@ export function Footer() {
                 <social.icon className="w-4 h-4" />
               </a>
             ))}
+            </div>
           </div>
         </div>
       </div>

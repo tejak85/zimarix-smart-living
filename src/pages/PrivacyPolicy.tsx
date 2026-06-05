@@ -5,7 +5,7 @@ import {
   Lock,
   Database,
   Settings,
-  Mic,
+  Smartphone,
   Share2,
   Clock,
   UserCheck,
@@ -13,12 +13,11 @@ import {
   RefreshCw,
   Mail,
   FileText,
-  ChevronRight,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-const LAST_UPDATED = "May 28, 2026";
+const LAST_UPDATED = "June 6, 2026";
 
 type Section = {
   id: string;
@@ -33,14 +32,27 @@ const sections: Section[] = [
     title: "1. Introduction",
     icon: FileText,
     content: (
-      <p>
-        Zimarix ("we", "our", or "us") provides smart home automation products and
-        services, including smart switch panels, IoT devices, cloud services, mobile
-        applications, and Amazon Alexa integrations. This Privacy Policy explains how
-        we collect, use, store, and protect information when you use our products and
-        services. By using Zimarix products or our Alexa Skill, you agree to the
-        practices described in this policy.
-      </p>
+      <>
+        <div className="rounded-xl bg-accent/5 border border-accent/20 p-4 mb-4">
+          <p>
+            By downloading, installing, or using the Zimarix mobile application (the
+            "App") or related services, you acknowledge that we may process your personal
+            information as described in this Privacy Policy. If you do not agree, please do
+            not use the App.
+          </p>
+        </div>
+        <p className="mb-4">
+          This Privacy Policy describes how <strong>Zimarix IoT Private Limited</strong>{" "}
+          ("Zimarix," "we," "us," or "our") collects, uses, stores, and shares information
+          when you use the Zimarix App to monitor and control compatible smart-home and
+          building-automation devices.
+        </p>
+        <p>
+          This policy applies to information collected through the App, our cloud services,
+          and customer support channels. It does not apply to third-party websites, apps, or
+          services that we do not operate.
+        </p>
+      </>
     ),
   },
   {
@@ -48,129 +60,280 @@ const sections: Section[] = [
     title: "2. Information We Collect",
     icon: Database,
     content: (
-      <ul className="space-y-2 list-disc pl-5">
-        <li>User account information (name, email, phone number, password credentials).</li>
-        <li>Device information (model, firmware version, unique device identifiers).</li>
-        <li>Smart home device status and control data (on/off states, schedules, scenes).</li>
-        <li>WiFi and network-related device metadata required for provisioning and connectivity.</li>
-        <li>Alexa account linking information required to authorize device control.</li>
-        <li>Usage analytics and diagnostics to improve reliability and performance.</li>
-        <li>Mobile app interaction data such as feature usage and crash reports.</li>
-      </ul>
+      <>
+        <p className="mb-4">
+          We collect information necessary to create your account, connect and control your
+          devices, and improve the reliability of our services.
+        </p>
+        <h3 className="font-semibold text-foreground mb-2">Account and profile information</h3>
+        <ul className="space-y-2 list-disc pl-5 mb-4">
+          <li>Email address</li>
+          <li>Phone number</li>
+          <li>Account credentials (password stored in hashed form)</li>
+          <li>Profile details you choose to provide</li>
+        </ul>
+        <h3 className="font-semibold text-foreground mb-2">Device and smart-home data</h3>
+        <ul className="space-y-2 list-disc pl-5 mb-4">
+          <li>Connected device identifiers, models, and configuration</li>
+          <li>Switch, port, scene, and automation settings</li>
+          <li>Device network information (such as IP addresses and Wi‑Fi details)</li>
+          <li>Bluetooth identifiers used for local device discovery and setup</li>
+          <li>Device status, logs, and operational events you enable</li>
+        </ul>
+        <h3 className="font-semibold text-foreground mb-2">App usage and technical data</h3>
+        <ul className="space-y-2 list-disc pl-5 mb-4">
+          <li>App interactions, feature usage, and preferences</li>
+          <li>Diagnostic, crash, and performance data</li>
+          <li>Push notification tokens</li>
+          <li>Device type, operating system version, and app version</li>
+          <li>General network and connection metadata</li>
+        </ul>
+        <h3 className="font-semibold text-foreground mb-2">Information from your device (with permission)</h3>
+        <p className="mb-4">
+          Depending on the features you use, the App may request access to device
+          capabilities such as Wi‑Fi, Bluetooth, location (for Wi‑Fi network scanning on
+          supported platforms), camera (for optional profile or setup flows), notifications,
+          and local storage. We only access these capabilities when needed for the feature
+          you are using.
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border border-border rounded-xl overflow-hidden">
+            <thead className="bg-muted/50">
+              <tr>
+                <th className="text-left p-3 font-semibold text-foreground">Category</th>
+                <th className="text-left p-3 font-semibold text-foreground">Examples</th>
+                <th className="text-left p-3 font-semibold text-foreground">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-t border-border">
+                <td className="p-3">Account data</td>
+                <td className="p-3">Email, phone, login activity</td>
+                <td className="p-3">You / App</td>
+              </tr>
+              <tr className="border-t border-border">
+                <td className="p-3">Smart-home data</td>
+                <td className="p-3">Device names, switch states, scenes</td>
+                <td className="p-3">You / Devices / App</td>
+              </tr>
+              <tr className="border-t border-border">
+                <td className="p-3">Technical data</td>
+                <td className="p-3">Crash logs, app version, connection status</td>
+                <td className="p-3">App / Servers</td>
+              </tr>
+              <tr className="border-t border-border">
+                <td className="p-3">Communications</td>
+                <td className="p-3">Support requests and feedback</td>
+                <td className="p-3">You</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </>
     ),
   },
   {
-    id: "how-we-use-information",
-    title: "3. How We Use Information",
+    id: "how-we-use",
+    title: "3. How We Use Your Information",
     icon: Settings,
     content: (
-      <ul className="space-y-2 list-disc pl-5">
-        <li>Device control, scheduling, and home automation execution.</li>
-        <li>Voice assistant integration with Amazon Alexa.</li>
-        <li>Improving service reliability, stability, and performance.</li>
-        <li>Security monitoring and fraud prevention.</li>
-        <li>Sending notifications and executing user-defined automations.</li>
-        <li>Providing customer support and troubleshooting.</li>
-        <li>Delivering firmware updates and new feature rollouts.</li>
-      </ul>
+      <>
+        <p className="mb-4">We use the information we collect to:</p>
+        <ul className="space-y-2 list-disc pl-5 mb-4">
+          <li>Provide, operate, and maintain the App and connected services</li>
+          <li>Authenticate you and secure your account</li>
+          <li>Enable local and remote control of your registered devices</li>
+          <li>Sync device configuration and state across your account</li>
+          <li>Send service-related notifications, alerts, and OTP messages</li>
+          <li>Diagnose technical issues and improve performance and reliability</li>
+          <li>Respond to support requests and communicate important updates</li>
+          <li>Comply with applicable legal obligations</li>
+        </ul>
+        <p>
+          We process your information based on your consent (where required), the
+          performance of our contract with you, our legitimate interests in operating and
+          improving the service, and compliance with law.
+        </p>
+      </>
     ),
   },
   {
-    id: "alexa-integration",
-    title: "4. Alexa Integration",
-    icon: Mic,
+    id: "device-permissions",
+    title: "4. Device Permissions",
+    icon: Smartphone,
     content: (
-      <ul className="space-y-2 list-disc pl-5">
-        <li>All voice requests are processed through Amazon Alexa services.</li>
-        <li>Zimarix only accesses devices that you have explicitly linked and authorized.</li>
-        <li>Zimarix does not store voice recordings; these are managed by Amazon.</li>
-        <li>
-          Alexa authentication is handled securely through OAuth-based account linking,
-          and credentials are never exposed to third parties.
-        </li>
-      </ul>
+      <>
+        <p className="mb-4">
+          The App requests certain device permissions to deliver core functionality. You can
+          manage many of these permissions in your device settings.
+        </p>
+        <ul className="space-y-2 list-disc pl-5">
+          <li>
+            <strong>Internet &amp; network:</strong> Required to communicate with Zimarix
+            servers and your connected devices.
+          </li>
+          <li>
+            <strong>Wi‑Fi:</strong> Used to discover, configure, and reconnect devices on
+            your local network.
+          </li>
+          <li>
+            <strong>Bluetooth:</strong> Used for local device discovery, provisioning, and
+            control when cloud connectivity is unavailable.
+          </li>
+          <li>
+            <strong>Location:</strong> Required on some platforms to scan for nearby Wi‑Fi
+            networks during device setup. We do not use location for advertising or
+            unrelated tracking.
+          </li>
+          <li>
+            <strong>Camera &amp; storage:</strong> Used only when you choose features that
+            involve capturing or uploading images.
+          </li>
+          <li>
+            <strong>Notifications:</strong> Used to deliver device alerts, account messages,
+            and service updates.
+          </li>
+        </ul>
+      </>
     ),
   },
   {
-    id: "data-security",
-    title: "5. Data Security",
-    icon: Lock,
-    content: (
-      <ul className="space-y-2 list-disc pl-5">
-        <li>All communication between devices, apps, and cloud is encrypted in transit.</li>
-        <li>Cloud infrastructure is hosted on secure, industry-trusted providers.</li>
-        <li>Authentication and authorization controls protect access to your account.</li>
-        <li>Continuous safeguards help prevent unauthorized access, alteration, or disclosure.</li>
-      </ul>
-    ),
-  },
-  {
-    id: "data-sharing",
-    title: "6. Data Sharing",
+    id: "sharing",
+    title: "5. Sharing and Disclosure",
     icon: Share2,
     content: (
-      <ul className="space-y-2 list-disc pl-5">
-        <li>Zimarix does not sell your personal information to any third party.</li>
-        <li>
-          Data may be shared only with essential cloud and service providers required to
-          operate the service (e.g. hosting, analytics, voice integration).
-        </li>
-        <li>
-          We may disclose information when required by law, regulation, or valid legal
-          process.
-        </li>
-      </ul>
+      <>
+        <p className="mb-4">
+          We do not sell your personal information. We may share information only in the
+          following circumstances:
+        </p>
+        <ul className="space-y-2 list-disc pl-5 mb-4">
+          <li>
+            <strong>Service providers:</strong> With trusted vendors who help us operate the
+            App (such as cloud hosting, messaging, and analytics providers), subject to
+            contractual confidentiality and security obligations.
+          </li>
+          <li>
+            <strong>Legal requirements:</strong> When required by law, regulation, legal
+            process, or governmental request.
+          </li>
+          <li>
+            <strong>Protection of rights:</strong> To protect the safety, rights, or
+            property of Zimarix, our users, or others.
+          </li>
+          <li>
+            <strong>Business transfers:</strong> In connection with a merger, acquisition, or
+            sale of assets, with notice where required by law.
+          </li>
+        </ul>
+        <p>
+          Where devices in your home are shared among multiple app users, certain device and
+          account metadata may be visible to other authorized users on the same installation,
+          as required for multi-user device management.
+        </p>
+      </>
     ),
   },
   {
-    id: "data-retention",
-    title: "7. Data Retention",
+    id: "retention",
+    title: "6. Data Retention",
     icon: Clock,
     content: (
-      <ul className="space-y-2 list-disc pl-5">
-        <li>
-          Data is retained only as long as necessary to provide the service and meet
-          legal obligations.
-        </li>
-        <li>You may request deletion of your account and associated data at any time.</li>
-      </ul>
+      <>
+        <p className="mb-4">
+          We retain personal information for as long as needed to provide the App, fulfill
+          the purposes described in this policy, comply with legal obligations, resolve
+          disputes, and enforce our agreements.
+        </p>
+        <p>
+          When you delete your account or request deletion of specific data, we will remove
+          or anonymize your information within a reasonable period, except where retention is
+          required by law or for legitimate business purposes such as security and fraud
+          prevention.
+        </p>
+      </>
     ),
   },
   {
-    id: "user-rights",
-    title: "8. User Rights",
+    id: "security",
+    title: "7. Security",
+    icon: Lock,
+    content: (
+      <>
+        <p className="mb-4">
+          We implement technical and organizational measures designed to protect your
+          information, including access controls, encryption in transit, and secure credential
+          handling. No method of transmission or storage is completely secure, and we cannot
+          guarantee absolute security.
+        </p>
+        <p>
+          You are responsible for keeping your login credentials confidential and for ensuring
+          that devices on your premises are installed and used safely.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "your-rights",
+    title: "8. Your Rights and Choices",
     icon: UserCheck,
     content: (
-      <ul className="space-y-2 list-disc pl-5">
-        <li>Access the personal data associated with your account.</li>
-        <li>Request deletion of your account and related data.</li>
-        <li>Unlink your Alexa account at any time from the Alexa app.</li>
-        <li>Disable specific devices or services through the Zimarix mobile application.</li>
-      </ul>
+      <>
+        <p className="mb-4">
+          Depending on your location, you may have rights regarding your personal
+          information, including the right to:
+        </p>
+        <ul className="space-y-2 list-disc pl-5 mb-4">
+          <li>Access the personal information we hold about you</li>
+          <li>Request correction of inaccurate information</li>
+          <li>Request deletion of your information</li>
+          <li>Object to or restrict certain processing</li>
+          <li>Withdraw consent where processing is based on consent</li>
+          <li>Lodge a complaint with a data protection authority</li>
+        </ul>
+        <p className="mb-4">
+          To exercise these rights, contact us at{" "}
+          <a href="mailto:support@zimarix.com" className="text-accent hover:underline">
+            support@zimarix.com
+          </a>
+          . We will respond within the timeframe required by applicable law.
+        </p>
+        <p>
+          You can also manage certain preferences directly in the App, such as notification
+          settings and connected devices.
+        </p>
+      </>
     ),
   },
   {
-    id: "childrens-privacy",
+    id: "children",
     title: "9. Children's Privacy",
     icon: Baby,
     content: (
       <p>
-        Zimarix services are not directed to or intended for children under the age of
-        13. We do not knowingly collect personal information from children. If we become
-        aware of such collection, the information will be promptly deleted.
+        The App is not directed to children under 18, and we do not knowingly collect
+        personal information from children. If you believe a child has provided us with
+        personal information, please contact us and we will take appropriate steps to
+        delete it.
       </p>
     ),
   },
   {
     id: "changes",
-    title: "10. Changes to This Privacy Policy",
+    title: "10. Changes to This Policy",
     icon: RefreshCw,
     content: (
-      <p>
-        We may update this Privacy Policy periodically to reflect changes in our
-        practices, technology, legal requirements, or service improvements. Updates will
-        be posted on this page along with a revised "Last Updated" date.
-      </p>
+      <>
+        <p className="mb-4">
+          We may update this Privacy Policy from time to time. When we make material changes,
+          we will provide notice through the App, by email, or by posting an updated policy
+          on our website with a revised "Last updated" date.
+        </p>
+        <p>
+          Your continued use of the App after changes take effect constitutes acceptance of
+          the updated policy, unless otherwise required by law.
+        </p>
+      </>
     ),
   },
 ];
@@ -179,16 +342,16 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Privacy Policy — Zimarix Smart Switch Panels & Alexa Skill</title>
+        <title>Privacy Policy — Zimarix</title>
         <meta
           name="description"
-          content="Learn how Zimarix collects, uses, and protects your data across smart switch panels, IoT devices, mobile apps, and the Amazon Alexa integration."
+          content="Privacy Policy for the Zimarix mobile application and related services operated by Zimarix IoT Private Limited."
         />
         <link rel="canonical" href="/privacy-policy" />
         <meta property="og:title" content="Zimarix Privacy Policy" />
         <meta
           property="og:description"
-          content="Privacy Policy for Zimarix Smart Switch Panels, IoT devices, and Alexa Skill integration."
+          content="Privacy Policy for the Zimarix mobile application and related services."
         />
         <meta property="og:url" content="/privacy-policy" />
         <meta property="og:type" content="website" />
@@ -196,15 +359,14 @@ export default function PrivacyPolicy() {
           "@context": "https://schema.org",
           "@type": "WebPage",
           name: "Privacy Policy",
-          about: "Zimarix Smart Switch Panels and Alexa Skill",
-          dateModified: "2026-05-28",
+          about: "Zimarix mobile application and connected services",
+          dateModified: "2026-06-06",
         })}</script>
       </Helmet>
 
       <Navbar />
 
       <main>
-        {/* Hero */}
         <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-br from-primary via-charcoal to-primary">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-0 w-96 h-96 bg-accent/15 rounded-full blur-3xl" />
@@ -220,9 +382,7 @@ export default function PrivacyPolicy() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
                 <Shield className="w-4 h-4 text-accent" />
-                <span className="text-sm font-medium text-accent">
-                  Trust & Security
-                </span>
+                <span className="text-sm font-medium text-accent">Legal</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
@@ -230,8 +390,8 @@ export default function PrivacyPolicy() {
               </h1>
 
               <p className="text-lg sm:text-xl text-primary-foreground/70 leading-relaxed mb-6">
-                Your privacy is fundamental to how we design Zimarix smart switch panels,
-                IoT devices, mobile apps, and our Amazon Alexa Skill.
+                How Zimarix IoT Private Limited collects, uses, and protects your information
+                when you use our mobile application and connected services.
               </p>
 
               <p className="text-sm text-primary-foreground/60">
@@ -241,7 +401,6 @@ export default function PrivacyPolicy() {
           </div>
         </section>
 
-        {/* Sections */}
         <section className="section-padding">
           <div className="container-tight">
             <div className="grid gap-6 md:gap-8">
@@ -272,7 +431,6 @@ export default function PrivacyPolicy() {
                 );
               })}
 
-              {/* Contact section */}
               <motion.article
                 id="contact"
                 initial={{ opacity: 0, y: 24 }}
@@ -285,48 +443,39 @@ export default function PrivacyPolicy() {
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center">
                     <Mail className="w-5 h-5 text-accent" />
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold pt-1.5">
-                    11. Contact Information
-                  </h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold pt-1.5">11. Contact Us</h2>
                 </header>
                 <p className="text-primary-foreground/70 mb-6 sm:pl-16 leading-relaxed">
-                  If you have questions, concerns, or requests regarding this Privacy
-                  Policy or your data, please reach out to us:
+                  If you have questions about this Privacy Policy or our data practices,
+                  please contact us:
                 </p>
-                <dl className="grid sm:grid-cols-3 gap-4 sm:pl-16">
-                  <div className="rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 p-4">
-                    <dt className="text-xs uppercase tracking-wider text-primary-foreground/50 mb-1">
-                      Company
-                    </dt>
-                    <dd className="font-semibold">Zimarix</dd>
-                  </div>
-                  <div className="rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 p-4">
-                    <dt className="text-xs uppercase tracking-wider text-primary-foreground/50 mb-1">
-                      Website
-                    </dt>
-                    <dd>
-                      <a
-                        href="https://zimarix.com"
-                        className="font-semibold text-accent hover:underline inline-flex items-center gap-1"
-                      >
-                        zimarix.com <ChevronRight className="w-4 h-4" />
-                      </a>
-                    </dd>
-                  </div>
-                  <div className="rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 p-4">
-                    <dt className="text-xs uppercase tracking-wider text-primary-foreground/50 mb-1">
-                      Email
-                    </dt>
-                    <dd>
-                      <a
-                        href="mailto:support@zimarix.com"
-                        className="font-semibold text-accent hover:underline break-all"
-                      >
-                        support@zimarix.com
-                      </a>
-                    </dd>
-                  </div>
-                </dl>
+                <ul className="space-y-3 sm:pl-16 text-primary-foreground/90">
+                  <li>
+                    <strong>Email:</strong>{" "}
+                    <a href="mailto:support@zimarix.com" className="text-accent hover:underline">
+                      support@zimarix.com
+                    </a>
+                  </li>
+                  <li>
+                    <strong>General inquiries:</strong>{" "}
+                    <a href="mailto:contact@zimarix.com" className="text-accent hover:underline">
+                      contact@zimarix.com
+                    </a>
+                  </li>
+                  <li>
+                    <strong>Company:</strong> Zimarix IoT Private Limited
+                  </li>
+                  <li>
+                    <strong>Address:</strong> Plot No 77, JBR Tech Park, 6th Road, EPIP Layout,
+                    Bangalore South, Whitefield, Bangalore – 560066, Karnataka, India
+                  </li>
+                  <li>
+                    <strong>Phone:</strong>{" "}
+                    <a href="tel:+918867050606" className="text-accent hover:underline">
+                      +91 88670 50606
+                    </a>
+                  </li>
+                </ul>
               </motion.article>
             </div>
           </div>
