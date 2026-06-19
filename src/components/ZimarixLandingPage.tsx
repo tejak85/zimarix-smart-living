@@ -684,6 +684,53 @@ export function RealHomesSection() {
 }
 
 export function ConsultationSection() {
+  const [submitState, setSubmitState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  const handleConsultationSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const endpoint = import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL as string | undefined;
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    if (!endpoint) {
+      setSubmitState("error");
+      setSubmitMessage("Lead capture is not configured yet. Please call or email us directly.");
+      return;
+    }
+
+    setSubmitState("submitting");
+    setSubmitMessage("");
+
+    const payload = new URLSearchParams({
+      name: String(formData.get("name") || ""),
+      phone: String(formData.get("phone") || ""),
+      city: String(formData.get("city") || ""),
+      propertyType: String(formData.get("propertyType") || ""),
+      source: "zimarix.com",
+      submittedAt: new Date().toISOString(),
+    });
+
+    try {
+      await fetch(endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: payload,
+      });
+
+      form.reset();
+      setSubmitState("success");
+      setSubmitMessage("Thank you. We have received your request and will contact you soon.");
+    } catch {
+      setSubmitState("error");
+      setSubmitMessage("Something went wrong. Please call or email us directly.");
+    }
+  };
+
   return (
     <section id="consultation" className="section-padding bg-[#07090C] text-white">
       <div className="container-tight grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
@@ -715,7 +762,10 @@ export function ConsultationSection() {
         </Reveal>
 
         <Reveal delay={0.12}>
-          <form className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl sm:p-8">
+          <form
+            className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl sm:p-8"
+            onSubmit={handleConsultationSubmit}
+          >
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="block">
                 <span className="text-sm font-medium text-white/75">Name</span>
@@ -723,6 +773,7 @@ export function ConsultationSection() {
                   name="name"
                   type="text"
                   autoComplete="name"
+                  required
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   placeholder="Your name"
                 />
@@ -733,6 +784,7 @@ export function ConsultationSection() {
                   name="phone"
                   type="tel"
                   autoComplete="tel"
+                  required
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   placeholder="+91"
                 />
@@ -743,6 +795,7 @@ export function ConsultationSection() {
                   name="city"
                   type="text"
                   autoComplete="address-level2"
+                  required
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   placeholder="Bangalore"
                 />
@@ -751,6 +804,7 @@ export function ConsultationSection() {
                 <span className="text-sm font-medium text-white/75">Property Type</span>
                 <select
                   name="propertyType"
+                  required
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   defaultValue=""
                 >
@@ -766,14 +820,26 @@ export function ConsultationSection() {
             </div>
             <button
               type="submit"
-              className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
+              disabled={submitState === "submitting"}
+              className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
             >
-              Book a Consultation
+              {submitState === "submitting" ? "Submitting..." : "Book a Consultation"}
               <ChevronRight className="h-4 w-4" />
             </button>
+            {submitMessage && (
+              <p
+                className={`mt-4 rounded-2xl border px-4 py-3 text-sm leading-6 ${
+                  submitState === "success"
+                    ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-100"
+                    : "border-red-400/30 bg-red-400/10 text-red-100"
+                }`}
+                role="status"
+              >
+                {submitMessage}
+              </p>
+            )}
             <p className="mt-4 text-sm leading-6 text-white/45">
-              This form is ready for your CRM or email integration. For now, direct contact
-              details are listed beside it.
+              Your details are used only to contact you about your Zimarix consultation.
             </p>
           </form>
         </Reveal>
