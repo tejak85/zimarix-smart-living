@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Bluetooth,
   ChevronRight,
-  CircuitBoard,
   Cloud,
   Cpu,
   Home,
@@ -15,8 +14,6 @@ import {
   Server,
   ShieldCheck,
   Smartphone,
-  Thermometer,
-  Wifi,
   Zap,
 } from "lucide-react";
 import appDevices from "@/assets/app-devices.png";
@@ -27,6 +24,8 @@ import familyRoomSwitchCluster from "@/assets/family-room-switch-cluster.png";
 import hallwayPanel from "@/assets/hallway-panel.png";
 import heroLuxuryBackground from "@/assets/hero-luxury-background.png";
 import productPanelInstalled from "@/assets/product-panel-installed.png";
+import zimarixExplodedView from "@/assets/zimarix-exploded-view.png";
+import zimarixFinishesGroupPhoto from "@/assets/zimarix-finishes-group-photo.png";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -177,28 +176,30 @@ export function HeroSection() {
         <img
           src={heroLuxuryBackground}
           alt="Zimarix smart switch panel installed on a wall with blue LED accents"
-          className="h-full w-full object-cover object-[28%_50%] opacity-100 contrast-110 saturate-110 sm:object-[30%_50%] lg:object-left"
+          className="h-full w-full object-cover object-[22%_50%] opacity-100 contrast-110 saturate-110 sm:object-[24%_50%] lg:object-left"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_46%,rgba(30,140,255,0.18),transparent_22%),radial-gradient(circle_at_28%_48%,transparent_0%,transparent_30%,rgba(7,9,12,0.18)_54%,rgba(7,9,12,0.86)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,12,0.06)_0%,rgba(7,9,12,0.08)_30%,rgba(7,9,12,0.55)_58%,rgba(7,9,12,0.94)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,9,12,0.34)_0%,rgba(7,9,12,0.02)_42%,#07090C_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_46%,rgba(30,140,255,0.12),transparent_22%),radial-gradient(circle_at_28%_48%,transparent_0%,transparent_36%,rgba(7,9,12,0.08)_56%,rgba(7,9,12,0.84)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,12,0)_0%,rgba(7,9,12,0.02)_34%,rgba(7,9,12,0.48)_62%,rgba(7,9,12,0.94)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,9,12,0.2)_0%,rgba(7,9,12,0)_42%,#07090C_100%)]" />
       </div>
 
       <div className="container-tight relative flex min-h-[calc(100vh-5rem)] flex-col justify-center pb-12 sm:pb-16 lg:pb-20">
         <Reveal>
-          <div className="max-w-3xl lg:ml-auto">
-            <h1 className="font-heading text-[clamp(2.35rem,4.55vw,4.75rem)] font-medium leading-[1.08] tracking-[-0.045em]">
-              <span className="block text-white">A switch that never feels cheap.</span>
-              <span className="mt-2 block text-blue-light">
-                A touch that <span className="text-white">never lags.</span>
+          <div className="max-w-3xl lg:ml-auto lg:w-[56%]">
+            <h1 className="font-heading font-medium leading-[1.08] tracking-[-0.045em]">
+              <span className="block text-[clamp(2.35rem,4.55vw,4.75rem)] text-white">
+                A switch that never feels <span className="text-accent">cheap.</span>
               </span>
-              <span className="mt-2 block text-white">
+              <span className="mt-3 block text-[clamp(1.95rem,3.75vw,4.05rem)] text-white">
+                A touch that never <span className="text-accent">lags.</span>
+              </span>
+              <span className="mt-3 block text-[clamp(1.95rem,3.75vw,4.05rem)] text-white">
                 A home that never depends on{" "}
-                <span className="text-accent">someone else's server.</span>
+                someone else's <span className="text-accent">server.</span>
               </span>
             </h1>
 
-            <p className="mt-8 font-mono text-xs font-semibold uppercase tracking-[0.36em] text-white/58">
+            <p className="mt-5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-white/55">
               This is Zimarix.
             </p>
 
@@ -208,12 +209,12 @@ export function HeroSection() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.18} className="mt-12 hidden border-t border-white/10 pt-5 sm:block lg:ml-auto lg:w-3/5">
-          <div className="grid grid-cols-2 gap-x-8 gap-y-3 font-mono text-[10px] uppercase tracking-[0.28em] text-white/46 lg:grid-cols-4">
-            <span>Aluminium 6061 T6</span>
-            <span>Anodise 20+ micron</span>
-            <span>Protocol ZX, on-device</span>
-            <span>Made in India</span>
+        <Reveal delay={0.18} className="mt-12 hidden border-t border-white/10 pt-5 sm:block lg:ml-auto lg:w-[56%]">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/46 lg:grid-cols-4">
+            <span className="whitespace-nowrap">Aluminium 6061 T6</span>
+            <span className="whitespace-nowrap">Anodise 20+ micron</span>
+            <span className="whitespace-nowrap">Protocol ZX</span>
+            <span className="whitespace-nowrap">Made in India</span>
           </div>
         </Reveal>
       </div>
@@ -289,10 +290,53 @@ export function CraftsmanshipSection() {
   );
 }
 
+export function FinishesSection() {
+  return (
+    <section id="finishes" className="section-padding bg-muted/30">
+      <div className="container-tight">
+        <Reveal>
+          <div className="max-w-4xl">
+            <Eyebrow>Multiple finishes. One standard.</Eyebrow>
+            <h2 className="mt-6 max-w-3xl font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-foreground">
+              Every finish, <span className="text-accent">anodised the same way.</span>
+            </h2>
+            <p className="mt-8 max-w-3xl text-lg leading-9 text-muted-foreground">
+              Every Zimarix panel — 1x3, 1x4, or 2x3 — comes in a range of finishes.
+              All milled from the same aircraft-grade aluminium. All anodised in-house
+              to the same 20+ micron standard.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.08}>
+          <div className="mt-12 overflow-hidden rounded-[2rem] bg-background shadow-elevated">
+            <img
+              src={zimarixFinishesGroupPhoto}
+              alt="Studio product photo showing Zimarix panels in multiple anodised finishes"
+              className="block h-auto w-full"
+              loading="lazy"
+            />
+          </div>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            Shown: a selection of available finishes.
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <p className="mt-10 border-t border-border pt-5 text-lg font-semibold leading-relaxed text-foreground">
+            Available across every panel size — 1x3, 1x4, and 2x3. And the scene
+            controller, finished to match.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export function ReliabilitySection() {
   const paths = [
     { icon: Router, label: "Local socket", note: "Primary path", primary: true },
-    { icon: Server, label: "Server relay", note: "When away" },
+    { icon: Server, label: "Server", note: "When away" },
     { icon: Bluetooth, label: "Bluetooth", note: "WiFi fallback" },
   ];
 
@@ -335,37 +379,94 @@ export function ReliabilitySection() {
             aria-label="Technical diagram showing Zimarix device connecting to app through local socket, server relay, and Bluetooth with local socket emphasized"
             className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl sm:p-8"
           >
-            <div className="grid gap-6 md:grid-cols-[1fr_1.1fr_1fr] md:items-center">
-              <div className="rounded-3xl border border-accent/35 bg-accent/10 p-5 text-center">
+            <div className="reliability-diagram relative grid gap-6 md:grid-cols-[1fr_1.1fr_1fr] md:items-center">
+              <svg
+                className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
+                aria-hidden="true"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+              >
+                <path className="reliability-line reliability-line-primary reliability-line-local" d="M 18 50 C 30 50, 35 24, 45 24" />
+                <path className="reliability-line reliability-line-primary reliability-line-local" d="M 55 24 C 66 24, 69 50, 82 50" />
+                <path className="reliability-line reliability-line-server" d="M 18 50 C 30 50, 34 50, 45 50" />
+                <path className="reliability-line reliability-line-server" d="M 55 50 C 66 50, 70 50, 82 50" />
+                <path className="reliability-line reliability-line-bluetooth" d="M 18 50 C 30 50, 35 76, 45 76" />
+                <path className="reliability-line reliability-line-bluetooth" d="M 55 76 C 66 76, 69 50, 82 50" />
+              </svg>
+              <svg
+                className="pointer-events-none absolute inset-0 h-full w-full md:hidden"
+                aria-hidden="true"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+              >
+                <path className="reliability-line reliability-line-primary reliability-line-local" d="M 50 15 C 40 24, 27 34, 22 44" />
+                <path className="reliability-line reliability-line-primary reliability-line-local" d="M 22 58 C 28 70, 40 80, 50 88" />
+                <path className="reliability-line reliability-line-server" d="M 50 15 C 50 28, 50 36, 50 44" />
+                <path className="reliability-line reliability-line-server" d="M 50 58 C 50 70, 50 80, 50 88" />
+                <path className="reliability-line reliability-line-bluetooth" d="M 50 15 C 60 24, 73 34, 78 44" />
+                <path className="reliability-line reliability-line-bluetooth" d="M 78 58 C 72 70, 60 80, 50 88" />
+              </svg>
+              <div className="reliability-pulse reliability-pulse-primary-start" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-primary-end" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-primary-reverse-start" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-primary-reverse-end" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-server-start" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-server-end" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-server-reverse-start" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-server-reverse-end" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-bluetooth-start" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-bluetooth-end" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-bluetooth-reverse-start" aria-hidden="true" />
+              <div className="reliability-pulse reliability-pulse-bluetooth-reverse-end" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-primary-start" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-primary-end" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-primary-reverse-start" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-primary-reverse-end" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-server-start" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-server-end" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-server-reverse-start" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-server-reverse-end" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-bluetooth-start" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-bluetooth-end" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-bluetooth-reverse-start" aria-hidden="true" />
+              <div className="reliability-pulse-mobile reliability-pulse-mobile-bluetooth-reverse-end" aria-hidden="true" />
+
+              <div className="reliability-card-device relative z-10 rounded-3xl border border-accent/35 bg-accent/10 p-5 text-center">
                 <Cpu className="mx-auto h-10 w-10 text-accent" />
                 <p className="mt-3 font-semibold">Zimarix Device</p>
                 <p className="mt-1 font-mono text-xs text-white/50">Intelligence on-device</p>
               </div>
 
-              <div className="space-y-3">
+              <div className="relative z-10 grid grid-cols-3 gap-3 md:block md:space-y-3">
                 {paths.map((path) => (
                   <div
                     key={path.label}
-                    className={`relative rounded-2xl border p-4 ${
+                    className={`relative flex min-h-36 items-center justify-center rounded-2xl border p-3 text-center md:block md:min-h-0 md:p-4 md:text-left ${
                       path.primary
-                        ? "border-accent bg-accent/15 shadow-[0_0_34px_rgba(30,140,255,0.25)]"
-                        : "border-white/10 bg-white/[0.03]"
+                        ? "reliability-card-local border-accent bg-accent/15 shadow-[0_0_34px_rgba(30,140,255,0.25)]"
+                        : path.label === "Server"
+                          ? "reliability-card-server border-white/10 bg-white/[0.03]"
+                        : "reliability-card-bluetooth border-white/10 bg-white/[0.03]"
                     }`}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:justify-start md:gap-3">
                       <path.icon
                         className={`h-5 w-5 ${path.primary ? "text-accent" : "text-white/55"}`}
                       />
-                      <div>
-                        <p className="font-semibold">{path.label}</p>
-                        <p className="font-mono text-xs text-white/45">{path.note}</p>
+                      <div className="md:block">
+                        <p className="font-semibold leading-tight [writing-mode:vertical-rl] rotate-180 md:[writing-mode:horizontal-tb] md:rotate-0">
+                          {path.label}
+                        </p>
+                        <p className="mt-2 hidden font-mono text-[10px] text-white/45 md:mt-0 md:block md:text-xs">
+                          {path.note}
+                        </p>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 text-center">
+              <div className="reliability-card-app relative z-10 rounded-3xl border border-white/10 bg-white/[0.05] p-5 text-center">
                 <Smartphone className="mx-auto h-10 w-10 text-white/75" />
                 <p className="mt-3 font-semibold">Zimarix App</p>
                 <p className="mt-1 font-mono text-xs text-white/50">Direct when possible</p>
@@ -467,10 +568,11 @@ export function IntelligenceSection() {
 
 export function EngineeringSection() {
   const specs = [
-    { icon: Cpu, label: "ZX protocol", value: "Built in-house" },
-    { icon: CircuitBoard, label: "PCB finish", value: "ENIG" },
-    { icon: Wifi, label: "Updates", value: "OTA" },
-    { icon: Thermometer, label: "Health", value: "Self monitored" },
+    { label: "Protocol", value: "ZX, IN-HOUSE" },
+    { label: "Transport", value: "LOW-LEVEL SOCKET" },
+    { label: "Security", value: "END-TO-END ENCRYPTED" },
+    { label: "PCB Finish", value: "ENIG" },
+    { label: "Back Panel", value: "FR4 (MILLED)" },
   ];
 
   return (
@@ -497,13 +599,14 @@ export function EngineeringSection() {
               </p>
               <p>
                 Every PCB is designed in-house and built on ENIG finish for superior signal
-                integrity and long-term reliability. Every device updates itself over the
-                air. Every device watches its own health — temperature, memory, connectivity
-                — and tells you before something goes wrong.
+                integrity and long-term reliability. Every command, encrypted end to end.
+                Every device updates itself over the air. Every device watches its own health
+                — temperature, memory, connectivity — and tells you before something goes
+                wrong.
               </p>
             </div>
-            <div className="mt-8 rounded-3xl border border-border bg-muted/40 p-6">
-              <p className="text-xl font-semibold leading-relaxed text-foreground">
+            <div className="mt-8 border-t border-border pt-5">
+              <p className="text-xl font-semibold leading-relaxed text-foreground sm:text-2xl">
                 We didn't start with how it looks.
                 <br />
                 We started with what it has to survive.
@@ -518,39 +621,45 @@ export function EngineeringSection() {
           <div className="rounded-[2rem] border border-border bg-gradient-to-br from-muted to-background p-5 shadow-elevated sm:p-8">
             <div
               role="img"
-              aria-label="Exploded-view placeholder illustration showing aluminium faceplate, anodised layer, touch buttons, PCB, and electronics"
-              className="relative min-h-[420px] overflow-hidden rounded-3xl bg-[#0C1016] p-6 text-white"
+              aria-label="SolidWorks exploded-view render showing Zimarix aluminium faceplate, milled touch buttons, and precision housing"
+              className="overflow-hidden rounded-3xl bg-[#0C1016] p-5 text-white sm:p-7"
             >
-              {["Anodised aluminium", "Milled touch surface", "ENIG PCB", "ZX controller"].map(
-                (layer, index) => (
-                  <div
-                    key={layer}
-                    className="absolute left-6 right-6 rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm"
-                    style={{ top: `${32 + index * 76}px` }}
-                  >
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/55">
-                        Layer {index + 1}
-                      </span>
-                      <span className="font-semibold">{layer}</span>
-                    </div>
-                  </div>
-                ),
-              )}
+              <div className="relative overflow-hidden rounded-[1.4rem] bg-[#0C1016] p-3 sm:p-5">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),rgba(12,16,22,0)_58%)]" />
+                <img
+                  src={zimarixExplodedView}
+                  alt="SolidWorks exploded-view render of the Zimarix panel showing faceplate, milled touch buttons, and back housing"
+                  className="relative h-auto w-full object-contain opacity-90 mix-blend-luminosity [filter:brightness(0.72)_contrast(1.18)_saturate(0.65)]"
+                  loading="lazy"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.32),rgba(30,140,255,0.08)_45%,rgba(0,0,0,0.28))] mix-blend-multiply" />
+              </div>
             </div>
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              {specs.map((spec) => (
-                <div key={spec.label} className="rounded-2xl border border-border bg-background p-4">
-                  <spec.icon className="h-5 w-5 text-accent" />
-                  <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                    {spec.label}
-                  </p>
-                  <p className="mt-1 font-semibold">{spec.value}</p>
-                </div>
-              ))}
+            <div className="mt-5 rounded-3xl border border-white/10 bg-[#0C1016] p-5 text-white shadow-[0_28px_70px_rgba(0,0,0,0.24)] sm:p-7">
+              <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-white/40">
+                Specifications
+              </p>
+              <div className="mt-4 border-t border-white/10">
+                {specs.map((spec, index) => (
+                  <div
+                    key={spec.label}
+                    className={`grid grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] gap-4 py-6 font-mono max-[430px]:block ${
+                      index === specs.length - 1 ? "" : "border-b border-white/10"
+                    } ${index === specs.length - 1 ? "sm:pb-4 sm:pt-8" : "sm:py-8"}`}
+                  >
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-white/42 sm:text-[11px]">
+                      {spec.label}
+                    </p>
+                    <p className="text-right text-xs uppercase tracking-[0.12em] text-white/88 max-[430px]:mt-2 max-[430px]:text-left sm:text-sm">
+                      {spec.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Reveal>
+
       </div>
     </section>
   );
@@ -853,6 +962,7 @@ export function ZimarixLandingPage() {
     <>
       <HeroSection />
       <CraftsmanshipSection />
+      <FinishesSection />
       <ReliabilitySection />
       <IntelligenceSection />
       <EngineeringSection />

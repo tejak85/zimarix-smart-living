@@ -150,4 +150,447 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .reliability-line {
+    fill: none;
+    stroke: hsl(var(--accent) / 0.16);
+    stroke-width: 0.35;
+    stroke-linecap: round;
+  }
+
+  .reliability-line-primary {
+    stroke: hsl(var(--accent) / 0.32);
+  }
+
+  .reliability-line-local {
+    animation: reliability-local-line 16s ease-in-out infinite;
+  }
+
+  .reliability-line-server {
+    opacity: 0;
+    animation: reliability-server-line 16s ease-in-out infinite;
+  }
+
+  .reliability-line-bluetooth {
+    opacity: 0;
+    animation: reliability-bluetooth-line 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse {
+    @apply pointer-events-none absolute hidden h-3 w-3 rounded-full md:block;
+    left: 18%;
+    top: 50%;
+    opacity: 0;
+    background: hsl(var(--accent));
+    box-shadow:
+      0 0 0 4px hsl(var(--accent) / 0.16),
+      0 0 22px hsl(var(--accent) / 0.85);
+    transform: translate(-50%, -50%);
+  }
+
+  .reliability-pulse-mobile {
+    @apply pointer-events-none absolute h-3 w-3 rounded-full md:hidden;
+    left: 50%;
+    top: 14%;
+    opacity: 0;
+    background: hsl(var(--accent));
+    box-shadow:
+      0 0 0 4px hsl(var(--accent) / 0.16),
+      0 0 22px hsl(var(--accent) / 0.85);
+    transform: translate(-50%, -50%);
+  }
+
+  .reliability-pulse-primary-start {
+    animation: reliability-primary-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-primary-end {
+    animation: reliability-primary-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-primary-reverse-start {
+    animation: reliability-primary-reverse-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-primary-reverse-end {
+    animation: reliability-primary-reverse-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-server-start {
+    animation: reliability-server-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-server-end {
+    animation: reliability-server-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-server-reverse-start {
+    animation: reliability-server-reverse-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-server-reverse-end {
+    animation: reliability-server-reverse-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-bluetooth-start {
+    animation: reliability-bluetooth-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-bluetooth-end {
+    animation: reliability-bluetooth-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-bluetooth-reverse-start {
+    animation: reliability-bluetooth-reverse-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-bluetooth-reverse-end {
+    animation: reliability-bluetooth-reverse-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-primary-start {
+    animation: reliability-mobile-primary-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-primary-end {
+    animation: reliability-mobile-primary-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-primary-reverse-start {
+    animation: reliability-mobile-primary-reverse-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-primary-reverse-end {
+    animation: reliability-mobile-primary-reverse-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-server-start {
+    animation: reliability-mobile-server-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-server-end {
+    animation: reliability-mobile-server-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-server-reverse-start {
+    animation: reliability-mobile-server-reverse-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-server-reverse-end {
+    animation: reliability-mobile-server-reverse-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-bluetooth-start {
+    animation: reliability-mobile-bluetooth-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-bluetooth-end {
+    animation: reliability-mobile-bluetooth-end 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-bluetooth-reverse-start {
+    animation: reliability-mobile-bluetooth-reverse-start 16s ease-in-out infinite;
+  }
+
+  .reliability-pulse-mobile-bluetooth-reverse-end {
+    animation: reliability-mobile-bluetooth-reverse-end 16s ease-in-out infinite;
+  }
+
+  .reliability-card-local {
+    animation: reliability-local-card 16s ease-in-out infinite;
+  }
+
+  .reliability-card-server {
+    animation: reliability-server-card 16s ease-in-out infinite;
+  }
+
+  .reliability-card-bluetooth {
+    animation: reliability-bluetooth-card 16s ease-in-out infinite;
+  }
+
+  .reliability-card-app {
+    animation: reliability-app-card 16s ease-in-out infinite;
+  }
+
+  @keyframes reliability-primary-start {
+    0%, 14% { left: 18%; top: 50%; opacity: 0; }
+    16% { opacity: 1; }
+    22% { left: 45%; top: 24%; opacity: 1; }
+    24%, 100% { left: 45%; top: 24%; opacity: 0; }
+  }
+
+  @keyframes reliability-primary-end {
+    0%, 22% { left: 55%; top: 24%; opacity: 0; }
+    24% { opacity: 1; }
+    30% { left: 82%; top: 50%; opacity: 1; }
+    32%, 100% { left: 82%; top: 50%; opacity: 0; }
+  }
+
+  @keyframes reliability-primary-reverse-start {
+    0% { left: 82%; top: 50%; opacity: 0; }
+    2% { opacity: 0.75; }
+    6% { left: 55%; top: 24%; opacity: 0.75; }
+    8%, 100% { left: 55%; top: 24%; opacity: 0; }
+  }
+
+  @keyframes reliability-primary-reverse-end {
+    0%, 6% { left: 45%; top: 24%; opacity: 0; }
+    8% { opacity: 0.75; }
+    12% { left: 18%; top: 50%; opacity: 0.75; }
+    14%, 100% { left: 18%; top: 50%; opacity: 0; }
+  }
+
+  @keyframes reliability-server-start {
+    0%, 48% { left: 18%; top: 50%; opacity: 0; }
+    50% { opacity: 1; }
+    54% { left: 45%; top: 50%; opacity: 1; }
+    56%, 100% { left: 45%; top: 50%; opacity: 0; }
+  }
+
+  @keyframes reliability-server-end {
+    0%, 54% { left: 55%; top: 50%; opacity: 0; }
+    56% { opacity: 1; }
+    60% { left: 82%; top: 50%; opacity: 1; }
+    62%, 100% { left: 82%; top: 50%; opacity: 0; }
+  }
+
+  @keyframes reliability-server-reverse-start {
+    0%, 34% { left: 82%; top: 50%; opacity: 0; }
+    36% { opacity: 0.75; }
+    40% { left: 55%; top: 50%; opacity: 0.75; }
+    42%, 100% { left: 55%; top: 50%; opacity: 0; }
+  }
+
+  @keyframes reliability-server-reverse-end {
+    0%, 40% { left: 45%; top: 50%; opacity: 0; }
+    42% { opacity: 0.75; }
+    46% { left: 18%; top: 50%; opacity: 0.75; }
+    48%, 100% { left: 18%; top: 50%; opacity: 0; }
+  }
+
+  @keyframes reliability-bluetooth-start {
+    0%, 84% { left: 18%; top: 50%; opacity: 0; }
+    86% { opacity: 1; }
+    90% { left: 45%; top: 76%; opacity: 1; }
+    92%, 100% { left: 45%; top: 76%; opacity: 0; }
+  }
+
+  @keyframes reliability-bluetooth-end {
+    0%, 90% { left: 55%; top: 76%; opacity: 0; }
+    92% { opacity: 1; }
+    96% { left: 82%; top: 50%; opacity: 1; }
+    98%, 100% { left: 82%; top: 50%; opacity: 0; }
+  }
+
+  @keyframes reliability-bluetooth-reverse-start {
+    0%, 70% { left: 82%; top: 50%; opacity: 0; }
+    72% { opacity: 0.75; }
+    76% { left: 55%; top: 76%; opacity: 0.75; }
+    78%, 100% { left: 55%; top: 76%; opacity: 0; }
+  }
+
+  @keyframes reliability-bluetooth-reverse-end {
+    0%, 76% { left: 45%; top: 76%; opacity: 0; }
+    78% { opacity: 0.75; }
+    82% { left: 18%; top: 50%; opacity: 0.75; }
+    84%, 100% { left: 18%; top: 50%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-primary-start {
+    0%, 14% { left: 50%; top: 15%; opacity: 0; }
+    16% { opacity: 1; }
+    22% { left: 22%; top: 44%; opacity: 1; }
+    24%, 100% { left: 22%; top: 44%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-primary-end {
+    0%, 22% { left: 22%; top: 58%; opacity: 0; }
+    24% { opacity: 1; }
+    30% { left: 50%; top: 88%; opacity: 1; }
+    32%, 100% { left: 50%; top: 88%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-primary-reverse-start {
+    0% { left: 50%; top: 88%; opacity: 0; }
+    2% { opacity: 0.75; }
+    6% { left: 22%; top: 58%; opacity: 0.75; }
+    8%, 100% { left: 22%; top: 58%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-primary-reverse-end {
+    0%, 6% { left: 22%; top: 44%; opacity: 0; }
+    8% { opacity: 0.75; }
+    12% { left: 50%; top: 15%; opacity: 0.75; }
+    14%, 100% { left: 50%; top: 15%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-server-start {
+    0%, 48% { left: 50%; top: 15%; opacity: 0; }
+    50% { opacity: 1; }
+    54% { left: 50%; top: 44%; opacity: 1; }
+    56%, 100% { left: 50%; top: 44%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-server-end {
+    0%, 54% { left: 50%; top: 58%; opacity: 0; }
+    56% { opacity: 1; }
+    60% { left: 50%; top: 88%; opacity: 1; }
+    62%, 100% { left: 50%; top: 88%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-server-reverse-start {
+    0%, 34% { left: 50%; top: 88%; opacity: 0; }
+    36% { opacity: 0.75; }
+    40% { left: 50%; top: 58%; opacity: 0.75; }
+    42%, 100% { left: 50%; top: 58%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-server-reverse-end {
+    0%, 40% { left: 50%; top: 44%; opacity: 0; }
+    42% { opacity: 0.75; }
+    46% { left: 50%; top: 15%; opacity: 0.75; }
+    48%, 100% { left: 50%; top: 15%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-bluetooth-start {
+    0%, 84% { left: 50%; top: 15%; opacity: 0; }
+    86% { opacity: 1; }
+    90% { left: 78%; top: 44%; opacity: 1; }
+    92%, 100% { left: 78%; top: 44%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-bluetooth-end {
+    0%, 90% { left: 78%; top: 58%; opacity: 0; }
+    92% { opacity: 1; }
+    96% { left: 50%; top: 88%; opacity: 1; }
+    98%, 100% { left: 50%; top: 88%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-bluetooth-reverse-start {
+    0%, 70% { left: 50%; top: 88%; opacity: 0; }
+    72% { opacity: 0.75; }
+    76% { left: 78%; top: 58%; opacity: 0.75; }
+    78%, 100% { left: 78%; top: 58%; opacity: 0; }
+  }
+
+  @keyframes reliability-mobile-bluetooth-reverse-end {
+    0%, 76% { left: 78%; top: 44%; opacity: 0; }
+    78% { opacity: 0.75; }
+    82% { left: 50%; top: 15%; opacity: 0.75; }
+    84%, 100% { left: 50%; top: 15%; opacity: 0; }
+  }
+
+  @keyframes reliability-local-card {
+    0%, 31.99%, 98.01%, 100% {
+      opacity: 1;
+      filter: none;
+      border-color: hsl(var(--accent));
+      background: hsl(var(--accent) / 0.15);
+      box-shadow: 0 0 34px hsl(var(--accent) / 0.25);
+    }
+    8%, 28% {
+      box-shadow: 0 0 54px hsl(var(--accent) / 0.48);
+    }
+    32%, 35.99% {
+      opacity: 0.55;
+      filter: grayscale(0.85);
+      border-color: hsl(var(--accent) / 0.35);
+      background: hsl(var(--accent) / 0.06);
+      box-shadow: none;
+    }
+    36%, 98% {
+      opacity: 0.55;
+      filter: none;
+      border-color: rgb(248 113 113 / 0.55);
+      background: rgb(239 68 68 / 0.1);
+      box-shadow: 0 0 24px rgb(239 68 68 / 0.16);
+    }
+  }
+
+  @keyframes reliability-local-line {
+    0%, 31.9%, 98.01%, 100% {
+      opacity: 1;
+    }
+    32%, 98% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes reliability-server-line {
+    0%, 63.9% {
+      opacity: 1;
+    }
+    64%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes reliability-server-card {
+    0%, 33.99%, 98.01%, 100% {
+      border-color: hsl(0 0% 100% / 0.1);
+      background: hsl(0 0% 100% / 0.03);
+      box-shadow: none;
+    }
+    34%, 63.99% {
+      border-color: hsl(var(--accent) / 0.55);
+      background: hsl(var(--accent) / 0.12);
+      box-shadow: 0 0 42px hsl(var(--accent) / 0.28);
+    }
+    64%, 98% {
+      opacity: 0.55;
+      border-color: rgb(248 113 113 / 0.55);
+      background: rgb(239 68 68 / 0.1);
+      box-shadow: 0 0 24px rgb(239 68 68 / 0.16);
+    }
+  }
+
+  @keyframes reliability-bluetooth-line {
+    0%, 65.9%, 98.01%, 100% {
+      opacity: 0;
+    }
+    66%, 98% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes reliability-bluetooth-card {
+    0%, 65.9%, 98.01%, 100% {
+      border-color: hsl(0 0% 100% / 0.1);
+      background: hsl(0 0% 100% / 0.03);
+      box-shadow: none;
+    }
+    66%, 98% {
+      border-color: hsl(var(--accent) / 0.55);
+      background: hsl(var(--accent) / 0.12);
+      box-shadow: 0 0 42px hsl(var(--accent) / 0.28);
+    }
+  }
+
+  @keyframes reliability-app-card {
+    0%, 2%, 14%, 22%, 32%, 36%, 48%, 56%, 64%, 72%, 84%, 92%, 100% {
+      border-color: hsl(0 0% 100% / 0.1);
+      background: hsl(0 0% 100% / 0.05);
+      box-shadow: none;
+    }
+    8%, 30%, 46%, 60%, 82%, 96% {
+      border-color: hsl(var(--accent) / 0.5);
+      background: hsl(var(--accent) / 0.1);
+      box-shadow: 0 0 44px hsl(var(--accent) / 0.3);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reliability-pulse,
+    .reliability-pulse-mobile {
+      display: none;
+      animation: none;
+    }
+
+    .reliability-card-local,
+    .reliability-card-server,
+    .reliability-card-bluetooth,
+    .reliability-card-app {
+      animation: none;
+    }
+  }
 }

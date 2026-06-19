@@ -18,8 +18,6 @@ const footerLinks = {
     { name: "Contact Us", href: "#" },
     { name: "Partners", href: "#" },
     { name: "Warranty", href: "#" },
-    { name: "Privacy Policy", href: "/privacy-policy", internal: true },
-    { name: "Terms of Use", href: "/terms", internal: true },
   ],
 };
 
@@ -47,10 +45,6 @@ export function Footer() {
             </div>
             <p className="text-xs text-muted-foreground mb-4 font-medium">
               ZIMARIX IOT PRIVATE LIMITED
-            </p>
-            <p className="text-muted-foreground mb-6 max-w-sm leading-relaxed">
-              Extreme-premium smart switch panels, CNC-milled from aircraft-grade
-              aluminium and built for homes that should never feel ordinary.
             </p>
             <div className="space-y-3">
               <div className="flex items-start gap-3 text-sm text-muted-foreground">
