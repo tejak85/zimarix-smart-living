@@ -17,12 +17,15 @@ import {
   Zap,
 } from "lucide-react";
 import appDevices from "@/assets/app-devices.png";
+import anodisedFinishPanels from "@/assets/anodised-finish-panels.png";
 import appRemote from "@/assets/app-remote.png";
 import appRooms from "@/assets/app-rooms.png";
 import appSwitches from "@/assets/app-switches.png";
+import cncMilledAluminiumGrain from "@/assets/cnc-milled-aluminium-grain.png";
 import familyRoomSwitchCluster from "@/assets/family-room-switch-cluster.png";
 import hallwayPanel from "@/assets/hallway-panel.png";
 import heroLuxuryBackground from "@/assets/hero-luxury-background.png";
+import milledTouchButton from "@/assets/milled-touch-button.png";
 import productPanelInstalled from "@/assets/product-panel-installed.png";
 import zimarixExplodedView from "@/assets/zimarix-exploded-view.png";
 import zimarixFinishesGroupPhoto from "@/assets/zimarix-finishes-group-photo.png";
@@ -226,15 +229,18 @@ export function CraftsmanshipSection() {
   const details = [
     {
       title: "6061 T6 aluminium grain",
-      alt: "Macro placeholder showing brushed aircraft-grade aluminium grain",
+      alt: "CNC milling close-up of aircraft-grade aluminium 6061 T6 panel grain",
+      image: cncMilledAluminiumGrain,
     },
     {
       title: "20+ micron anodised finish",
-      alt: "Placeholder showing anodised aluminium finish consistency",
+      alt: "Anodised Zimarix aluminium faceplates showing multiple finish tones",
+      image: anodisedFinishPanels,
     },
     {
       title: "Milled touch button",
-      alt: "Close-up placeholder of a milled metallic touch button",
+      alt: "Close-up of milled metallic touch buttons in multiple finishes",
+      image: milledTouchButton,
     },
   ];
 
@@ -277,11 +283,20 @@ export function CraftsmanshipSection() {
         <div className="grid gap-4 sm:grid-cols-3 lg:gap-5">
           {details.map((detail, index) => (
             <Reveal key={detail.title} delay={index * 0.08}>
-              <PhotoPlaceholder
-                label={detail.title}
-                alt={detail.alt}
-                className="aspect-[4/5]"
-              />
+              {detail.image ? (
+                <ClickablePhotoCard
+                  label={detail.title}
+                  alt={detail.alt}
+                  image={detail.image}
+                  className="aspect-[4/5]"
+                />
+              ) : (
+                <PhotoPlaceholder
+                  label={detail.title}
+                  alt={detail.alt}
+                  className="aspect-[4/5]"
+                />
+              )}
             </Reveal>
           ))}
         </div>
@@ -291,6 +306,8 @@ export function CraftsmanshipSection() {
 }
 
 export function FinishesSection() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <section id="finishes" className="section-padding bg-muted/30">
       <div className="container-tight">
@@ -309,16 +326,21 @@ export function FinishesSection() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="mt-12 overflow-hidden rounded-[2rem] bg-background shadow-elevated">
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            className="group mt-12 block overflow-hidden rounded-[2rem] bg-background shadow-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            aria-label="Open finishes product photo"
+          >
             <img
               src={zimarixFinishesGroupPhoto}
               alt="Studio product photo showing Zimarix panels in multiple anodised finishes"
-              className="block h-auto w-full"
+              className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.02]"
               loading="lazy"
             />
-          </div>
+          </button>
           <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            Shown: a selection of available finishes.
+            Shown: a selection of available finishes. Click to enlarge.
           </p>
         </Reveal>
 
@@ -329,6 +351,35 @@ export function FinishesSection() {
           </p>
         </Reveal>
       </div>
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Finishes product photo preview"
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="relative max-h-[92vh] w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Close image preview"
+            >
+              ×
+            </button>
+            <img
+              src={zimarixFinishesGroupPhoto}
+              alt="Studio product photo showing Zimarix panels in multiple anodised finishes"
+              className="max-h-[92vh] w-full object-contain"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

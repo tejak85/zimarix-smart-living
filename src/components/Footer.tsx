@@ -14,8 +14,6 @@ const footerLinks = {
     { name: "Consultation", href: "/#consultation" },
   ],
   support: [
-    { name: "Help Center", href: "#" },
-    { name: "Contact Us", href: "#" },
     { name: "Partners", href: "#" },
     { name: "Warranty", href: "#" },
   ],
