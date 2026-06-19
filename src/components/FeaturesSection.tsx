@@ -65,18 +65,18 @@ export function FeaturesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="mx-auto mb-10 max-w-3xl text-center sm:mb-16"
         >
           <span className="inline-block text-accent font-semibold text-sm tracking-wider uppercase mb-4">
             Features
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="mb-4 text-3xl font-bold sm:mb-6 sm:text-4xl lg:text-5xl">
             Everything You Need for a{" "}
             <span className="bg-gradient-to-r from-accent to-blue-light bg-clip-text text-transparent">
               Smarter Home
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
             Zimarix combines cutting-edge technology with elegant design, built
             specifically for Indian homes and power conditions.
           </p>
@@ -87,7 +87,7 @@ export function FeaturesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
           {features.map((feature, index) => (
             <motion.div
@@ -98,15 +98,15 @@ export function FeaturesSection() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group"
             >
-              <div className="h-full glass-card rounded-2xl p-8 hover:shadow-elevated transition-all duration-500 hover:-translate-y-1">
+              <div className="glass-card h-full rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated sm:p-8">
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                  <feature.icon className="w-7 h-7 text-accent" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 transition-transform duration-500 group-hover:scale-110 sm:mb-6 sm:h-14 sm:w-14">
+                  <feature.icon className="h-6 w-6 text-accent sm:h-7 sm:w-7" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="mb-2 text-lg font-semibold sm:mb-3 sm:text-xl">{feature.title}</h3>
+                <p className="leading-relaxed text-muted-foreground">
                   {feature.description}
                 </p>
               </div>

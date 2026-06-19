@@ -4,16 +4,14 @@ import { MapPin, Phone, Mail, Linkedin, Facebook, Instagram, Youtube } from "luc
 
 const footerLinks = {
   product: [
-    { name: "Features", href: "#features" },
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "Installation", href: "#installation" },
-    { name: "Pricing", href: "#" },
+    { name: "Craftsmanship", href: "/#craftsmanship" },
+    { name: "Reliability", href: "/#reliability" },
+    { name: "Engineering", href: "/#engineering" },
+    { name: "The App", href: "/#app" },
   ],
   company: [
-    { name: "About Us", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Press", href: "#" },
-    { name: "Blog", href: "#" },
+    { name: "Real Homes", href: "/#real-homes" },
+    { name: "Consultation", href: "/#consultation" },
   ],
   support: [
     { name: "Help Center", href: "#" },
@@ -36,9 +34,9 @@ export function Footer() {
   return (
     <footer className="bg-muted/50 border-t border-border">
       <div className="container-tight section-padding pb-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <div className="mb-12 grid gap-10 sm:grid-cols-2 lg:mb-16 lg:grid-cols-5 lg:gap-12">
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="sm:col-span-2 lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <img
                 src="/zimarix-logo.png"
@@ -51,8 +49,8 @@ export function Footer() {
               ZIMARIX IOT PRIVATE LIMITED
             </p>
             <p className="text-muted-foreground mb-6 max-w-sm leading-relaxed">
-              Intelligence Built Into Your Walls. Premium smart switch panels
-              designed specifically for Indian homes.
+              Extreme-premium smart switch panels, CNC-milled from aircraft-grade
+              aluminium and built for homes that should never feel ordinary.
             </p>
             <div className="space-y-3">
               <div className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -89,7 +87,7 @@ export function Footer() {
           {/* Product Links */}
           <div>
             <h4 className="font-semibold mb-4">Product</h4>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 sm:block sm:space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
                   <a
@@ -106,7 +104,7 @@ export function Footer() {
           {/* Company Links */}
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 sm:block sm:space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   {"internal" in link && link.internal ? (
@@ -132,7 +130,7 @@ export function Footer() {
           {/* Support Links */}
           <div>
             <h4 className="font-semibold mb-4">Support</h4>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 sm:block sm:space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   {"internal" in link && link.internal ? (
@@ -157,37 +155,39 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="flex flex-col items-center justify-between gap-5 border-t border-border pt-8 text-center sm:flex-row sm:text-left">
+          <p className="text-sm text-muted-foreground sm:max-w-sm">
             © {new Date().getFullYear()} Zimarix IoT Private Limited. All rights reserved.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-            <Link
-              to="/privacy-policy"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              to="/terms"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Terms of Use
-            </Link>
+          <div className="flex flex-col items-center gap-4 sm:items-end">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              <Link
+                to="/privacy-policy"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                to="/terms"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Terms of Use
+              </Link>
+            </div>
 
             {/* Social Links */}
             <div className="flex items-center gap-4">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                aria-label={social.label}
-                className="w-10 h-10 rounded-xl bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-accent transition-all"
-              >
-                <social.icon className="w-4 h-4" />
-              </a>
-            ))}
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-xl bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-accent transition-all"
+                >
+                  <social.icon className="w-4 h-4" />
+                </a>
+              ))}
             </div>
           </div>
         </div>

@@ -1,13 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import { HeroSection } from "@/components/HeroSection";
-import { OverviewSection } from "@/components/OverviewSection";
-import { FeaturesSection } from "@/components/FeaturesSection";
-
-
-
-import { UseCasesSection } from "@/components/UseCasesSection";
-import { ColorsSection } from "@/components/ColorsSection";
-import { CTASection } from "@/components/CTASection";
+import { ZimarixLandingPage } from "@/components/ZimarixLandingPage";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -15,15 +7,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        <HeroSection />
-        <OverviewSection />
-        <FeaturesSection />
-        
-        
-        
-        <UseCasesSection />
-        <ColorsSection />
-        <CTASection />
+        <ZimarixLandingPage />
       </main>
       <Footer />
     </div>

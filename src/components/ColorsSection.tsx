@@ -26,19 +26,19 @@ const finishes = [
 
 export function ColorsSection() {
   return (
-    <section id="colors" className="py-24 bg-background">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="colors" className="bg-background py-14 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-14"
+          className="mx-auto mb-10 max-w-3xl text-center sm:mb-14"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+          <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-5xl">
             Finishes &amp; <span className="text-accent">Colors</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
             Crafted from anodized aluminum. Choose a finish that blends seamlessly
             with your interior.
           </p>
@@ -49,16 +49,16 @@ export function ColorsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative rounded-3xl overflow-hidden border border-border/50 shadow-elevated mb-16"
+          className="relative mb-10 overflow-hidden rounded-2xl border border-border/50 shadow-elevated sm:mb-16 sm:rounded-3xl"
         >
           <img
             src={colorOptionsImg}
             alt="Zimarix smart switch panels in five finishes"
-            className="w-full h-auto object-cover"
+            className="h-[260px] w-full object-cover object-center sm:h-auto"
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {finishes.map((finish, i) => (
             <motion.div
               key={finish.name}
@@ -66,10 +66,10 @@ export function ColorsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group bg-card border border-border/50 rounded-2xl overflow-hidden hover:shadow-elevated transition-all duration-500"
+              className="group overflow-hidden rounded-2xl border border-border/50 bg-card transition-all duration-500 hover:shadow-elevated"
             >
-              <div className="h-32 w-full" style={{ background: finish.swatch }} />
-              <div className="p-6 text-center">
+              <div className="h-24 w-full sm:h-32" style={{ background: finish.swatch }} />
+              <div className="p-5 text-center sm:p-6">
                 <h3 className="font-serif text-lg tracking-wide">{finish.name}</h3>
               </div>
             </motion.div>

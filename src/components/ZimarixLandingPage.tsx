@@ -1,0 +1,798 @@
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  ArrowRight,
+  Bluetooth,
+  ChevronRight,
+  CircuitBoard,
+  Cloud,
+  Cpu,
+  Home,
+  Mail,
+  Phone,
+  Radio,
+  Router,
+  Server,
+  ShieldCheck,
+  Smartphone,
+  Thermometer,
+  Wifi,
+  Zap,
+} from "lucide-react";
+import appDevices from "@/assets/app-devices.png";
+import appRemote from "@/assets/app-remote.png";
+import appRooms from "@/assets/app-rooms.png";
+import appSwitches from "@/assets/app-switches.png";
+import familyRoomSwitchCluster from "@/assets/family-room-switch-cluster.png";
+import hallwayPanel from "@/assets/hallway-panel.png";
+import heroLuxuryBackground from "@/assets/hero-luxury-background.png";
+import productPanelInstalled from "@/assets/product-panel-installed.png";
+
+type RevealProps = {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+};
+
+function Reveal({ children, className, delay = 0 }: RevealProps) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-accent">
+      {children}
+    </p>
+  );
+}
+
+function ConsultationCTA({
+  variant = "primary",
+  className = "",
+}: {
+  variant?: "primary" | "secondary";
+  className?: string;
+}) {
+  const isPrimary = variant === "primary";
+
+  return (
+    <a
+      href="#consultation"
+      className={`inline-flex items-center justify-center gap-3 rounded-full border px-6 py-3 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-7 ${
+        isPrimary
+          ? "border-accent bg-accent text-accent-foreground shadow-blue hover:-translate-y-0.5 hover:bg-accent/90"
+          : "border-foreground/15 bg-background/70 text-foreground hover:border-accent hover:text-accent"
+      } ${className}`}
+    >
+      Book a Consultation
+      <ArrowRight className="h-4 w-4" />
+    </a>
+  );
+}
+
+function PhotoPlaceholder({
+  label,
+  alt,
+  className = "",
+}: {
+  label: string;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <div
+      role="img"
+      aria-label={alt}
+      className={`relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-[#D6D9DD] via-[#AEB5BE] to-[#3D4652] ${className}`}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,255,255,0.45),transparent_28%),linear-gradient(120deg,rgba(255,255,255,0.2),transparent_45%)]" />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/85 to-transparent p-5">
+        <p className="text-sm font-medium text-primary-foreground">{label}</p>
+      </div>
+    </div>
+  );
+}
+
+function ClickablePhotoCard({
+  label,
+  alt,
+  image,
+  className = "",
+}: {
+  label: string;
+  alt: string;
+  image: string;
+  className?: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        className={`group relative block overflow-hidden rounded-3xl border border-border/60 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${className}`}
+        aria-label={`Open image: ${label}`}
+      >
+        <img
+          src={image}
+          alt={alt}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/15 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <p className="text-sm font-medium text-primary-foreground">{label}</p>
+          <p className="mt-1 text-xs text-primary-foreground/60">Click to enlarge</p>
+        </div>
+      </button>
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={label}
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-3xl border border-white/15 bg-black shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Close image preview"
+            >
+              ×
+            </button>
+            <img src={image} alt={alt} className="max-h-[92vh] w-full object-contain" />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5">
+              <p className="text-sm font-medium text-white">{label}</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export function HeroSection() {
+  return (
+    <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-20 text-white sm:pt-24">
+      <div className="absolute inset-0">
+        <img
+          src={heroLuxuryBackground}
+          alt="Zimarix smart switch panel installed on a wall with blue LED accents"
+          className="h-full w-full object-cover object-[28%_50%] opacity-100 contrast-110 saturate-110 sm:object-[30%_50%] lg:object-left"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_46%,rgba(30,140,255,0.18),transparent_22%),radial-gradient(circle_at_28%_48%,transparent_0%,transparent_30%,rgba(7,9,12,0.18)_54%,rgba(7,9,12,0.86)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,12,0.06)_0%,rgba(7,9,12,0.08)_30%,rgba(7,9,12,0.55)_58%,rgba(7,9,12,0.94)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,9,12,0.34)_0%,rgba(7,9,12,0.02)_42%,#07090C_100%)]" />
+      </div>
+
+      <div className="container-tight relative flex min-h-[calc(100vh-5rem)] flex-col justify-center pb-12 sm:pb-16 lg:pb-20">
+        <Reveal>
+          <div className="max-w-3xl lg:ml-auto">
+            <h1 className="font-heading text-[clamp(2.35rem,4.55vw,4.75rem)] font-medium leading-[1.08] tracking-[-0.045em]">
+              <span className="block text-white">A switch that never feels cheap.</span>
+              <span className="mt-2 block text-blue-light">
+                A touch that <span className="text-white">never lags.</span>
+              </span>
+              <span className="mt-2 block text-white">
+                A home that never depends on{" "}
+                <span className="text-accent">someone else's server.</span>
+              </span>
+            </h1>
+
+            <p className="mt-8 font-mono text-xs font-semibold uppercase tracking-[0.36em] text-white/58">
+              This is Zimarix.
+            </p>
+
+            <div className="mt-8">
+              <ConsultationCTA className="border-white/25 bg-white/10 text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md hover:border-accent hover:bg-accent hover:text-accent-foreground" />
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.18} className="mt-12 hidden border-t border-white/10 pt-5 sm:block lg:ml-auto lg:w-3/5">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-3 font-mono text-[10px] uppercase tracking-[0.28em] text-white/46 lg:grid-cols-4">
+            <span>Aluminium 6061 T6</span>
+            <span>Anodise 20+ micron</span>
+            <span>Protocol ZX, on-device</span>
+            <span>Made in India</span>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function CraftsmanshipSection() {
+  const details = [
+    {
+      title: "6061 T6 aluminium grain",
+      alt: "Macro placeholder showing brushed aircraft-grade aluminium grain",
+    },
+    {
+      title: "20+ micron anodised finish",
+      alt: "Placeholder showing anodised aluminium finish consistency",
+    },
+    {
+      title: "Milled touch button",
+      alt: "Close-up placeholder of a milled metallic touch button",
+    },
+  ];
+
+  return (
+    <section id="craftsmanship" className="section-padding bg-background">
+      <div className="container-tight grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <Reveal>
+          <div>
+            <Eyebrow>02 — Craftsmanship</Eyebrow>
+            <h2 className="mt-6 max-w-3xl font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-foreground">
+              Every detail, <span className="text-accent">milled.</span>
+            </h2>
+            <div className="mt-8 space-y-6 text-lg leading-9 text-muted-foreground">
+              <p>
+                Most switch panels are assembled from parts bought off a shelf. Zimarix
+                isn't.
+              </p>
+              <p>
+                Every panel is milled from{" "}
+                <strong className="font-semibold text-foreground">
+                  aircraft-grade aluminium 6061 T6
+                </strong>{" "}
+                — the same alloy used in aerospace and premium electronics — then anodised
+                in-house to a consistent{" "}
+                <strong className="font-semibold text-foreground">20+ micron finish</strong>.
+                Not for aesthetics. Because it distributes heat evenly, detects temperature
+                accurately, and outlasts everything around it.
+              </p>
+              <p className="text-2xl font-semibold leading-snug text-foreground">
+                Even the touch buttons are milled.
+              </p>
+              <p>
+                You'll feel the difference the first time you touch it. You'll still feel it
+                ten years from now.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="grid gap-4 sm:grid-cols-3 lg:gap-5">
+          {details.map((detail, index) => (
+            <Reveal key={detail.title} delay={index * 0.08}>
+              <PhotoPlaceholder
+                label={detail.title}
+                alt={detail.alt}
+                className="aspect-[4/5]"
+              />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ReliabilitySection() {
+  const paths = [
+    { icon: Router, label: "Local socket", note: "Primary path", primary: true },
+    { icon: Server, label: "Server relay", note: "When away" },
+    { icon: Bluetooth, label: "Bluetooth", note: "WiFi fallback" },
+  ];
+
+  return (
+    <section id="reliability" className="section-padding bg-[#07090C] text-white">
+      <div className="container-tight grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <Reveal>
+          <div>
+            <Eyebrow>03 — Reliability</Eyebrow>
+            <h2 className="mt-6 max-w-3xl font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-white">
+              Your home should never depend on{" "}
+              <span className="text-accent">someone else's server.</span>
+            </h2>
+            <div className="mt-8 space-y-6 text-lg leading-9 text-white/68">
+              <p>
+                Most smart switches stop being smart the moment the WiFi drops, or the
+                company behind them shuts down a server somewhere. Zimarix doesn't work that
+                way.
+              </p>
+              <p>
+                Every Zimarix device runs its own intelligence — on the device itself.
+                Scheduling, automation, monitoring — none of it lives in the cloud.
+              </p>
+              <p>
+                Lose your WiFi, and the app still reaches your switches over Bluetooth.
+                Lose the internet entirely, and your home keeps running exactly as you set
+                it up.
+              </p>
+              <p className="text-2xl font-semibold leading-snug text-white">
+                This isn't a feature. It's how it was always meant to work.
+              </p>
+            </div>
+            <ConsultationCTA variant="secondary" className="mt-9 border-white/20 bg-white/5 text-white" />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <div
+            role="img"
+            aria-label="Technical diagram showing Zimarix device connecting to app through local socket, server relay, and Bluetooth with local socket emphasized"
+            className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl sm:p-8"
+          >
+            <div className="grid gap-6 md:grid-cols-[1fr_1.1fr_1fr] md:items-center">
+              <div className="rounded-3xl border border-accent/35 bg-accent/10 p-5 text-center">
+                <Cpu className="mx-auto h-10 w-10 text-accent" />
+                <p className="mt-3 font-semibold">Zimarix Device</p>
+                <p className="mt-1 font-mono text-xs text-white/50">Intelligence on-device</p>
+              </div>
+
+              <div className="space-y-3">
+                {paths.map((path) => (
+                  <div
+                    key={path.label}
+                    className={`relative rounded-2xl border p-4 ${
+                      path.primary
+                        ? "border-accent bg-accent/15 shadow-[0_0_34px_rgba(30,140,255,0.25)]"
+                        : "border-white/10 bg-white/[0.03]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <path.icon
+                        className={`h-5 w-5 ${path.primary ? "text-accent" : "text-white/55"}`}
+                      />
+                      <div>
+                        <p className="font-semibold">{path.label}</p>
+                        <p className="font-mono text-xs text-white/45">{path.note}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 text-center">
+                <Smartphone className="mx-auto h-10 w-10 text-white/75" />
+                <p className="mt-3 font-semibold">Zimarix App</p>
+                <p className="mt-1 font-mono text-xs text-white/50">Direct when possible</p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function IntelligenceSection() {
+  const scenarios = [
+    {
+      icon: Home,
+      text: "Walk in the door, and the lights, fan, and AC turn on together — one tap, one cluster.",
+    },
+    {
+      icon: ShieldCheck,
+      text: "Leave for the weekend, and Zimarix watches your home. If something moves when it shouldn't, every phone on your account knows immediately.",
+    },
+    {
+      icon: Zap,
+      text: "No one home during the day? Devices configured for power-saving switch off on their own.",
+    },
+    {
+      icon: Radio,
+      text: "Want the TV to turn on, switch to channel 456, and dim the lights — all from one button? Record it once. Use it forever.",
+    },
+  ];
+
+  return (
+    <section id="intelligence" className="section-padding bg-muted/30">
+      <div className="container-tight">
+        <Reveal className="max-w-3xl">
+          <Eyebrow>04 — Intelligence</Eyebrow>
+          <h2 className="mt-6 font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-foreground">
+            It doesn't just turn things{" "}
+            <span className="text-accent">on and off.</span>
+          </h2>
+        </Reveal>
+
+        <div className="mt-9 grid gap-5 md:grid-cols-2">
+          {scenarios.map((scenario, index) => (
+            <Reveal key={scenario.text} delay={index * 0.06}>
+              <article className="glass-card h-full rounded-3xl p-6 sm:p-8">
+                <scenario.icon className="h-8 w-8 text-accent" />
+                <p className="mt-5 text-xl font-semibold leading-8 text-foreground">
+                  {scenario.text}
+                </p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-2xl font-semibold leading-snug text-foreground">
+            This is what your switches do when they're actually thinking.
+          </p>
+          <ConsultationCTA variant="secondary" />
+        </Reveal>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <Reveal delay={0}>
+            <ClickablePhotoCard
+              label="Candid living room install"
+              alt="Real installed Zimarix smart switch panel on a wall with blue LED accents"
+              image={productPanelInstalled}
+              className="aspect-[4/3]"
+            />
+          </Reveal>
+          {[
+            {
+              label: "Hallway panel in daily use",
+              alt: "Zimarix smart switch panel installed on a textured wall in a luxury hallway",
+              image: hallwayPanel,
+            },
+            {
+              label: "Family room switch cluster",
+              alt: "Zimarix smart switch panel installed in a premium family room with marble wall and seating",
+              image: familyRoomSwitchCluster,
+            },
+          ].map((photo, index) => (
+            <Reveal key={photo.label} delay={(index + 1) * 0.08}>
+              <ClickablePhotoCard
+                label={photo.label}
+                alt={photo.alt}
+                image={photo.image}
+                className="aspect-[4/3]"
+              />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function EngineeringSection() {
+  const specs = [
+    { icon: Cpu, label: "ZX protocol", value: "Built in-house" },
+    { icon: CircuitBoard, label: "PCB finish", value: "ENIG" },
+    { icon: Wifi, label: "Updates", value: "OTA" },
+    { icon: Thermometer, label: "Health", value: "Self monitored" },
+  ];
+
+  return (
+    <section id="engineering" className="section-padding bg-background">
+      <div className="container-tight grid gap-12 lg:grid-cols-[1fr_0.95fr] lg:items-center">
+        <Reveal>
+          <div>
+            <Eyebrow>05 — Engineering</Eyebrow>
+            <h2 className="mt-6 max-w-3xl font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-foreground">
+              For those who want to know{" "}
+              <span className="text-accent">why it works.</span>
+            </h2>
+            <div className="mt-8 space-y-6 text-lg leading-9 text-muted-foreground">
+              <p>
+                At the core of every Zimarix device is{" "}
+                <strong className="font-semibold text-foreground">ZX</strong> — a
+                communication protocol built entirely in-house, designed for
+                mission-critical reliability and extreme low latency.
+              </p>
+              <p>
+                The architecture uses low level socket design — the same standard found in
+                aerospace, medical, and defence systems. Not because we had to. Because
+                nothing else was precise enough.
+              </p>
+              <p>
+                Every PCB is designed in-house and built on ENIG finish for superior signal
+                integrity and long-term reliability. Every device updates itself over the
+                air. Every device watches its own health — temperature, memory, connectivity
+                — and tells you before something goes wrong.
+              </p>
+            </div>
+            <div className="mt-8 rounded-3xl border border-border bg-muted/40 p-6">
+              <p className="text-xl font-semibold leading-relaxed text-foreground">
+                We didn't start with how it looks.
+                <br />
+                We started with what it has to survive.
+                <br />
+                The rest followed.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <div className="rounded-[2rem] border border-border bg-gradient-to-br from-muted to-background p-5 shadow-elevated sm:p-8">
+            <div
+              role="img"
+              aria-label="Exploded-view placeholder illustration showing aluminium faceplate, anodised layer, touch buttons, PCB, and electronics"
+              className="relative min-h-[420px] overflow-hidden rounded-3xl bg-[#0C1016] p-6 text-white"
+            >
+              {["Anodised aluminium", "Milled touch surface", "ENIG PCB", "ZX controller"].map(
+                (layer, index) => (
+                  <div
+                    key={layer}
+                    className="absolute left-6 right-6 rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm"
+                    style={{ top: `${32 + index * 76}px` }}
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/55">
+                        Layer {index + 1}
+                      </span>
+                      <span className="font-semibold">{layer}</span>
+                    </div>
+                  </div>
+                ),
+              )}
+            </div>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              {specs.map((spec) => (
+                <div key={spec.label} className="rounded-2xl border border-border bg-background p-4">
+                  <spec.icon className="h-5 w-5 text-accent" />
+                  <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                    {spec.label}
+                  </p>
+                  <p className="mt-1 font-semibold">{spec.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function AppSection() {
+  const screens = [
+    {
+      title: "Devices",
+      image: appDevices,
+      alt: "Zimarix app devices screen showing registered and active smart devices",
+    },
+    {
+      title: "Switches",
+      image: appSwitches,
+      alt: "Zimarix app switch control screen with on-off toggles for a device",
+    },
+    {
+      title: "Remote",
+      image: appRemote,
+      alt: "Zimarix app remote control screen for TV and IR commands",
+    },
+    {
+      title: "Rooms",
+      image: appRooms,
+      alt: "Zimarix app rooms screen showing room cards and navigation",
+    },
+  ];
+
+  return (
+    <section id="app" className="section-padding bg-[#07090C] text-white">
+      <div className="container-tight grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <Reveal>
+          <div>
+            <Eyebrow>06 — The App</Eyebrow>
+            <h2 className="mt-6 max-w-3xl font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-white">
+              Built to get out of{" "}
+              <span className="text-accent">your way.</span>
+            </h2>
+            <div className="mt-8 space-y-6 text-lg leading-9 text-white/68">
+              <p>
+                Native on iOS and Android. Designed to get you to the action you want in
+                the fewest taps possible.
+              </p>
+              <p>
+                Control multiple homes from one account. See exactly which devices are
+                active, right now. Choose exactly which switches you want Alexa to control —
+                and keep the rest private.
+              </p>
+              <p>
+                When you're home, commands reach your switches directly. When you're not,
+                they still reach you — through Zimarix's own relay, automatically, with no
+                setup required.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {screens.map((screen, index) => (
+            <Reveal key={screen.title} delay={index * 0.08}>
+              <div
+                className={`mx-auto w-full max-w-[230px] rounded-[2rem] border border-white/15 bg-[#0D1117] p-2.5 shadow-2xl ${
+                  index % 2 === 1 ? "xl:mt-10" : ""
+                }`}
+              >
+                <div className="overflow-hidden rounded-[1.55rem] bg-black">
+                  <img
+                    src={screen.image}
+                    alt={screen.alt}
+                    className="block h-auto w-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="px-3 pb-2 pt-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+                    {screen.title}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function RealHomesSection() {
+  const homes = [
+    "Living room, Bangalore",
+    "Master bedroom panel",
+    "Villa entrance foyer",
+    "Dining room automation",
+    "Apartment hallway",
+    "Home theatre wall",
+  ];
+
+  return (
+    <section id="real-homes" className="section-padding bg-muted/30">
+      <div className="container-tight">
+        <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <Eyebrow>07 — In Real Homes</Eyebrow>
+            <h2 className="mt-6 max-w-3xl font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-foreground">
+              Already living in homes{" "}
+              <span className="text-accent">like yours.</span>
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              Placeholder installation photography with a consistent treatment. Replace
+              these with real candid site images as installations are documented.
+            </p>
+          </div>
+          <ConsultationCTA variant="secondary" />
+        </Reveal>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {homes.map((home, index) => (
+            <Reveal key={home} delay={index * 0.04}>
+              <PhotoPlaceholder
+                label={home}
+                alt={`${home} placeholder photo of a Zimarix smart switch panel installed in a real home`}
+                className="aspect-[4/3]"
+              />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ConsultationSection() {
+  return (
+    <section id="consultation" className="section-padding bg-[#07090C] text-white">
+      <div className="container-tight grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
+        <Reveal>
+          <div>
+            <Eyebrow>08 — Book a Consultation</Eyebrow>
+            <h2 className="mt-5 text-4xl font-medium leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
+              See it in person.
+            </h2>
+            <p className="mt-6 max-w-lg text-lg leading-8 text-white/68">
+              Talk to us about your home, your requirements, and how Zimarix fits in.
+            </p>
+
+            <div className="mt-8 space-y-3 text-white/75">
+              <a className="flex items-center gap-3 hover:text-white" href="mailto:contact@zimarix.com">
+                <Mail className="h-5 w-5 text-accent" />
+                contact@zimarix.com
+              </a>
+              <a className="flex items-center gap-3 hover:text-white" href="tel:+918867050606">
+                <Phone className="h-5 w-5 text-accent" />
+                +91 88670 50606
+              </a>
+              <a className="flex items-center gap-3 hover:text-white" href="https://www.zimarix.com">
+                <Cloud className="h-5 w-5 text-accent" />
+                www.zimarix.com
+              </a>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.12}>
+          <form className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl sm:p-8">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="block">
+                <span className="text-sm font-medium text-white/75">Name</span>
+                <input
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  placeholder="Your name"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-white/75">Phone</span>
+                <input
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  placeholder="+91"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-white/75">City</span>
+                <input
+                  name="city"
+                  type="text"
+                  autoComplete="address-level2"
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  placeholder="Bangalore"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-white/75">Property Type</span>
+                <select
+                  name="propertyType"
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select property type
+                  </option>
+                  <option>Apartment</option>
+                  <option>Independent House</option>
+                  <option>Villa</option>
+                  <option>Commercial</option>
+                </select>
+              </label>
+            </div>
+            <button
+              type="submit"
+              className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
+            >
+              Book a Consultation
+              <ChevronRight className="h-4 w-4" />
+            </button>
+            <p className="mt-4 text-sm leading-6 text-white/45">
+              This form is ready for your CRM or email integration. For now, direct contact
+              details are listed beside it.
+            </p>
+          </form>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function ZimarixLandingPage() {
+  return (
+    <>
+      <HeroSection />
+      <CraftsmanshipSection />
+      <ReliabilitySection />
+      <IntelligenceSection />
+      <EngineeringSection />
+      <AppSection />
+      <RealHomesSection />
+      <ConsultationSection />
+    </>
+  );
+}

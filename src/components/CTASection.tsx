@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Phone, Calendar } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 export function CTASection() {
   return (
@@ -25,7 +24,7 @@ export function CTASection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 sm:mb-8"
           >
             <span className="text-sm font-medium text-accent">
               Limited Time Offer
@@ -33,12 +32,12 @@ export function CTASection() {
           </motion.div>
 
           {/* Headline */}
-          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-primary-foreground mb-6">
+          <h2 className="mb-5 text-3xl font-bold text-primary-foreground sm:mb-6 sm:text-4xl lg:text-6xl">
             Ready to Make Your Home{" "}
             <span className="text-accent">Intelligent?</span>
           </h2>
 
-          <p className="text-lg sm:text-xl text-primary-foreground/70 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-primary-foreground/70 sm:mb-10 sm:text-xl">
             Contact us at
           </p>
 
@@ -48,19 +47,24 @@ export function CTASection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 text-primary-foreground/60"
+            className="mx-auto flex max-w-sm flex-col items-stretch justify-center gap-3 text-primary-foreground/70 sm:max-w-none sm:flex-row sm:items-center sm:gap-6"
           >
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4" />
+            <div className="flex items-center justify-center gap-2 rounded-xl border border-primary-foreground/10 bg-primary-foreground/5 px-4 py-3 sm:border-0 sm:bg-transparent sm:p-0">
+              <Phone className="h-4 w-4 flex-shrink-0" />
               <a href="tel:+918867050606" className="hover:text-primary-foreground transition-colors">+91 8867050606</a>
             </div>
             <div className="hidden sm:block w-1 h-1 rounded-full bg-primary-foreground/30" />
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4" />
+            <div className="flex items-center justify-center gap-2 rounded-xl border border-primary-foreground/10 bg-primary-foreground/5 px-4 py-3 sm:border-0 sm:bg-transparent sm:p-0">
+              <Phone className="h-4 w-4 flex-shrink-0" />
               <a href="tel:+918884184647" className="hover:text-primary-foreground transition-colors">+91 8884184647</a>
             </div>
             <div className="hidden sm:block w-1 h-1 rounded-full bg-primary-foreground/30" />
-            <span>sales@zimarix.com</span>
+            <div className="flex items-center justify-center gap-2 rounded-xl border border-primary-foreground/10 bg-primary-foreground/5 px-4 py-3 sm:border-0 sm:bg-transparent sm:p-0">
+              <Mail className="h-4 w-4 flex-shrink-0" />
+              <a href="mailto:sales@zimarix.com" className="hover:text-primary-foreground transition-colors">
+                sales@zimarix.com
+              </a>
+            </div>
           </motion.div>
         </motion.div>
       </div>

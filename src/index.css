@@ -1,66 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
-
-/* Zimarix Premium Design System — Blue/Silver Theme */
+/* Zimarix Premium Design System — Anodised Aluminium Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 99%;
-    --foreground: 220 20% 10%;
+    --background: 210 20% 98%;
+    --foreground: 216 26% 8%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card: 210 20% 99%;
+    --card-foreground: 216 26% 8%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 10%;
 
-    --primary: 220 20% 12%;
+    --primary: 216 26% 8%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 220 20% 12%;
+    --secondary: 216 10% 91%;
+    --secondary-foreground: 216 26% 8%;
 
-    --muted: 215 15% 96%;
-    --muted-foreground: 215 10% 45%;
+    --muted: 216 14% 93%;
+    --muted-foreground: 217 8% 43%;
 
-    --accent: 210 100% 55%;
+    --accent: 209 100% 56%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 215 15% 91%;
-    --input: 215 15% 91%;
-    --ring: 210 100% 55%;
+    --border: 216 11% 84%;
+    --input: 216 11% 84%;
+    --ring: 209 100% 56%;
 
     --radius: 1rem;
 
     /* Custom Zimarix tokens */
-    --blue: 210 100% 55%;
-    --blue-light: 205 90% 68%;
-    --blue-glow: 210 100% 55%;
-    --silver: 210 10% 75%;
-    --silver-light: 210 8% 88%;
-    --charcoal: 220 20% 12%;
-    --charcoal-light: 220 15% 20%;
+    --blue: 209 100% 56%;
+    --blue-light: 210 100% 69%;
+    --blue-glow: 209 100% 56%;
+    --silver: 215 6% 47%;
+    --silver-light: 216 10% 91%;
+    --charcoal: 216 26% 8%;
+    --charcoal-light: 214 19% 13%;
     --cool-white: 210 20% 98%;
-    --soft-grey: 215 10% 94%;
+    --soft-grey: 216 14% 93%;
     --glass: 0 0% 100%;
 
     /* Gradients */
     --gradient-blue: linear-gradient(135deg, hsl(210 100% 55%), hsl(205 90% 68%));
-    --gradient-dark: linear-gradient(180deg, hsl(220 20% 12%), hsl(220 25% 8%));
+    --gradient-dark: linear-gradient(180deg, hsl(216 26% 8%), hsl(220 27% 4%));
     --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
     --gradient-hero: linear-gradient(180deg, hsl(210 20% 98%) 0%, hsl(215 15% 96%) 100%);
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(220 20% 12% / 0.08);
-    --shadow-card: 0 8px 32px -8px hsl(220 20% 12% / 0.12);
-    --shadow-elevated: 0 20px 50px -12px hsl(220 20% 12% / 0.15);
-    --shadow-blue: 0 8px 30px -8px hsl(210 100% 55% / 0.35);
+    --shadow-soft: 0 4px 20px -4px hsl(216 26% 8% / 0.08);
+    --shadow-card: 0 8px 32px -8px hsl(216 26% 8% / 0.12);
+    --shadow-elevated: 0 20px 50px -12px hsl(216 26% 8% / 0.17);
+    --shadow-blue: 0 8px 30px -8px hsl(209 100% 56% / 0.35);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -119,10 +119,12 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight;
+    text-wrap: balance;
   }
 }
 
@@ -136,11 +138,11 @@
   }
 
   .section-padding {
-    @apply py-20 md:py-28 lg:py-32;
+    @apply py-14 sm:py-20 md:py-24 lg:py-28;
   }
 
   .container-tight {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
 
