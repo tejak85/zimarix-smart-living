@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import appDevices from "@/assets/app-devices.png";
 import anodisedFinishPanels from "@/assets/anodised-finish-panels.png";
+import apartmentHallway from "@/assets/apartment-hallway.png";
 import appRemote from "@/assets/app-remote.png";
 import appRooms from "@/assets/app-rooms.png";
 import appSwitches from "@/assets/app-switches.png";
@@ -25,6 +26,8 @@ import cncMilledAluminiumGrain from "@/assets/cnc-milled-aluminium-grain.png";
 import familyRoomSwitchCluster from "@/assets/family-room-switch-cluster.png";
 import hallwayPanel from "@/assets/hallway-panel.png";
 import heroLuxuryBackground from "@/assets/hero-luxury-background.png";
+import livingRoomInstall from "@/assets/living-room-install.png";
+import masterBedroomPanel from "@/assets/master-bedroom-panel.png";
 import milledTouchButton from "@/assets/milled-touch-button.png";
 import productPanelInstalled from "@/assets/product-panel-installed.png";
 import zimarixExplodedView from "@/assets/zimarix-exploded-view.png";
@@ -801,12 +804,24 @@ export function AppSection() {
 
 export function RealHomesSection() {
   const homes = [
-    "Living room, Bangalore",
-    "Master bedroom panel",
-    "Villa entrance foyer",
-    "Dining room automation",
-    "Apartment hallway",
-    "Home theatre wall",
+    {
+      label: "Living room, Bangalore",
+      alt: "Zimarix smart switch panel installed on a wood-panelled living room wall",
+      image: livingRoomInstall,
+    },
+    {
+      label: "Master bedroom panel",
+      alt: "Zimarix smart switch panel installed near a master bedroom",
+      image: masterBedroomPanel,
+    },
+    { label: "Villa entrance foyer" },
+    { label: "Dining room automation" },
+    {
+      label: "Apartment hallway",
+      alt: "Zimarix smart switch panel shown in a luxury apartment hallway and interior collage",
+      image: apartmentHallway,
+    },
+    { label: "Home theatre wall" },
   ];
 
   return (
@@ -829,12 +844,21 @@ export function RealHomesSection() {
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {homes.map((home, index) => (
-            <Reveal key={home} delay={index * 0.04}>
-              <PhotoPlaceholder
-                label={home}
-                alt={`${home} placeholder photo of a Zimarix smart switch panel installed in a real home`}
-                className="aspect-[4/3]"
-              />
+            <Reveal key={home.label} delay={index * 0.04}>
+              {home.image ? (
+                <ClickablePhotoCard
+                  label={home.label}
+                  alt={home.alt}
+                  image={home.image}
+                  className="aspect-[4/3]"
+                />
+              ) : (
+                <PhotoPlaceholder
+                  label={home.label}
+                  alt={`${home.label} placeholder photo of a Zimarix smart switch panel installed in a real home`}
+                  className="aspect-[4/3]"
+                />
+              )}
             </Reveal>
           ))}
         </div>
