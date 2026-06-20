@@ -42,6 +42,20 @@ type RevealProps = {
   delay?: number;
 };
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+function trackGAEvent(eventName: string, eventParams?: Record<string, string>) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", eventName, eventParams ?? {});
+}
+
 function Reveal({ children, className, delay = 0 }: RevealProps) {
   const reduceMotion = useReducedMotion();
 
@@ -69,15 +83,22 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 function ConsultationCTA({
   variant = "primary",
   className = "",
+  trackingLocation = "unknown",
 }: {
   variant?: "primary" | "secondary";
   className?: string;
+  trackingLocation?: string;
 }) {
   const isPrimary = variant === "primary";
 
   return (
     <a
       href="#consultation"
+      onClick={() =>
+        trackGAEvent("book_consultation_click", {
+          location: trackingLocation,
+        })
+      }
       className={`inline-flex items-center justify-center gap-3 rounded-full border px-6 py-3 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-7 ${
         isPrimary
           ? "border-accent bg-accent text-accent-foreground shadow-blue hover:-translate-y-0.5 hover:bg-accent/90"
@@ -213,7 +234,10 @@ export function HeroSection() {
             </p>
 
             <div className="mt-8">
-              <ConsultationCTA className="border-white/25 bg-white/10 text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md hover:border-accent hover:bg-accent hover:text-accent-foreground" />
+              <ConsultationCTA
+                trackingLocation="hero"
+                className="border-white/25 bg-white/10 text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md hover:border-accent hover:bg-accent hover:text-accent-foreground"
+              />
             </div>
 
             <p className="mt-6 rounded-full border border-white/12 bg-white/[0.06] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 backdrop-blur-md sm:inline-flex sm:text-left">
@@ -430,7 +454,11 @@ export function ReliabilitySection() {
                 This isn't a feature. It's how it was always meant to work.
               </p>
             </div>
-            <ConsultationCTA variant="secondary" className="mt-9 border-white/20 bg-white/5 text-white" />
+            <ConsultationCTA
+              variant="secondary"
+              trackingLocation="reliability"
+              className="mt-9 border-white/20 bg-white/5 text-white"
+            />
           </div>
         </Reveal>
 
@@ -588,7 +616,7 @@ export function IntelligenceSection() {
           <p className="max-w-2xl text-2xl font-semibold leading-snug text-foreground">
             This is what your switches do when they're actually thinking.
           </p>
-          <ConsultationCTA variant="secondary" />
+          <ConsultationCTA variant="secondary" trackingLocation="intelligence" />
         </Reveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -853,7 +881,7 @@ export function RealHomesSection() {
               How it looks, <span className="text-accent">where it lives.</span>
             </h2>
           </div>
-          <ConsultationCTA variant="secondary" />
+          <ConsultationCTA variant="secondary" trackingLocation="design_reference" />
         </Reveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -974,6 +1002,9 @@ export function ConsultationSection() {
       form.reset();
       setSubmitState("success");
       setSubmitMessage("Thank you. We have received your request and will contact you soon.");
+      trackGAEvent("consultation_form_submit", {
+        location: "consultation_form",
+      });
     } catch {
       setSubmitState("error");
       setSubmitMessage("Something went wrong. Please call or email us directly.");
@@ -1070,6 +1101,11 @@ export function ConsultationSection() {
             <button
               type="submit"
               disabled={submitState === "submitting"}
+              onClick={() =>
+                trackGAEvent("book_consultation_click", {
+                  location: "consultation_form",
+                })
+              }
               className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
             >
               {submitState === "submitting" ? "Submitting..." : "Book a Consultation"}
