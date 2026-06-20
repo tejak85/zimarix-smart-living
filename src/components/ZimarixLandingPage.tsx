@@ -32,6 +32,7 @@ import livingRoomInstall from "@/assets/living-room-install.png";
 import masterBedroomPanel from "@/assets/master-bedroom-panel.png";
 import milledTouchButton from "@/assets/milled-touch-button.png";
 import productPanelInstalled from "@/assets/product-panel-installed.png";
+import villaEntranceFoyer from "@/assets/villa-entrance-foyer.png";
 import zimarixExplodedView from "@/assets/zimarix-exploded-view.png";
 import zimarixFinishesGroupPhoto from "@/assets/zimarix-finishes-group-photo.png";
 
@@ -816,7 +817,11 @@ export function RealHomesSection() {
       alt: "Zimarix smart switch panel installed near a master bedroom",
       image: masterBedroomPanel,
     },
-    { label: "Villa entrance foyer" },
+    {
+      label: "Villa entrance foyer",
+      alt: "Zimarix smart switch panel installed beside a villa entrance foyer",
+      image: villaEntranceFoyer,
+    },
     {
       label: "Dining room automation",
       alt: "Zimarix smart switch panel installed beside a modern kitchen and dining area",
