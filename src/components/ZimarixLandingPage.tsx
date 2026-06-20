@@ -23,6 +23,7 @@ import appRemote from "@/assets/app-remote.png";
 import appRooms from "@/assets/app-rooms.png";
 import appSwitches from "@/assets/app-switches.png";
 import cncMilledAluminiumGrain from "@/assets/cnc-milled-aluminium-grain.png";
+import diningRoomAutomation from "@/assets/dining-room-automation.png";
 import familyRoomSwitchCluster from "@/assets/family-room-switch-cluster.png";
 import hallwayPanel from "@/assets/hallway-panel.png";
 import homeTheatreWall from "@/assets/home-theatre-wall.png";
@@ -816,7 +817,11 @@ export function RealHomesSection() {
       image: masterBedroomPanel,
     },
     { label: "Villa entrance foyer" },
-    { label: "Dining room automation" },
+    {
+      label: "Dining room automation",
+      alt: "Zimarix smart switch panel installed beside a modern kitchen and dining area",
+      image: diningRoomAutomation,
+    },
     {
       label: "Apartment hallway",
       alt: "Zimarix smart switch panel shown in a luxury apartment hallway and interior collage",
