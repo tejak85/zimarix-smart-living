@@ -25,6 +25,7 @@ import appSwitches from "@/assets/app-switches.png";
 import cncMilledAluminiumGrain from "@/assets/cnc-milled-aluminium-grain.png";
 import familyRoomSwitchCluster from "@/assets/family-room-switch-cluster.png";
 import hallwayPanel from "@/assets/hallway-panel.png";
+import homeTheatreWall from "@/assets/home-theatre-wall.png";
 import heroLuxuryBackground from "@/assets/hero-luxury-background.png";
 import livingRoomInstall from "@/assets/living-room-install.png";
 import masterBedroomPanel from "@/assets/master-bedroom-panel.png";
@@ -821,7 +822,11 @@ export function RealHomesSection() {
       alt: "Zimarix smart switch panel shown in a luxury apartment hallway and interior collage",
       image: apartmentHallway,
     },
-    { label: "Home theatre wall" },
+    {
+      label: "Home theatre wall",
+      alt: "Zimarix smart switch panel installed on a home theatre wall",
+      image: homeTheatreWall,
+    },
   ];
 
   return (
@@ -834,10 +839,6 @@ export function RealHomesSection() {
               Already living in homes{" "}
               <span className="text-accent">like yours.</span>
             </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-              Placeholder installation photography with a consistent treatment. Replace
-              these with real candid site images as installations are documented.
-            </p>
           </div>
           <ConsultationCTA variant="secondary" />
         </Reveal>
