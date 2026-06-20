@@ -215,6 +215,10 @@ export function HeroSection() {
             <div className="mt-8">
               <ConsultationCTA className="border-white/25 bg-white/10 text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md hover:border-accent hover:bg-accent hover:text-accent-foreground" />
             </div>
+
+            <p className="mt-6 rounded-full border border-white/12 bg-white/[0.06] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 backdrop-blur-md sm:inline-flex sm:text-left">
+              5-Year Warranty · 48-Hour Diagnosis · In-House Service
+            </p>
           </div>
         </Reveal>
 
@@ -878,6 +882,57 @@ export function RealHomesSection() {
   );
 }
 
+export function WarrantySupportSection() {
+  const stats = [
+    { value: "5 YEARS", label: "Warranty coverage" },
+    { value: "48 HOURS", label: "Issue diagnosis" },
+    { value: "5 DAYS", label: "Replacement shipped" },
+  ];
+
+  return (
+    <section id="warranty-support" className="section-padding bg-background">
+      <div className="container-tight">
+        <Reveal>
+          <div className="rounded-[2rem] border border-border bg-muted/35 p-6 shadow-soft sm:p-8 lg:p-10">
+            <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+              <div>
+                <Eyebrow>Warranty & Support</Eyebrow>
+                <h2 className="mt-6 max-w-3xl font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-foreground">
+                  Backed by the people{" "}
+                  <span className="text-accent">who built it.</span>
+                </h2>
+                <p className="mt-8 max-w-3xl text-lg leading-9 text-muted-foreground">
+                  Because Zimarix designs and manufactures every panel in-house, there's no
+                  third party to wait on. Every panel comes with a 5-year warranty. If
+                  something goes wrong, our team diagnoses the issue within 48 hours and
+                  ships a replacement within 5 days — start to finish, handled by the people
+                  who built your product.
+                </p>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {stats.map((stat) => (
+                  <div
+                    key={stat.value}
+                    className="rounded-2xl border border-border bg-background p-5"
+                  >
+                    <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                      {stat.value}
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export function ConsultationSection() {
   const [submitState, setSubmitState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
@@ -1054,6 +1109,7 @@ export function ZimarixLandingPage() {
       <EngineeringSection />
       <AppSection />
       <RealHomesSection />
+      <WarrantySupportSection />
       <ConsultationSection />
     </>
   );
