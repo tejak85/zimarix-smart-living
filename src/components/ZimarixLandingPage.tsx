@@ -594,7 +594,7 @@ export function IntelligenceSection() {
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           <Reveal delay={0}>
             <ClickablePhotoCard
-              label="Candid living room install"
+              label="Living room reference"
               alt="Real installed Zimarix smart switch panel on a wall with blue LED accents"
               image={productPanelInstalled}
               className="aspect-[4/3]"
@@ -602,12 +602,12 @@ export function IntelligenceSection() {
           </Reveal>
           {[
             {
-              label: "Hallway panel in daily use",
+              label: "Hallway application",
               alt: "Zimarix smart switch panel installed on a textured wall in a luxury hallway",
               image: hallwayPanel,
             },
             {
-              label: "Family room switch cluster",
+              label: "Switch cluster reference",
               alt: "Zimarix smart switch panel installed in a premium family room with marble wall and seating",
               image: familyRoomSwitchCluster,
             },
@@ -812,32 +812,32 @@ export function AppSection() {
 export function RealHomesSection() {
   const homes = [
     {
-      label: "Living room, Bangalore",
+      label: "Living room application",
       alt: "Zimarix smart switch panel installed on a wood-panelled living room wall",
       image: livingRoomInstall,
     },
     {
-      label: "Master bedroom panel",
+      label: "Bedroom placement reference",
       alt: "Zimarix smart switch panel installed near a master bedroom",
       image: masterBedroomPanel,
     },
     {
-      label: "Villa entrance foyer",
+      label: "Foyer application",
       alt: "Zimarix smart switch panel installed beside a villa entrance foyer",
       image: villaEntranceFoyer,
     },
     {
-      label: "Dining room automation",
+      label: "Dining room reference",
       alt: "Zimarix smart switch panel installed beside a modern kitchen and dining area",
       image: diningRoomAutomation,
     },
     {
-      label: "Apartment hallway",
+      label: "Hallway placement reference",
       alt: "Zimarix smart switch panel shown in a luxury apartment hallway and interior collage",
       image: apartmentHallway,
     },
     {
-      label: "Home theatre wall",
+      label: "Media room application",
       alt: "Zimarix smart switch panel installed on a home theatre wall",
       image: homeTheatreWall,
     },
@@ -848,10 +848,9 @@ export function RealHomesSection() {
       <div className="container-tight">
         <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <Eyebrow>07 — In Real Homes</Eyebrow>
+            <Eyebrow>07 — Design Reference</Eyebrow>
             <h2 className="mt-6 max-w-3xl font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-foreground">
-              Already living in homes{" "}
-              <span className="text-accent">like yours.</span>
+              How it looks, <span className="text-accent">where it lives.</span>
             </h2>
           </div>
           <ConsultationCTA variant="secondary" />
