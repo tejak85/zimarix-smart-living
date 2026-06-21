@@ -1077,7 +1077,6 @@ export function ConsultationSection() {
                   autoComplete="address-level2"
                   required
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                  placeholder="Bangalore"
                 />
               </label>
               <label className="block">
