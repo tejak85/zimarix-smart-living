@@ -6,15 +6,12 @@ import {
   ChevronRight,
   Cloud,
   Cpu,
-  Home,
   Mail,
   Phone,
-  Radio,
+  PlayCircle,
   Router,
   Server,
-  ShieldCheck,
   Smartphone,
-  Zap,
 } from "lucide-react";
 import appDevices from "@/assets/app-devices.png";
 import anodisedFinishPanels from "@/assets/anodised-finish-panels.png";
@@ -24,14 +21,11 @@ import appRooms from "@/assets/app-rooms.png";
 import appSwitches from "@/assets/app-switches.png";
 import cncMilledAluminiumGrain from "@/assets/cnc-milled-aluminium-grain.png";
 import diningRoomAutomation from "@/assets/dining-room-automation.png";
-import familyRoomSwitchCluster from "@/assets/family-room-switch-cluster.png";
-import hallwayPanel from "@/assets/hallway-panel.png";
 import homeTheatreWall from "@/assets/home-theatre-wall.png";
 import heroLuxuryBackground from "@/assets/hero-luxury-background.png";
 import livingRoomInstall from "@/assets/living-room-install.png";
 import masterBedroomPanel from "@/assets/master-bedroom-panel.png";
 import milledTouchButton from "@/assets/milled-touch-button.png";
-import productPanelInstalled from "@/assets/product-panel-installed.png";
 import villaEntranceFoyer from "@/assets/villa-entrance-foyer.png";
 import zimarixExplodedView from "@/assets/zimarix-exploded-view.png";
 import zimarixFinishesGroupPhoto from "@/assets/zimarix-finishes-group-photo.png";
@@ -108,6 +102,196 @@ function ConsultationCTA({
       Book a Consultation
       <ArrowRight className="h-4 w-4" />
     </a>
+  );
+}
+
+function DemoVideoButton({
+  onClick,
+  children,
+}: {
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex items-center justify-center gap-3 rounded-full border border-foreground/15 bg-background/70 px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent hover:bg-accent/10 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    >
+      <PlayCircle className="h-4 w-4" />
+      {children}
+      <ArrowRight className="h-4 w-4" />
+    </button>
+  );
+}
+
+function ClusterAutomationVisual() {
+  const reduceMotion = useReducedMotion();
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <motion.div
+      className={`cluster-automation ${isActive && !reduceMotion ? "is-active" : ""}`}
+      aria-hidden="true"
+      viewport={{ once: true, amount: 0.75 }}
+      onViewportEnter={() => {
+        if (!reduceMotion) {
+          setIsActive(true);
+        }
+      }}
+    >
+      <svg className="cluster-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M 14 50 C 24 50, 30 50, 39 50" />
+        <path d="M 45 50 C 58 50, 62 22, 80 22" />
+        <path d="M 45 50 C 58 50, 62 50, 80 50" />
+        <path d="M 45 50 C 58 50, 62 78, 80 78" />
+      </svg>
+      <div className="cluster-node cluster-device">Home</div>
+      <div className="cluster-node cluster-tap">Tap</div>
+      <div className="cluster-output cluster-output-light">
+        <span>Light</span>
+      </div>
+      <div className="cluster-output cluster-output-fan">
+        <span>Fan</span>
+      </div>
+      <div className="cluster-output cluster-output-ac">
+        <span>AC</span>
+      </div>
+      <div className="cluster-signal cluster-signal-ac">IR signal</div>
+      <div className="cluster-pulse cluster-pulse-tap" />
+      <div className="cluster-pulse cluster-pulse-light" />
+      <div className="cluster-pulse cluster-pulse-fan" />
+      <div className="cluster-pulse cluster-pulse-ac" />
+    </motion.div>
+  );
+}
+
+function SecurityWatchVisual() {
+  const reduceMotion = useReducedMotion();
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <motion.div
+      className={`watch-automation ${isActive && !reduceMotion ? "is-active" : ""}`}
+      aria-hidden="true"
+      viewport={{ once: true, amount: 0.75 }}
+      onViewportEnter={() => {
+        if (!reduceMotion) {
+          setIsActive(true);
+        }
+      }}
+    >
+      <svg className="watch-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M 19 50 C 30 50, 35 50, 43 50" />
+        <path d="M 49 50 C 60 50, 65 25, 82 25" />
+        <path d="M 49 50 C 60 50, 66 50, 84 50" />
+        <path d="M 49 50 C 60 50, 65 75, 82 75" />
+      </svg>
+      <div className="watch-home">
+        <span>Home</span>
+      </div>
+      <div className="watch-shield">✓</div>
+      <div className="watch-motion">Motion</div>
+      <div className="watch-phone watch-phone-one">
+        <span>Alert</span>
+      </div>
+      <div className="watch-phone watch-phone-two">
+        <span>Alert</span>
+      </div>
+      <div className="watch-phone watch-phone-three">
+        <span>Alert</span>
+      </div>
+      <div className="watch-pulse watch-pulse-motion" />
+      <div className="watch-pulse watch-pulse-phone-one" />
+      <div className="watch-pulse watch-pulse-phone-two" />
+      <div className="watch-pulse watch-pulse-phone-three" />
+    </motion.div>
+  );
+}
+
+function PowerSavingVisual() {
+  const reduceMotion = useReducedMotion();
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <motion.div
+      className={`power-automation ${isActive && !reduceMotion ? "is-active" : ""}`}
+      aria-hidden="true"
+      viewport={{ once: true, amount: 0.75 }}
+      onViewportEnter={() => {
+        if (!reduceMotion) {
+          setIsActive(true);
+        }
+      }}
+    >
+      <svg className="power-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M 16 50 C 28 50, 33 50, 42 50" />
+        <path d="M 48 50 C 60 50, 64 25, 82 25" />
+        <path d="M 48 50 C 60 50, 66 50, 84 50" />
+        <path d="M 48 50 C 60 50, 64 75, 82 75" />
+      </svg>
+      <div className="power-sun">Day</div>
+      <div className="power-away">Away</div>
+      <div className="power-controller">Auto</div>
+      <div className="power-device power-device-light">
+        <span>Light</span>
+        <strong>On</strong>
+      </div>
+      <div className="power-device power-device-fan">
+        <span>Fan</span>
+        <strong>On</strong>
+      </div>
+      <div className="power-device power-device-ac">
+        <span>AC</span>
+        <strong>On</strong>
+      </div>
+      <div className="power-pulse power-pulse-trigger" />
+      <div className="power-pulse power-pulse-light" />
+      <div className="power-pulse power-pulse-fan" />
+      <div className="power-pulse power-pulse-ac" />
+    </motion.div>
+  );
+}
+
+function IRMacroVisual() {
+  const reduceMotion = useReducedMotion();
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <motion.div
+      className={`ir-automation ${isActive && !reduceMotion ? "is-active" : ""}`}
+      aria-hidden="true"
+      viewport={{ once: true, amount: 0.75 }}
+      onViewportEnter={() => {
+        if (!reduceMotion) {
+          setIsActive(true);
+        }
+      }}
+    >
+      <svg className="ir-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M 16 50 C 26 50, 31 50, 39 50" />
+        <path d="M 47 50 C 58 50, 64 28, 82 28" />
+        <path d="M 47 50 C 58 50, 66 50, 84 50" />
+        <path d="M 47 50 C 58 50, 64 74, 82 74" />
+      </svg>
+      <div className="ir-button">TV On</div>
+      <div className="ir-blaster">IR</div>
+      <div className="ir-target ir-target-tv">TV</div>
+      <div className="ir-channel">
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+      </div>
+      <div className="ir-target ir-target-light">Light</div>
+      <div className="ir-wait ir-wait-five">Wait 5s</div>
+      <div className="ir-wait ir-wait-one">Wait 1s</div>
+      <div className="ir-pulse ir-pulse-start" />
+      <div className="ir-pulse ir-pulse-tv" />
+      <div className="ir-pulse ir-pulse-four" />
+      <div className="ir-pulse ir-pulse-five" />
+      <div className="ir-pulse ir-pulse-six" />
+      <div className="ir-pulse ir-pulse-light" />
+    </motion.div>
   );
 }
 
@@ -571,19 +755,19 @@ export function ReliabilitySection() {
 export function IntelligenceSection() {
   const scenarios = [
     {
-      icon: Home,
+      visual: "cluster",
       text: "Walk in the door, and the lights, fan, and AC turn on together — one tap, one cluster.",
     },
     {
-      icon: ShieldCheck,
+      visual: "watch",
       text: "Leave for the weekend, and Zimarix watches your home. If something moves when it shouldn't, every phone on your account knows immediately.",
     },
     {
-      icon: Zap,
+      visual: "power",
       text: "No one home during the day? Devices configured for power-saving switch off on their own.",
     },
     {
-      icon: Radio,
+      visual: "ir",
       text: "Want the TV to turn on, switch to channel 456, and dim the lights — all from one button? Record it once. Use it forever.",
     },
   ];
@@ -602,8 +786,18 @@ export function IntelligenceSection() {
         <div className="mt-9 grid gap-5 md:grid-cols-2">
           {scenarios.map((scenario, index) => (
             <Reveal key={scenario.text} delay={index * 0.06}>
-              <article className="glass-card h-full rounded-3xl p-6 sm:p-8">
-                <scenario.icon className="h-8 w-8 text-accent" />
+              <article className="glass-card h-full rounded-3xl p-5 sm:p-8">
+                {"visual" in scenario && scenario.visual === "cluster" ? (
+                  <ClusterAutomationVisual />
+                ) : "visual" in scenario && scenario.visual === "watch" ? (
+                  <SecurityWatchVisual />
+                ) : "visual" in scenario && scenario.visual === "power" ? (
+                  <PowerSavingVisual />
+                ) : "visual" in scenario && scenario.visual === "ir" ? (
+                  <IRMacroVisual />
+                ) : (
+                  <scenario.icon className="h-8 w-8 text-accent" />
+                )}
                 <p className="mt-5 text-xl font-semibold leading-8 text-foreground">
                   {scenario.text}
                 </p>
@@ -618,38 +812,6 @@ export function IntelligenceSection() {
           </p>
           <ConsultationCTA variant="secondary" trackingLocation="intelligence" />
         </Reveal>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          <Reveal delay={0}>
-            <ClickablePhotoCard
-              label="Living room reference"
-              alt="Real installed Zimarix smart switch panel on a wall with blue LED accents"
-              image={productPanelInstalled}
-              className="aspect-[4/3]"
-            />
-          </Reveal>
-          {[
-            {
-              label: "Hallway application",
-              alt: "Zimarix smart switch panel installed on a textured wall in a luxury hallway",
-              image: hallwayPanel,
-            },
-            {
-              label: "Switch cluster reference",
-              alt: "Zimarix smart switch panel installed in a premium family room with marble wall and seating",
-              image: familyRoomSwitchCluster,
-            },
-          ].map((photo, index) => (
-            <Reveal key={photo.label} delay={(index + 1) * 0.08}>
-              <ClickablePhotoCard
-                label={photo.label}
-                alt={photo.alt}
-                image={photo.image}
-                className="aspect-[4/3]"
-              />
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -663,6 +825,10 @@ export function EngineeringSection() {
     { label: "PCB Finish", value: "ENIG" },
     { label: "Back Panel", value: "FR4 (MILLED)" },
   ];
+  const [activeDemo, setActiveDemo] = useState<{
+    title: string;
+    embedUrl: string;
+  } | null>(null);
 
   return (
     <section id="engineering" className="section-padding bg-background">
@@ -702,6 +868,35 @@ export function EngineeringSection() {
                 <br />
                 The rest followed.
               </p>
+            </div>
+            <div className="mt-6 border-t border-border pt-5">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                Engineering demos
+              </p>
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <DemoVideoButton
+                  onClick={() =>
+                    setActiveDemo({
+                      title: "Watch Voltage Stability Test",
+                      embedUrl:
+                        "https://www.youtube.com/embed/q_1IYpQOGoU?autoplay=1&rel=0&modestbranding=1",
+                    })
+                  }
+                >
+                  Watch Voltage Stability Test
+                </DemoVideoButton>
+                <DemoVideoButton
+                  onClick={() =>
+                    setActiveDemo({
+                      title: "Watch Temperature Alert Demo",
+                      embedUrl:
+                        "https://www.youtube.com/embed/HGrO_tm2XNQ?autoplay=1&rel=0&modestbranding=1",
+                    })
+                  }
+                >
+                  Watch Temperature Alert Demo
+                </DemoVideoButton>
+              </div>
             </div>
           </div>
         </Reveal>
@@ -750,6 +945,37 @@ export function EngineeringSection() {
         </Reveal>
 
       </div>
+
+      {activeDemo && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeDemo.title}
+          onClick={() => setActiveDemo(null)}
+        >
+          <div
+            className="relative aspect-[9/16] max-h-[88vh] w-full max-w-sm overflow-hidden rounded-3xl border border-white/15 bg-black shadow-2xl sm:max-w-md"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveDemo(null)}
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Close video preview"
+            >
+              ×
+            </button>
+            <iframe
+              src={activeDemo.embedUrl}
+              title={activeDemo.title}
+              className="h-full w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
