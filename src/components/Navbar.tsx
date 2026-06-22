@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Reliability", href: "/#reliability" },
   { name: "Intelligence", href: "/#intelligence" },
   { name: "Engineering", href: "/#engineering" },
-  { name: "Warranty", href: "/warranty" },
+  { name: "Warranty", href: "/#warranty-support" },
 ];
 
 export function Navbar() {

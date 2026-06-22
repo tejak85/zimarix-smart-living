@@ -14,7 +14,7 @@ const footerLinks = {
     { name: "Consultation", href: "/#consultation" },
   ],
   support: [
-    { name: "Warranty", href: "/warranty", internal: true },
+    { name: "Warranty", href: "/#warranty-support" },
   ],
 };
 

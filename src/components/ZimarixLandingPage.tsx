@@ -125,6 +125,74 @@ function DemoVideoButton({
   );
 }
 
+function WatchDemoButton({
+  onClick,
+  children,
+  variant = "light",
+}: {
+  onClick: () => void;
+  children: React.ReactNode;
+  variant?: "light" | "dark";
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+        variant === "dark"
+          ? "border-white/20 bg-white/[0.03] text-white/88 hover:border-accent hover:bg-accent/10 hover:text-white focus-visible:ring-offset-[#07090C]"
+          : "border-foreground/15 bg-background/70 text-foreground hover:border-accent hover:bg-accent/10 hover:text-accent focus-visible:ring-offset-background"
+      }`}
+    >
+      <span aria-hidden="true" className="text-[0.7rem] leading-none">
+        ▶
+      </span>
+      {children}
+    </button>
+  );
+}
+
+function VideoPopup({
+  title,
+  embedUrl,
+  onClose,
+}: {
+  title: string;
+  embedUrl: string;
+  onClose: () => void;
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      onClick={onClose}
+    >
+      <div
+        className="relative aspect-[9/16] max-h-[88vh] w-full max-w-sm overflow-hidden rounded-3xl border border-white/15 bg-black shadow-2xl sm:max-w-md"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          aria-label="Close video preview"
+        >
+          ×
+        </button>
+        <iframe
+          src={embedUrl}
+          title={title}
+          className="h-full w-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
+    </div>
+  );
+}
+
 function ClusterAutomationVisual() {
   const reduceMotion = useReducedMotion();
   const [isActive, setIsActive] = useState(false);
@@ -608,6 +676,10 @@ export function ReliabilitySection() {
     { icon: Server, label: "Server", note: "When away" },
     { icon: Bluetooth, label: "Bluetooth", note: "WiFi fallback" },
   ];
+  const [activeDemo, setActiveDemo] = useState<{
+    title: string;
+    embedUrl: string;
+  } | null>(null);
 
   return (
     <section id="reliability" className="section-padding bg-[#07090C] text-white">
@@ -745,9 +817,30 @@ export function ReliabilitySection() {
                 <p className="mt-1 font-mono text-xs text-white/50">Direct when possible</p>
               </div>
             </div>
+            <div className="mt-8 flex justify-center">
+              <WatchDemoButton
+                variant="dark"
+                onClick={() =>
+                  setActiveDemo({
+                    title: "Watch: Zero Downtime Demo",
+                    embedUrl:
+                      "https://www.youtube.com/embed/jgtshkQz_ic?autoplay=1&rel=0&modestbranding=1",
+                  })
+                }
+              >
+                Watch: Zero Downtime Demo →
+              </WatchDemoButton>
+            </div>
           </div>
         </Reveal>
       </div>
+      {activeDemo && (
+        <VideoPopup
+          title={activeDemo.title}
+          embedUrl={activeDemo.embedUrl}
+          onClose={() => setActiveDemo(null)}
+        />
+      )}
     </section>
   );
 }
@@ -771,6 +864,10 @@ export function IntelligenceSection() {
       text: "Want the TV to turn on, switch to channel 456, and dim the lights — all from one button? Record it once. Use it forever.",
     },
   ];
+  const [activeDemo, setActiveDemo] = useState<{
+    title: string;
+    embedUrl: string;
+  } | null>(null);
 
   return (
     <section id="intelligence" className="section-padding bg-muted/30">
@@ -806,6 +903,20 @@ export function IntelligenceSection() {
           ))}
         </div>
 
+        <Reveal className="mt-8 flex justify-center">
+          <WatchDemoButton
+            onClick={() =>
+              setActiveDemo({
+                title: "Watch: Cluster & Automation Demo",
+                embedUrl:
+                  "https://www.youtube.com/embed/jgtshkQz_ic?autoplay=1&rel=0&modestbranding=1",
+              })
+            }
+          >
+            Watch: Cluster & Automation Demo →
+          </WatchDemoButton>
+        </Reveal>
+
         <Reveal className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-2xl text-2xl font-semibold leading-snug text-foreground">
             This is what your switches do when they're actually thinking.
@@ -813,6 +924,13 @@ export function IntelligenceSection() {
           <ConsultationCTA variant="secondary" trackingLocation="intelligence" />
         </Reveal>
       </div>
+      {activeDemo && (
+        <VideoPopup
+          title={activeDemo.title}
+          embedUrl={activeDemo.embedUrl}
+          onClose={() => setActiveDemo(null)}
+        />
+      )}
     </section>
   );
 }
