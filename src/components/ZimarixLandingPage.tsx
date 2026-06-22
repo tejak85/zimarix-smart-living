@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -34,6 +34,11 @@ type RevealProps = {
   className?: string;
   delay?: number;
 };
+
+const CONNECTIVITY_DEMO_EMBED =
+  "https://www.youtube.com/embed/jgtshkQz_ic?autoplay=1&rel=0&modestbranding=1";
+const FEATURE_DEMO_EMBED =
+  "https://www.youtube.com/embed/kSxo5FUI3A8?autoplay=1&rel=0&modestbranding=1";
 
 declare global {
   interface Window {
@@ -124,15 +129,44 @@ function DemoVideoButton({
   );
 }
 
+function ExternalDemoLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center justify-center gap-3 rounded-full border border-foreground/15 bg-background/70 px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent hover:bg-accent/10 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    >
+      <PlayCircle className="h-4 w-4" />
+      {children}
+      <ArrowRight className="h-4 w-4" />
+    </a>
+  );
+}
+
 function WatchDemoButton({
   onClick,
   children,
   variant = "light",
+  iconPosition = "start",
 }: {
   onClick: () => void;
   children: React.ReactNode;
   variant?: "light" | "dark";
+  iconPosition?: "start" | "end";
 }) {
+  const icon = (
+    <span aria-hidden="true" className="text-[0.7rem] leading-none">
+      ▶
+    </span>
+  );
+
   return (
     <button
       type="button"
@@ -143,10 +177,9 @@ function WatchDemoButton({
           : "border-foreground/15 bg-background/70 text-foreground hover:border-accent hover:bg-accent/10 hover:text-accent focus-visible:ring-offset-background"
       }`}
     >
-      <span aria-hidden="true" className="text-[0.7rem] leading-none">
-        ▶
-      </span>
+      {iconPosition === "start" && icon}
       {children}
+      {iconPosition === "end" && icon}
     </button>
   );
 }
@@ -160,22 +193,88 @@ function VideoPopup({
   embedUrl: string;
   onClose: () => void;
 }) {
+  const reduceMotion = useReducedMotion();
+  const [isClosing, setIsClosing] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  const handleClose = () => {
+    if (isClosing) {
+      return;
+    }
+
+    if (reduceMotion) {
+      onClose();
+      return;
+    }
+
+    setIsClosing(true);
+    window.setTimeout(onClose, 200);
+  };
+
+  useEffect(() => {
+    triggerRef.current = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleClose();
+        return;
+      }
+
+      if (event.key !== "Tab" || !modalRef.current) {
+        return;
+      }
+
+      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+        'button, iframe, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!firstElement || !lastElement) {
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      triggerRef.current?.focus();
+    };
+  }, [handleClose]);
+
   return (
-    <div
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0 }}
+      animate={reduceMotion ? undefined : { opacity: isClosing ? 0 : 1 }}
+      transition={{ duration: 0.2 }}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label={title}
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div
-        className="relative aspect-[9/16] max-h-[88vh] w-full max-w-sm overflow-hidden rounded-3xl border border-white/15 bg-black shadow-2xl sm:max-w-md"
+        ref={modalRef}
+        className="relative aspect-[9/16] max-h-[88vh] w-full max-w-sm overflow-hidden rounded-3xl border border-white/15 bg-[#111] shadow-2xl sm:max-w-md"
         onClick={(event) => event.stopPropagation()}
       >
         <button
+          ref={closeButtonRef}
           type="button"
-          onClick={onClose}
-          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          onClick={handleClose}
+          className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/75 text-3xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Close video preview"
         >
           ×
@@ -188,7 +287,7 @@ function VideoPopup({
           allowFullScreen
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -451,6 +550,11 @@ function ClickablePhotoCard({
 }
 
 export function HeroSection() {
+  const [activeDemo, setActiveDemo] = useState<{
+    title: string;
+    embedUrl: string;
+  } | null>(null);
+
   return (
     <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-20 text-white sm:pt-24">
       <div className="absolute inset-0">
@@ -484,11 +588,23 @@ export function HeroSection() {
               This is Zimarix.
             </p>
 
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <ConsultationCTA
                 trackingLocation="hero"
                 className="border-white/25 bg-white/10 text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md hover:border-accent hover:bg-accent hover:text-accent-foreground"
               />
+              <WatchDemoButton
+                variant="dark"
+                iconPosition="end"
+                onClick={() =>
+                  setActiveDemo({
+                    title: "See It In Action",
+                    embedUrl: FEATURE_DEMO_EMBED,
+                  })
+                }
+              >
+                See It In Action
+              </WatchDemoButton>
             </div>
 
             <p className="mt-6 rounded-full border border-white/12 bg-white/[0.06] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 backdrop-blur-md sm:inline-flex sm:text-left">
@@ -506,6 +622,13 @@ export function HeroSection() {
           </div>
         </Reveal>
       </div>
+      {activeDemo && (
+        <VideoPopup
+          title={activeDemo.title}
+          embedUrl={activeDemo.embedUrl}
+          onClose={() => setActiveDemo(null)}
+        />
+      )}
     </section>
   );
 }
@@ -822,8 +945,7 @@ export function ReliabilitySection() {
                 onClick={() =>
                   setActiveDemo({
                     title: "Watch: Zero Downtime Demo",
-                    embedUrl:
-                      "https://www.youtube.com/embed/jgtshkQz_ic?autoplay=1&rel=0&modestbranding=1",
+                    embedUrl: CONNECTIVITY_DEMO_EMBED,
                   })
                 }
               >
@@ -902,17 +1024,28 @@ export function IntelligenceSection() {
           ))}
         </div>
 
-        <Reveal className="mt-8 flex justify-center">
+        <Reveal className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <WatchDemoButton
+            iconPosition="end"
             onClick={() =>
               setActiveDemo({
-                title: "Watch: Cluster & Automation Demo",
-                embedUrl:
-                  "https://www.youtube.com/embed/jgtshkQz_ic?autoplay=1&rel=0&modestbranding=1",
+                title: "See It In Action",
+                embedUrl: FEATURE_DEMO_EMBED,
               })
             }
           >
-            Watch: Cluster & Automation Demo →
+            See It In Action
+          </WatchDemoButton>
+          <WatchDemoButton
+            iconPosition="end"
+            onClick={() =>
+              setActiveDemo({
+                title: "Watch: Zero Downtime Demo",
+                embedUrl: CONNECTIVITY_DEMO_EMBED,
+              })
+            }
+          >
+            Watch: Zero Downtime Demo
           </WatchDemoButton>
         </Reveal>
 
@@ -1002,17 +1135,10 @@ export function EngineeringSection() {
                 >
                   Watch Voltage Stability Test
                 </DemoVideoButton>
-                <DemoVideoButton
-                  onClick={() =>
-                    setActiveDemo({
-                      title: "Watch Temperature Alert Demo",
-                      embedUrl:
-                        "https://www.youtube.com/embed/HGrO_tm2XNQ?autoplay=1&rel=0&modestbranding=1",
-                    })
-                  }
-                >
+                {/* TODO: Replace with modal once temperature alert video URL is confirmed */}
+                <ExternalDemoLink href="https://youtube.com/shorts/HGrO_tm2XNQ?si=IUJcBQSl1ipMlcD0">
                   Watch Temperature Alert Demo
-                </DemoVideoButton>
+                </ExternalDemoLink>
               </div>
             </div>
           </div>
@@ -1064,34 +1190,11 @@ export function EngineeringSection() {
       </div>
 
       {activeDemo && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          aria-label={activeDemo.title}
-          onClick={() => setActiveDemo(null)}
-        >
-          <div
-            className="relative aspect-[9/16] max-h-[88vh] w-full max-w-sm overflow-hidden rounded-3xl border border-white/15 bg-black shadow-2xl sm:max-w-md"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setActiveDemo(null)}
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label="Close video preview"
-            >
-              ×
-            </button>
-            <iframe
-              src={activeDemo.embedUrl}
-              title={activeDemo.title}
-              className="h-full w-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-        </div>
+        <VideoPopup
+          title={activeDemo.title}
+          embedUrl={activeDemo.embedUrl}
+          onClose={() => setActiveDemo(null)}
+        />
       )}
     </section>
   );
