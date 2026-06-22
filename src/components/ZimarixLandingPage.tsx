@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   Bluetooth,
-  ChevronRight,
   Cloud,
   Cpu,
   Mail,
@@ -99,7 +98,7 @@ function ConsultationCTA({
           : "border-foreground/15 bg-background/70 text-foreground hover:border-accent hover:text-accent"
       } ${className}`}
     >
-      Book a Consultation
+      Book a Free Demo
       <ArrowRight className="h-4 w-4" />
     </a>
   );
@@ -1360,12 +1359,33 @@ export function ConsultationSection() {
       <div className="container-tight grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <Reveal>
           <div>
-            <Eyebrow>08 — Book a Consultation</Eyebrow>
+            <Eyebrow>08 — Free Live Demo</Eyebrow>
             <h2 className="mt-5 text-4xl font-medium leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-              See it in person.
+              See it before you decide. No pressure, no obligation.
             </h2>
-            <p className="mt-6 max-w-lg text-lg leading-8 text-white/68">
-              Talk to us about your home, your requirements, and how Zimarix fits in.
+            <div className="mt-6 max-w-lg space-y-5 text-lg leading-8 text-white/68">
+              <p>
+                Home automation has let a lot of people down — cheap builds,
+                unreliable apps, switches that stopped working when a company shut
+                down a server.
+              </p>
+              <p>
+                We built Zimarix to be different. But we don't expect you to take our
+                word for it.
+              </p>
+              <p>
+                Book a live demo. Watch it work — clusters, automation, intrusion
+                detection, temperature monitoring — in real time, on a real device.
+                Ask us anything.
+              </p>
+              <p>
+                If it feels right for your home, we'll talk. If it doesn't, you've
+                lost nothing but an hour.
+              </p>
+            </div>
+            <p className="mt-5 max-w-lg text-sm leading-7 text-white/52">
+              What to expect: a 45-minute hands-on session at your location or ours,
+              where you control the device yourself.
             </p>
 
             <div className="mt-8 space-y-3 text-white/75">
@@ -1451,8 +1471,7 @@ export function ConsultationSection() {
               }
               className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
             >
-              {submitState === "submitting" ? "Submitting..." : "Book a Consultation"}
-              <ChevronRight className="h-4 w-4" />
+              {submitState === "submitting" ? "Submitting..." : "Book a Free Live Demo →"}
             </button>
             {submitMessage && (
               <p

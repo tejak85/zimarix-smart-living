@@ -66,7 +66,7 @@ export function Navbar() {
               href="/#consultation"
               className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-all hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              Book
+              Free Demo
             </a>
           </div>
 
@@ -109,7 +109,7 @@ export function Navbar() {
                 className="mt-2 rounded-xl bg-accent px-3 py-3 text-center font-semibold text-accent-foreground transition-colors hover:bg-accent/90"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Book a Consultation
+                Free Demo
               </a>
             </div>
           </motion.div>
