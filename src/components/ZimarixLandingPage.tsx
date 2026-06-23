@@ -769,6 +769,9 @@ export function HeroSection() {
             <p className="mt-5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-white/55">
               This is Zimarix.
             </p>
+            <p className="mt-3 text-sm leading-6 text-white/52 sm:text-base">
+              Premium smart home automation, engineered in Bangalore.
+            </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <ConsultationCTA
@@ -851,8 +854,8 @@ export function CraftsmanshipSection() {
             </h2>
             <div className="mt-8 space-y-6 text-lg leading-9 text-muted-foreground">
               <p>
-                Most switch panels are assembled from parts bought off a shelf. Zimarix
-                isn't.
+                Most smart home switch panels are assembled from parts bought off a shelf.
+                Zimarix isn't.
               </p>
               <p>
                 Every panel is milled from{" "}
@@ -992,9 +995,9 @@ export function ReliabilitySection() {
             </h2>
             <div className="mt-8 space-y-6 text-lg leading-9 text-white/68">
               <p>
-                Most smart switches stop being smart the moment the WiFi drops, or the
-                company behind them shuts down a server somewhere. Zimarix doesn't work that
-                way.
+                Most smart home automation switches stop being smart the moment the WiFi
+                drops, or the company behind them shuts down a server somewhere. Zimarix
+                doesn't work that way.
               </p>
               <p>
                 Every Zimarix device runs its own intelligence — on the device itself.
@@ -1694,6 +1697,10 @@ export function ConsultationSection() {
             <p className="mt-5 max-w-lg text-sm leading-7 text-white/52">
               What to expect: a 45-minute hands-on session at your location or ours,
               where you control the device yourself.
+            </p>
+            <p className="mt-3 max-w-lg text-sm leading-7 text-white/52">
+              Serving premium homes across Bangalore, Whitefield, Koramangala,
+              Indiranagar, and HSR Layout.
             </p>
 
             <div className="mt-8 space-y-3 text-white/75">

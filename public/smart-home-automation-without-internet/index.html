@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Home That Works Without Internet | Zimarix</title>
+    <meta name="description" content="Zimarix smart home automation works without WiFi and without internet — local socket control, server relay, and automatic Bluetooth fallback. Your home never stops working. Book a demo in Bangalore." />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href="https://zimarix.com/smart-home-automation-without-internet" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://zimarix.com/smart-home-automation-without-internet" />
+    <meta property="og:title" content="Smart Home That Works Without Internet | Zimarix" />
+    <meta property="og:description" content="Zimarix smart home automation works without WiFi and without internet — local socket control, server relay, and automatic Bluetooth fallback. Your home never stops working. Book a demo in Bangalore." />
+    <meta property="og:image" content="https://zimarix.com/hero-switch-panel.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://zimarix.com/hero-switch-panel.webp" />
+    <meta name="twitter:title" content="Smart Home That Works Without Internet | Zimarix" />
+    <meta name="twitter:description" content="Zimarix smart home automation works without WiFi and without internet — local socket control, server relay, and automatic Bluetooth fallback. Your home never stops working. Book a demo in Bangalore." />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07090c;
+        --panel: rgba(255, 255, 255, 0.055);
+        --line: rgba(255, 255, 255, 0.12);
+        --text: #ffffff;
+        --muted: rgba(255, 255, 255, 0.66);
+        --soft: rgba(255, 255, 255, 0.48);
+        --accent: #1e8cff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--bg);
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      a,
+      button {
+        color: inherit;
+        font: inherit;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .page {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 26% 16%, rgba(30, 140, 255, 0.18), transparent 28rem),
+          radial-gradient(circle at 85% 34%, rgba(30, 140, 255, 0.08), transparent 24rem),
+          linear-gradient(180deg, #07090c 0%, #0b1017 52%, #07090c 100%);
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .brand img {
+        width: 34px;
+        height: 34px;
+        border-radius: 0.75rem;
+      }
+
+      .home-link {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.75rem 1rem;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        display: grid;
+        min-height: 72vh;
+        align-items: center;
+        padding: 4rem 0 5rem;
+      }
+
+      .eyebrow {
+        margin: 0 0 1.25rem;
+        color: var(--soft);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 920px;
+        margin: 0;
+        font-size: clamp(3rem, 7vw, 6.5rem);
+        font-weight: 500;
+        letter-spacing: -0.06em;
+        line-height: 0.98;
+      }
+
+      .lede {
+        max-width: 760px;
+        margin: 1.75rem 0 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.35rem);
+        line-height: 1.75;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        margin-top: 2.25rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3.25rem;
+        border: 1px solid var(--accent);
+        border-radius: 999px;
+        background: var(--accent);
+        color: #06111f;
+        cursor: pointer;
+        font-weight: 800;
+        padding: 0 1.35rem;
+      }
+
+      .button.secondary {
+        border-color: var(--line);
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+      }
+
+      main {
+        padding: 0 0 5rem;
+      }
+
+      .stack {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 1.6rem;
+        background: var(--panel);
+        padding: clamp(1.25rem, 3vw, 2rem);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+      }
+
+      .card h2 {
+        margin: 0;
+        font-size: clamp(1.45rem, 3vw, 2.25rem);
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        line-height: 1.12;
+      }
+
+      .card p {
+        margin: 1.2rem 0 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.85;
+      }
+
+      .signal {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+      }
+
+      .signal span {
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        padding: 0.9rem;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.78);
+        padding: 1rem;
+      }
+
+      .modal.open {
+        display: flex;
+      }
+
+      .modal-card {
+        width: min(920px, 100%);
+        border: 1px solid var(--line);
+        border-radius: 1.5rem;
+        background: #090d13;
+        padding: 1rem;
+      }
+
+      .modal-top {
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 0.75rem;
+      }
+
+      .close {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+        cursor: pointer;
+        padding: 0.55rem 0.9rem;
+      }
+
+      iframe {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 0;
+        border-radius: 1rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 2rem 0;
+        color: var(--soft);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 760px) {
+        .container {
+          width: min(100% - 28px, 1120px);
+        }
+
+        header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero {
+          min-height: 64vh;
+          padding: 3rem 0 4rem;
+        }
+
+        .signal {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://zimarix.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Smart Home Automation That Works Without Internet",
+            "item": "https://zimarix.com/smart-home-automation-without-internet"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="container">
+        <a class="brand" href="/" aria-label="Zimarix homepage">
+          <img src="/zimarix-logo.webp" alt="Zimarix logo" width="34" height="34" />
+          <span>Zimarix</span>
+        </a>
+        <a class="home-link" href="/">Main Site</a>
+      </header>
+
+      <section class="hero container">
+        <div>
+          <p class="eyebrow">Zero cloud dependency</p>
+          <h1>Smart Home Automation That Works Without Internet</h1>
+          <p class="lede">
+            Zimarix is built around local intelligence, Bluetooth fallback, and a
+            proprietary protocol so the home keeps responding through real connectivity
+            failures.
+          </p>
+          <div class="actions">
+            <button class="button" type="button" data-open-demo>Watch the Demo</button>
+            <a class="button secondary" href="/#consultation">Book a Free Demo →</a>
+          </div>
+        </div>
+      </section>
+
+      <main class="container">
+        <div class="stack">
+          <section class="card">
+            <h2>What happens to most smart homes when the internet goes down?</h2>
+            <p>
+              Most smart home devices stop responding the moment WiFi drops. Your
+              lights, your AC, your scenes — all frozen until connectivity returns. Some
+              brands go further: if their cloud server goes down, your automations stop
+              working even if your internet is fine.
+            </p>
+          </section>
+
+          <section class="card">
+            <h2>How Zimarix works differently</h2>
+            <p>
+              Every Zimarix device runs its intelligence locally — on the device itself,
+              not in a data centre somewhere. If WiFi drops, commands route via our
+              server. If internet goes down entirely, Bluetooth takes over automatically.
+              No manual switching. No setup. It just works.
+            </p>
+            <div class="signal" aria-label="Zimarix connection paths">
+              <span>Local socket</span>
+              <span>Server relay</span>
+              <span>Bluetooth fallback</span>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>See it tested live</h2>
+            <p>
+              We've demonstrated this on camera — WiFi off, mobile data off, device still
+              responding. Not a promise. A live demo.
+            </p>
+            <div class="actions">
+              <button class="button" type="button" data-open-demo>Watch the Demo</button>
+              <a class="button secondary" href="/luxury-smart-home-automation-bangalore">Luxury smart home automation in Bangalore</a>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <div class="container">© Zimarix · <a href="/">Homepage</a> · <a href="/#consultation">Consultation</a></div>
+      </footer>
+    </div>
+
+    <div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-label="Zimarix internet fallback demo">
+      <div class="modal-card">
+        <div class="modal-top">
+          <button class="close" type="button" data-close-demo>Close</button>
+        </div>
+        <iframe id="demo-frame" title="Zimarix internet fallback demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener("load", function () {
+        var analyticsLoaded = false;
+        function loadAnalytics() {
+          if (analyticsLoaded) return;
+          analyticsLoaded = true;
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){ window.dataLayer.push(arguments); };
+          var ga = document.createElement("script");
+          ga.async = true;
+          ga.src = "https://www.googletagmanager.com/gtag/js?id=G-Z9QZ4D45VW";
+          document.head.appendChild(ga);
+          window.gtag("js", new Date());
+          window.gtag("config", "G-Z9QZ4D45VW");
+
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "xa579i1cky");
+        }
+        ["scroll", "touchstart", "pointerdown", "keydown"].forEach(function(eventName) {
+          window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
+        });
+        window.setTimeout(loadAnalytics, 15000);
+      });
+
+      (function () {
+        var modal = document.getElementById("demo-modal");
+        var frame = document.getElementById("demo-frame");
+        var embedUrl = "https://www.youtube.com/embed/jgtshkQz_ic?autoplay=1&rel=0&modestbranding=1";
+
+        function openDemo() {
+          frame.src = embedUrl;
+          modal.classList.add("open");
+        }
+
+        function closeDemo() {
+          modal.classList.remove("open");
+          frame.src = "";
+        }
+
+        document.querySelectorAll("[data-open-demo]").forEach(function (button) {
+          button.addEventListener("click", openDemo);
+        });
+        document.querySelector("[data-close-demo]").addEventListener("click", closeDemo);
+        modal.addEventListener("click", function (event) {
+          if (event.target === modal) closeDemo();
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") closeDemo();
+        });
+      })();
+    </script>
+  </body>
+</html>
