@@ -102,7 +102,10 @@
     </noscript>
     <script>
       window.addEventListener("load", function () {
-        window.setTimeout(function () {
+        var analyticsLoaded = false;
+        function loadAnalytics() {
+          if (analyticsLoaded) return;
+          analyticsLoaded = true;
           window.dataLayer = window.dataLayer || [];
           window.gtag = function(){ window.dataLayer.push(arguments); };
           var ga = document.createElement("script");
@@ -117,7 +120,11 @@
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "xa579i1cky");
-        }, 0);
+        }
+        ["scroll", "touchstart", "pointerdown", "keydown"].forEach(function(eventName) {
+          window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
+        });
+        window.setTimeout(loadAnalytics, 15000);
       });
     </script>
     <script type="module" src="/src/main.tsx"></script>

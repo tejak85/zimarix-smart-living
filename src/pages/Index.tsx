@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { ZimarixHero } from "@/components/ZimarixHero";
 
@@ -13,28 +13,32 @@ const Footer = lazy(() =>
   })),
 );
 
-declare global {
-  interface Window {
-    requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
-    cancelIdleCallback?: (handle: number) => void;
-  }
-}
-
 const Index = () => {
   const [loadBelowFold, setLoadBelowFold] = useState(false);
+  const loadRestOfPage = useCallback(() => {
+    setLoadBelowFold(true);
+  }, []);
 
   useEffect(() => {
-    if ("requestIdleCallback" in window && window.requestIdleCallback) {
-      const handle = window.requestIdleCallback(() => setLoadBelowFold(true), {
-        timeout: 1200,
-      });
-
-      return () => window.cancelIdleCallback?.(handle);
+    if (loadBelowFold) {
+      return;
     }
 
-    const timeout = window.setTimeout(() => setLoadBelowFold(true), 300);
-    return () => window.clearTimeout(timeout);
-  }, []);
+    const options = { passive: true } as AddEventListenerOptions;
+    const interactionEvents = ["scroll", "wheel", "touchstart", "pointerdown", "keydown"];
+    interactionEvents.forEach((eventName) => {
+      window.addEventListener(eventName, loadRestOfPage, options);
+    });
+
+    const timeout = window.setTimeout(loadRestOfPage, 8000);
+
+    return () => {
+      interactionEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, loadRestOfPage);
+      });
+      window.clearTimeout(timeout);
+    };
+  }, [loadBelowFold, loadRestOfPage]);
 
   return (
     <div className="min-h-screen bg-background">
