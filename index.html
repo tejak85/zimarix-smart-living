@@ -9,6 +9,21 @@
     <meta name="keywords" content="smart switch panels Bangalore, premium home automation, aircraft-grade aluminium switches, smart switchboard, Zimarix, ZX protocol" />
     <meta name="author" content="Zimarix" />
     <link rel="canonical" href="https://zimarix.com/" />
+    <link rel="preload" as="image" href="/hero-luxury-background.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" />
+    </noscript>
+    <style>
+      html { background: #07090c; scroll-behavior: smooth; }
+      body { margin: 0; min-width: 320px; background: #f7f9fb; color: #111827; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      #root { min-height: 100vh; }
+      #hero { background: #07090c; color: white; }
+      img { max-width: 100%; height: auto; }
+    </style>
 
     
     
@@ -16,11 +31,11 @@
     <meta property="og:url" content="https://zimarix.com/" />
     <meta property="og:title" content="Zimarix — Premium Smart Switch Panels | Aerospace-Grade Aluminium | Bangalore" />
     <meta property="og:description" content="Zimarix smart switch panels are milled from aircraft-grade aluminium 6061 T6, run on our proprietary ZX protocol, and work without internet. Zero cloud dependency. Book a free demo in Bangalore." />
-    <meta property="og:image" content="https://zimarix.com/hero-switch-panel.png" />
+    <meta property="og:image" content="https://zimarix.com/hero-switch-panel.webp" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@Zimarix" />
-    <meta name="twitter:image" content="https://zimarix.com/hero-switch-panel.png" />
+    <meta name="twitter:image" content="https://zimarix.com/hero-switch-panel.webp" />
     <meta name="twitter:title" content="Zimarix — Premium Smart Switch Panels | Aerospace-Grade Aluminium | Bangalore" />
     <meta name="twitter:description" content="Zimarix smart switch panels are milled from aircraft-grade aluminium 6061 T6, run on our proprietary ZX protocol, and work without internet. Zero cloud dependency. Book a free demo in Bangalore." />
 
@@ -42,23 +57,6 @@
     }
   </script>
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9QZ4D45VW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Z9QZ4D45VW');
-  </script>
-
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "xa579i1cky");
-  </script>
 </head>
 
   <body>
@@ -108,6 +106,26 @@
         </section>
       </main>
     </div>
+    <script>
+      window.addEventListener("load", function () {
+        window.setTimeout(function () {
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){ window.dataLayer.push(arguments); };
+          var ga = document.createElement("script");
+          ga.async = true;
+          ga.src = "https://www.googletagmanager.com/gtag/js?id=G-Z9QZ4D45VW";
+          document.head.appendChild(ga);
+          window.gtag("js", new Date());
+          window.gtag("config", "G-Z9QZ4D45VW");
+
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "xa579i1cky");
+        }, 0);
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

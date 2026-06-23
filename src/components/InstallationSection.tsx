@@ -41,9 +41,13 @@ export function InstallationSection() {
               {/* Image Container */}
               <div className="relative rounded-3xl overflow-hidden shadow-elevated border border-border/50">
                 <img
-                  src="/installation-image.png"
+                  src="/installation-image.webp"
                   alt="Zimarix smart switch panel installation by a technician in a modern home"
+                  width={1000}
+                  height={625}
                   className="w-full h-auto"
+                  loading="lazy"
+                  decoding="async"
                 />
 
                 {/* Overlay Stats */}

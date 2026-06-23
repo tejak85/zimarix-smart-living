@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import colorOptionsImg from "@/assets/color-options.jpeg";
+import colorOptionsImg from "@/assets/color-options.webp";
 
 const finishes = [
   {
@@ -54,7 +54,11 @@ export function ColorsSection() {
           <img
             src={colorOptionsImg}
             alt="Zimarix smart switch panels in five finishes"
+            width={1000}
+            height={667}
             className="h-[260px] w-full object-cover object-center sm:h-auto"
+            loading="lazy"
+            decoding="async"
           />
         </motion.div>
 

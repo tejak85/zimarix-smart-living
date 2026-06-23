@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -12,22 +12,21 @@ import {
   Server,
   Smartphone,
 } from "lucide-react";
-import appDevices from "@/assets/app-devices.png";
-import anodisedFinishPanels from "@/assets/anodised-finish-panels.png";
-import apartmentHallway from "@/assets/apartment-hallway.png";
-import appRemote from "@/assets/app-remote.png";
-import appRooms from "@/assets/app-rooms.png";
-import appSwitches from "@/assets/app-switches.png";
-import cncMilledAluminiumGrain from "@/assets/cnc-milled-aluminium-grain.png";
-import diningRoomAutomation from "@/assets/dining-room-automation.png";
-import homeTheatreWall from "@/assets/home-theatre-wall.png";
-import heroLuxuryBackground from "@/assets/hero-luxury-background.png";
-import livingRoomInstall from "@/assets/living-room-install.png";
-import masterBedroomPanel from "@/assets/master-bedroom-panel.png";
-import milledTouchButton from "@/assets/milled-touch-button.png";
-import villaEntranceFoyer from "@/assets/villa-entrance-foyer.png";
-import zimarixExplodedView from "@/assets/zimarix-exploded-view.png";
-import zimarixFinishesGroupPhoto from "@/assets/zimarix-finishes-group-photo.png";
+import appDevices from "@/assets/app-devices.webp";
+import anodisedFinishPanels from "@/assets/anodised-finish-panels.webp";
+import apartmentHallway from "@/assets/apartment-hallway.webp";
+import appRemote from "@/assets/app-remote.webp";
+import appRooms from "@/assets/app-rooms.webp";
+import appSwitches from "@/assets/app-switches.webp";
+import cncMilledAluminiumGrain from "@/assets/cnc-milled-aluminium-grain.webp";
+import diningRoomAutomation from "@/assets/dining-room-automation.webp";
+import homeTheatreWall from "@/assets/home-theatre-wall.webp";
+import livingRoomInstall from "@/assets/living-room-install.webp";
+import masterBedroomPanel from "@/assets/master-bedroom-panel.webp";
+import milledTouchButton from "@/assets/milled-touch-button.webp";
+import villaEntranceFoyer from "@/assets/villa-entrance-foyer.webp";
+import zimarixExplodedView from "@/assets/zimarix-exploded-view.webp";
+import zimarixFinishesGroupPhoto from "@/assets/zimarix-finishes-group-photo.webp";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -39,6 +38,7 @@ const CONNECTIVITY_DEMO_EMBED =
   "https://www.youtube.com/embed/jgtshkQz_ic?autoplay=1&rel=0&modestbranding=1";
 const FEATURE_DEMO_EMBED =
   "https://www.youtube.com/embed/kSxo5FUI3A8?autoplay=1&rel=0&modestbranding=1";
+const MODAL_HISTORY_STATE = "__zimarixModal";
 
 declare global {
   interface Window {
@@ -52,6 +52,53 @@ function trackGAEvent(eventName: string, eventParams?: Record<string, string>) {
   }
 
   window.gtag("event", eventName, eventParams ?? {});
+}
+
+function usePopupHistory(onDismiss: () => void) {
+  const onDismissRef = useRef(onDismiss);
+  const pushedStateRef = useRef(false);
+
+  useEffect(() => {
+    onDismissRef.current = onDismiss;
+  }, [onDismiss]);
+
+  useEffect(() => {
+    const currentState =
+      typeof window.history.state === "object" && window.history.state !== null
+        ? window.history.state
+        : {};
+
+    window.history.pushState(
+      { ...currentState, [MODAL_HISTORY_STATE]: true },
+      "",
+      window.location.href,
+    );
+    pushedStateRef.current = true;
+
+    const handlePopState = () => {
+      if (!pushedStateRef.current) {
+        return;
+      }
+
+      pushedStateRef.current = false;
+      onDismissRef.current();
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
+  return useCallback(() => {
+    if (pushedStateRef.current) {
+      window.history.back();
+      return;
+    }
+
+    onDismissRef.current();
+  }, []);
 }
 
 function Reveal({ children, className, delay = 0 }: RevealProps) {
@@ -195,11 +242,14 @@ function VideoPopup({
 }) {
   const reduceMotion = useReducedMotion();
   const [isClosing, setIsClosing] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
+  const videoId = embedUrl.match(/\/embed\/([^?]+)/)?.[1];
+  const thumbnailUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : "";
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     if (isClosing) {
       return;
     }
@@ -211,7 +261,8 @@ function VideoPopup({
 
     setIsClosing(true);
     window.setTimeout(onClose, 200);
-  };
+  }, [isClosing, onClose, reduceMotion]);
+  const requestClose = usePopupHistory(handleClose);
 
   useEffect(() => {
     triggerRef.current = document.activeElement as HTMLElement | null;
@@ -219,7 +270,7 @@ function VideoPopup({
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        handleClose();
+        requestClose();
         return;
       }
 
@@ -252,7 +303,7 @@ function VideoPopup({
       document.removeEventListener("keydown", handleKeyDown);
       triggerRef.current?.focus();
     };
-  }, [handleClose]);
+  }, [requestClose]);
 
   return (
     <motion.div
@@ -263,7 +314,7 @@ function VideoPopup({
       role="dialog"
       aria-modal="true"
       aria-label={title}
-      onClick={handleClose}
+      onClick={requestClose}
     >
       <div
         ref={modalRef}
@@ -273,19 +324,42 @@ function VideoPopup({
         <button
           ref={closeButtonRef}
           type="button"
-          onClick={handleClose}
+          onClick={requestClose}
           className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/75 text-3xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Close video preview"
         >
           ×
         </button>
-        <iframe
-          src={embedUrl}
-          title={title}
-          className="h-full w-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
+        {isPlaying ? (
+          <iframe
+            src={embedUrl}
+            title={title}
+            className="h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setIsPlaying(true)}
+            className="group relative h-full w-full overflow-hidden bg-black text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+            aria-label={`Play ${title}`}
+          >
+            {thumbnailUrl && (
+              <img
+                src={thumbnailUrl}
+                alt=""
+                className="h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105"
+                loading="eager"
+                decoding="async"
+              />
+            )}
+            <span className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(30,140,255,0.2),rgba(0,0,0,0.72))]" />
+            <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/15 text-3xl shadow-2xl backdrop-blur-md transition-transform group-hover:scale-105">
+              ▶
+            </span>
+          </button>
+        )}
       </div>
     </motion.div>
   );
@@ -488,11 +562,15 @@ function ClickablePhotoCard({
   label,
   alt,
   image,
+  width,
+  height,
   className = "",
 }: {
   label: string;
   alt: string;
   image: string;
+  width: number;
+  height: number;
   className?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -508,8 +586,11 @@ function ClickablePhotoCard({
         <img
           src={image}
           alt={alt}
+          width={width}
+          height={height}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/15 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -519,33 +600,76 @@ function ClickablePhotoCard({
       </button>
 
       {isOpen && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          aria-label={label}
-          onClick={() => setIsOpen(false)}
-        >
-          <div
-            className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-3xl border border-white/15 bg-black shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label="Close image preview"
-            >
-              ×
-            </button>
-            <img src={image} alt={alt} className="max-h-[92vh] w-full object-contain" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5">
-              <p className="text-sm font-medium text-white">{label}</p>
-            </div>
-          </div>
-        </div>
+        <ImageLightbox
+          label={label}
+          alt={alt}
+          image={image}
+          width={width}
+          height={height}
+          onClose={() => setIsOpen(false)}
+        />
       )}
     </>
+  );
+}
+
+function ImageLightbox({
+  label,
+  alt,
+  image,
+  width,
+  height,
+  onClose,
+  containerClassName = "max-w-5xl border border-white/15 bg-black",
+  showCaption = true,
+}: {
+  label: string;
+  alt: string;
+  image: string;
+  width: number;
+  height: number;
+  onClose: () => void;
+  containerClassName?: string;
+  showCaption?: boolean;
+}) {
+  const closePopup = usePopupHistory(onClose);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label={label}
+      onClick={closePopup}
+    >
+      <div
+        className={`relative max-h-[92vh] w-full overflow-hidden rounded-3xl shadow-2xl ${containerClassName}`}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={closePopup}
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          aria-label="Close image preview"
+        >
+          ×
+        </button>
+        <img
+          src={image}
+          alt={alt}
+          width={width}
+          height={height}
+          className="max-h-[92vh] w-full object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+        {showCaption && (
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5">
+            <p className="text-sm font-medium text-white">{label}</p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -559,9 +683,13 @@ export function HeroSection() {
     <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-20 text-white sm:pt-24">
       <div className="absolute inset-0">
         <img
-          src={heroLuxuryBackground}
+          src="/hero-luxury-background.webp"
           alt="Zimarix smart switch panel installed on a wall with blue LED accents"
+          width={1200}
+          height={670}
           className="h-full w-full object-cover object-[22%_50%] opacity-100 contrast-110 saturate-110 sm:object-[24%_50%] lg:object-left"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_46%,rgba(30,140,255,0.12),transparent_22%),radial-gradient(circle_at_28%_48%,transparent_0%,transparent_36%,rgba(7,9,12,0.08)_56%,rgba(7,9,12,0.84)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,12,0)_0%,rgba(7,9,12,0.02)_34%,rgba(7,9,12,0.48)_62%,rgba(7,9,12,0.94)_100%)]" />
@@ -639,16 +767,22 @@ export function CraftsmanshipSection() {
       title: "6061 T6 aluminium grain",
       alt: "Close-up of CNC-milled aircraft-grade aluminium 6061 T6 grain on a Zimarix smart switch panel",
       image: cncMilledAluminiumGrain,
+      width: 900,
+      height: 503,
     },
     {
       title: "20+ micron anodised finish",
       alt: "Zimarix anodised aluminium smart switch panels showing multiple premium finish tones",
       image: anodisedFinishPanels,
+      width: 1000,
+      height: 637,
     },
     {
       title: "Milled touch button",
       alt: "Close-up of milled metallic Zimarix touch buttons in multiple anodised finishes",
       image: milledTouchButton,
+      width: 760,
+      height: 1183,
     },
   ];
 
@@ -696,6 +830,8 @@ export function CraftsmanshipSection() {
                   label={detail.title}
                   alt={detail.alt}
                   image={detail.image}
+                  width={detail.width}
+                  height={detail.height}
                   className="aspect-[4/5]"
                 />
               ) : (
@@ -743,8 +879,11 @@ export function FinishesSection() {
             <img
               src={zimarixFinishesGroupPhoto}
               alt="Studio product photo showing Zimarix anodised aluminium smart switch panels in graphite, bronze, silver, and gold finishes"
+              width={1200}
+              height={675}
               className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.02]"
               loading="lazy"
+              decoding="async"
             />
           </button>
           <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -761,32 +900,16 @@ export function FinishesSection() {
       </div>
 
       {isOpen && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Finishes product photo preview"
-          onClick={() => setIsOpen(false)}
-        >
-          <div
-            className="relative max-h-[92vh] w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-2xl leading-none text-white transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label="Close image preview"
-            >
-              ×
-            </button>
-            <img
-              src={zimarixFinishesGroupPhoto}
-              alt="Studio product photo showing Zimarix anodised aluminium smart switch panels in graphite, bronze, silver, and gold finishes"
-              className="max-h-[92vh] w-full object-contain"
-            />
-          </div>
-        </div>
+        <ImageLightbox
+          label="Finishes product photo preview"
+          alt="Studio product photo showing Zimarix anodised aluminium smart switch panels in graphite, bronze, silver, and gold finishes"
+          image={zimarixFinishesGroupPhoto}
+          width={1200}
+          height={675}
+          onClose={() => setIsOpen(false)}
+          containerClassName="max-w-6xl bg-white"
+          showCaption={false}
+        />
       )}
     </section>
   );
@@ -1156,8 +1279,11 @@ export function EngineeringSection() {
                 <img
                   src={zimarixExplodedView}
                   alt="SolidWorks exploded-view render of the Zimarix panel showing faceplate, milled touch buttons, and back housing"
+                  width={760}
+                  height={675}
                   className="relative h-auto w-full object-contain opacity-90 mix-blend-luminosity [filter:brightness(0.72)_contrast(1.18)_saturate(0.65)]"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.32),rgba(30,140,255,0.08)_45%,rgba(0,0,0,0.28))] mix-blend-multiply" />
               </div>
@@ -1206,21 +1332,29 @@ export function AppSection() {
       title: "Devices",
       image: appDevices,
       alt: "Zimarix app devices screen showing registered and active smart devices",
+      width: 472,
+      height: 1024,
     },
     {
       title: "Switches",
       image: appSwitches,
       alt: "Zimarix app switch control screen with on-off toggles for a device",
+      width: 472,
+      height: 1024,
     },
     {
       title: "Remote",
       image: appRemote,
       alt: "Zimarix app remote control screen for TV and IR commands",
+      width: 472,
+      height: 1024,
     },
     {
       title: "Rooms",
       image: appRooms,
       alt: "Zimarix app rooms screen showing room cards and navigation",
+      width: 472,
+      height: 1024,
     },
   ];
 
@@ -1265,8 +1399,11 @@ export function AppSection() {
                   <img
                     src={screen.image}
                     alt={screen.alt}
+                    width={screen.width}
+                    height={screen.height}
                     className="block h-auto w-full"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="px-3 pb-2 pt-3">
@@ -1289,31 +1426,43 @@ export function RealHomesSection() {
       label: "Living room application",
       alt: "Zimarix smart switch panel installed on a wood-panelled living room wall",
       image: livingRoomInstall,
+      width: 1000,
+      height: 640,
     },
     {
       label: "Bedroom placement reference",
       alt: "Zimarix smart switch panel installed near a master bedroom",
       image: masterBedroomPanel,
+      width: 900,
+      height: 685,
     },
     {
       label: "Foyer application",
       alt: "Zimarix smart switch panel installed beside a villa entrance foyer",
       image: villaEntranceFoyer,
+      width: 900,
+      height: 439,
     },
     {
       label: "Dining room reference",
       alt: "Zimarix smart switch panel installed beside a modern kitchen and dining area",
       image: diningRoomAutomation,
+      width: 900,
+      height: 796,
     },
     {
       label: "Hallway placement reference",
       alt: "Zimarix smart switch panel shown in a luxury apartment hallway and interior collage",
       image: apartmentHallway,
+      width: 1000,
+      height: 498,
     },
     {
       label: "Media room application",
       alt: "Zimarix smart switch panel installed on a home theatre wall",
       image: homeTheatreWall,
+      width: 900,
+      height: 445,
     },
   ];
 
@@ -1338,6 +1487,8 @@ export function RealHomesSection() {
                   label={home.label}
                   alt={home.alt}
                   image={home.image}
+                  width={home.width}
+                  height={home.height}
                   className="aspect-[4/3]"
                 />
               ) : (

@@ -38,8 +38,10 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex min-w-0 items-center gap-3">
             <img
-              src="/zimarix-logo.png"
+              src="/zimarix-logo.webp"
               alt="Zimarix company logo"
+              width={256}
+              height={256}
               className="h-9 w-9 flex-shrink-0 rounded-xl object-cover sm:h-10 sm:w-10"
             />
             <span className="truncate text-lg font-bold tracking-tight sm:text-xl">
