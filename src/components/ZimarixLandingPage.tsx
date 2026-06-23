@@ -1788,7 +1788,6 @@ export function ConsultationSection() {
 export function ZimarixLandingPage() {
   return (
     <>
-      <HeroSection />
       <CraftsmanshipSection />
       <FinishesSection />
       <ReliabilitySection />
