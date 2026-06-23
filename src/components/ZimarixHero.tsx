@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const FEATURE_DEMO_EMBED =
   "https://www.youtube.com/embed/kSxo5FUI3A8?autoplay=1&rel=0&modestbranding=1";
@@ -37,12 +38,21 @@ function usePrefersReducedMotion() {
 function usePopupHistory(onDismiss: () => void) {
   const onDismissRef = useRef(onDismiss);
   const pushedStateRef = useRef(false);
+  const scrollPositionRef = useRef({ x: 0, y: 0 });
+  const scrollRestorationRef = useRef<History["scrollRestoration"] | null>(null);
 
   useEffect(() => {
     onDismissRef.current = onDismiss;
   }, [onDismiss]);
 
   useEffect(() => {
+    scrollPositionRef.current = {
+      x: window.scrollX,
+      y: window.scrollY,
+    };
+    scrollRestorationRef.current = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
     const currentState =
       typeof window.history.state === "object" && window.history.state !== null
         ? window.history.state
@@ -62,12 +72,18 @@ function usePopupHistory(onDismiss: () => void) {
 
       pushedStateRef.current = false;
       onDismissRef.current();
+      window.requestAnimationFrame(() => {
+        window.scrollTo(scrollPositionRef.current.x, scrollPositionRef.current.y);
+      });
     };
 
     window.addEventListener("popstate", handlePopState);
 
     return () => {
       window.removeEventListener("popstate", handlePopState);
+      if (scrollRestorationRef.current) {
+        window.history.scrollRestoration = scrollRestorationRef.current;
+      }
     };
   }, []);
 
@@ -193,7 +209,7 @@ function VideoPopup({
     };
   }, [requestClose]);
 
-  return (
+  return createPortal(
     <div
       style={
         reduceMotion
@@ -254,7 +270,8 @@ function VideoPopup({
           </button>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

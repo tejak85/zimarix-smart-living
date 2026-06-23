@@ -79,7 +79,7 @@ export function Footer() {
 
           {/* Product Links */}
           <div>
-            <h4 className="font-semibold mb-4">Product</h4>
+            <p className="font-semibold mb-4">Product</p>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-3 sm:block sm:space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
@@ -96,7 +96,7 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
+            <p className="font-semibold mb-4">Company</p>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-3 sm:block sm:space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -122,7 +122,7 @@ export function Footer() {
 
           {/* Support Links */}
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
+            <p className="font-semibold mb-4">Support</p>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-3 sm:block sm:space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>

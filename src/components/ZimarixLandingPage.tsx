@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   ArrowRight,
   Bluetooth,
@@ -105,12 +106,21 @@ function useActivateOnView<T extends HTMLElement>(threshold = 0.75) {
 function usePopupHistory(onDismiss: () => void) {
   const onDismissRef = useRef(onDismiss);
   const pushedStateRef = useRef(false);
+  const scrollPositionRef = useRef({ x: 0, y: 0 });
+  const scrollRestorationRef = useRef<History["scrollRestoration"] | null>(null);
 
   useEffect(() => {
     onDismissRef.current = onDismiss;
   }, [onDismiss]);
 
   useEffect(() => {
+    scrollPositionRef.current = {
+      x: window.scrollX,
+      y: window.scrollY,
+    };
+    scrollRestorationRef.current = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
     const currentState =
       typeof window.history.state === "object" && window.history.state !== null
         ? window.history.state
@@ -130,12 +140,18 @@ function usePopupHistory(onDismiss: () => void) {
 
       pushedStateRef.current = false;
       onDismissRef.current();
+      window.requestAnimationFrame(() => {
+        window.scrollTo(scrollPositionRef.current.x, scrollPositionRef.current.y);
+      });
     };
 
     window.addEventListener("popstate", handlePopState);
 
     return () => {
       window.removeEventListener("popstate", handlePopState);
+      if (scrollRestorationRef.current) {
+        window.history.scrollRestoration = scrollRestorationRef.current;
+      }
     };
   }, []);
 
@@ -360,7 +376,7 @@ function VideoPopup({
     };
   }, [requestClose]);
 
-  return (
+  return createPortal(
     <div
       style={
         reduceMotion
@@ -421,7 +437,8 @@ function VideoPopup({
           </button>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -656,7 +673,7 @@ function ImageLightbox({
   width,
   height,
   onClose,
-  containerClassName = "max-w-5xl border border-white/15 bg-black",
+  containerClassName = "border border-white/15 bg-black",
   showCaption = true,
 }: {
   label: string;
@@ -670,7 +687,7 @@ function ImageLightbox({
 }) {
   const closePopup = usePopupHistory(onClose);
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
       role="dialog"
@@ -679,7 +696,7 @@ function ImageLightbox({
       onClick={closePopup}
     >
       <div
-        className={`relative max-h-[92vh] w-full overflow-hidden rounded-3xl shadow-2xl ${containerClassName}`}
+        className={`relative flex max-h-[92vh] max-w-[94vw] items-center justify-center overflow-hidden rounded-3xl shadow-2xl ${containerClassName}`}
         onClick={(event) => event.stopPropagation()}
       >
         <button
@@ -695,7 +712,7 @@ function ImageLightbox({
           alt={alt}
           width={width}
           height={height}
-          className="max-h-[92vh] w-full object-contain"
+          className="block max-h-[92vh] max-w-[94vw] object-contain"
           loading="lazy"
           decoding="async"
         />
@@ -705,7 +722,8 @@ function ImageLightbox({
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -943,7 +961,7 @@ export function FinishesSection() {
           width={1200}
           height={675}
           onClose={() => setIsOpen(false)}
-          containerClassName="max-w-6xl bg-white"
+          containerClassName="bg-white"
           showCaption={false}
         />
       )}
