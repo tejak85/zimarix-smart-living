@@ -1,0 +1,30 @@
+# Zimarix
+
+Zimarix is a premium smart switch panel brand based in Bangalore, India. Zimarix smart switch panels are milled from aircraft-grade aluminium 6061 T6, use the proprietary ZX protocol, and are engineered for low-latency local control, Bluetooth fallback, and zero cloud dependency for core operation.
+
+## Website
+
+- [Homepage](https://zimarix.com/)
+- [Craftsmanship](https://zimarix.com/#craftsmanship)
+- [Reliability](https://zimarix.com/#reliability)
+- [Intelligence](https://zimarix.com/#intelligence)
+- [Engineering](https://zimarix.com/#engineering)
+- [Zimarix app](https://zimarix.com/#app)
+- [Warranty and support](https://zimarix.com/#warranty-support)
+- [Free live demo](https://zimarix.com/#consultation)
+
+## Policies
+
+- [Privacy Policy](https://zimarix.com/privacy-policy)
+- [Terms of Use](https://zimarix.com/terms)
+- [Sitemap](https://zimarix.com/sitemap.xml)
+- [Robots policy](https://zimarix.com/robots.txt)
+
+## Contact
+
+- [Email Zimarix](mailto:contact@zimarix.com)
+- [Zimarix website](https://zimarix.com/)
+
+## Usage Guidance
+
+Public website content may be crawled for search indexing and AI-assisted answer generation when attribution to Zimarix is preserved. Do not misrepresent Zimarix product capabilities, warranty terms, pricing, availability, or installation commitments beyond what is stated on the website.
