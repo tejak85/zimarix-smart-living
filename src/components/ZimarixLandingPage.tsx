@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   Bluetooth,
@@ -54,6 +53,55 @@ function trackGAEvent(eventName: string, eventParams?: Record<string, string>) {
   window.gtag("event", eventName, eventParams ?? {});
 }
 
+function usePrefersReducedMotion() {
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mediaQuery.matches);
+
+    const handleChange = () => setReduceMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  return reduceMotion;
+}
+
+function useActivateOnView<T extends HTMLElement>(threshold = 0.75) {
+  const reduceMotion = usePrefersReducedMotion();
+  const ref = useRef<T>(null);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    if (reduceMotion) {
+      return;
+    }
+
+    const node = ref.current;
+    if (!node) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsActive(true);
+          observer.disconnect();
+        }
+      },
+      { threshold },
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, [reduceMotion, threshold]);
+
+  return { ref, isActive, reduceMotion };
+}
+
 function usePopupHistory(onDismiss: () => void) {
   const onDismissRef = useRef(onDismiss);
   const pushedStateRef = useRef(false);
@@ -102,18 +150,25 @@ function usePopupHistory(onDismiss: () => void) {
 }
 
 function Reveal({ children, className, delay = 0 }: RevealProps) {
-  const reduceMotion = useReducedMotion();
+  const { ref, isActive, reduceMotion } = useActivateOnView<HTMLDivElement>(0.1);
 
   return (
-    <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+    <div
+      ref={ref}
+      style={
+        reduceMotion
+          ? undefined
+          : {
+              opacity: isActive ? 1 : 0,
+              transform: isActive ? "translateY(0)" : "translateY(28px)",
+              transition: "opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1)",
+              transitionDelay: `${delay}s`,
+            }
+      }
       className={className}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -240,7 +295,7 @@ function VideoPopup({
   embedUrl: string;
   onClose: () => void;
 }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const [isClosing, setIsClosing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -306,10 +361,15 @@ function VideoPopup({
   }, [requestClose]);
 
   return (
-    <motion.div
-      initial={reduceMotion ? false : { opacity: 0 }}
-      animate={reduceMotion ? undefined : { opacity: isClosing ? 0 : 1 }}
-      transition={{ duration: 0.2 }}
+    <div
+      style={
+        reduceMotion
+          ? undefined
+          : {
+              opacity: isClosing ? 0 : 1,
+              transition: "opacity 200ms ease",
+            }
+      }
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
@@ -361,24 +421,18 @@ function VideoPopup({
           </button>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 function ClusterAutomationVisual() {
-  const reduceMotion = useReducedMotion();
-  const [isActive, setIsActive] = useState(false);
+  const { ref, isActive, reduceMotion } = useActivateOnView<HTMLDivElement>();
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       className={`cluster-automation ${isActive && !reduceMotion ? "is-active" : ""}`}
       aria-hidden="true"
-      viewport={{ once: true, amount: 0.75 }}
-      onViewportEnter={() => {
-        if (!reduceMotion) {
-          setIsActive(true);
-        }
-      }}
     >
       <svg className="cluster-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path d="M 14 50 C 24 50, 30 50, 39 50" />
@@ -402,24 +456,18 @@ function ClusterAutomationVisual() {
       <div className="cluster-pulse cluster-pulse-light" />
       <div className="cluster-pulse cluster-pulse-fan" />
       <div className="cluster-pulse cluster-pulse-ac" />
-    </motion.div>
+    </div>
   );
 }
 
 function SecurityWatchVisual() {
-  const reduceMotion = useReducedMotion();
-  const [isActive, setIsActive] = useState(false);
+  const { ref, isActive, reduceMotion } = useActivateOnView<HTMLDivElement>();
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       className={`watch-automation ${isActive && !reduceMotion ? "is-active" : ""}`}
       aria-hidden="true"
-      viewport={{ once: true, amount: 0.75 }}
-      onViewportEnter={() => {
-        if (!reduceMotion) {
-          setIsActive(true);
-        }
-      }}
     >
       <svg className="watch-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path d="M 19 50 C 30 50, 35 50, 43 50" />
@@ -445,24 +493,18 @@ function SecurityWatchVisual() {
       <div className="watch-pulse watch-pulse-phone-one" />
       <div className="watch-pulse watch-pulse-phone-two" />
       <div className="watch-pulse watch-pulse-phone-three" />
-    </motion.div>
+    </div>
   );
 }
 
 function PowerSavingVisual() {
-  const reduceMotion = useReducedMotion();
-  const [isActive, setIsActive] = useState(false);
+  const { ref, isActive, reduceMotion } = useActivateOnView<HTMLDivElement>();
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       className={`power-automation ${isActive && !reduceMotion ? "is-active" : ""}`}
       aria-hidden="true"
-      viewport={{ once: true, amount: 0.75 }}
-      onViewportEnter={() => {
-        if (!reduceMotion) {
-          setIsActive(true);
-        }
-      }}
     >
       <svg className="power-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path d="M 16 50 C 28 50, 33 50, 42 50" />
@@ -489,24 +531,18 @@ function PowerSavingVisual() {
       <div className="power-pulse power-pulse-light" />
       <div className="power-pulse power-pulse-fan" />
       <div className="power-pulse power-pulse-ac" />
-    </motion.div>
+    </div>
   );
 }
 
 function IRMacroVisual() {
-  const reduceMotion = useReducedMotion();
-  const [isActive, setIsActive] = useState(false);
+  const { ref, isActive, reduceMotion } = useActivateOnView<HTMLDivElement>();
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       className={`ir-automation ${isActive && !reduceMotion ? "is-active" : ""}`}
       aria-hidden="true"
-      viewport={{ once: true, amount: 0.75 }}
-      onViewportEnter={() => {
-        if (!reduceMotion) {
-          setIsActive(true);
-        }
-      }}
     >
       <svg className="ir-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path d="M 16 50 C 26 50, 31 50, 39 50" />
@@ -531,7 +567,7 @@ function IRMacroVisual() {
       <div className="ir-pulse ir-pulse-five" />
       <div className="ir-pulse ir-pulse-six" />
       <div className="ir-pulse ir-pulse-light" />
-    </motion.div>
+    </div>
   );
 }
 

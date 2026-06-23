@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -24,9 +23,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? "bg-background/80 text-foreground backdrop-blur-xl border-b border-border/50 shadow-soft"
@@ -87,36 +84,29 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="border-b border-border bg-background/95 shadow-soft backdrop-blur-xl md:hidden"
-          >
-            <div className="container-tight flex flex-col gap-1 py-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="rounded-xl px-3 py-3 font-medium text-foreground transition-colors hover:bg-muted hover:text-accent"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
-              ))}
+      {isMobileMenuOpen && (
+        <div className="border-b border-border bg-background/95 shadow-soft backdrop-blur-xl md:hidden">
+          <div className="container-tight flex flex-col gap-1 py-4">
+            {navLinks.map((link) => (
               <a
-                href="/#consultation"
-                className="mt-2 rounded-xl bg-accent px-3 py-3 text-center font-semibold text-accent-foreground transition-colors hover:bg-accent/90"
+                key={link.name}
+                href={link.href}
+                className="rounded-xl px-3 py-3 font-medium text-foreground transition-colors hover:bg-muted hover:text-accent"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Free Demo
+                {link.name}
               </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+            ))}
+            <a
+              href="/#consultation"
+              className="mt-2 rounded-xl bg-accent px-3 py-3 text-center font-semibold text-accent-foreground transition-colors hover:bg-accent/90"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Free Demo
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }
