@@ -367,32 +367,5 @@
         <div class="container">© Zimarix · <a href="/">Homepage</a> · <a href="/#consultation">Consultation</a></div>
       </footer>
     </div>
-    <script>
-      window.addEventListener("load", function () {
-        var analyticsLoaded = false;
-        function loadAnalytics() {
-          if (analyticsLoaded) return;
-          analyticsLoaded = true;
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = function(){ window.dataLayer.push(arguments); };
-          var ga = document.createElement("script");
-          ga.async = true;
-          ga.src = "https://www.googletagmanager.com/gtag/js?id=G-Z9QZ4D45VW";
-          document.head.appendChild(ga);
-          window.gtag("js", new Date());
-          window.gtag("config", "G-Z9QZ4D45VW");
-
-          (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "xa579i1cky");
-        }
-        ["scroll", "touchstart", "pointerdown", "keydown"].forEach(function(eventName) {
-          window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
-        });
-        window.setTimeout(loadAnalytics, 15000);
-      });
-    </script>
   </body>
 </html>

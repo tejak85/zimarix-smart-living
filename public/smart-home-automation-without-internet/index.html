@@ -392,59 +392,5 @@
       </div>
     </div>
 
-    <script>
-      window.addEventListener("load", function () {
-        var analyticsLoaded = false;
-        function loadAnalytics() {
-          if (analyticsLoaded) return;
-          analyticsLoaded = true;
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = function(){ window.dataLayer.push(arguments); };
-          var ga = document.createElement("script");
-          ga.async = true;
-          ga.src = "https://www.googletagmanager.com/gtag/js?id=G-Z9QZ4D45VW";
-          document.head.appendChild(ga);
-          window.gtag("js", new Date());
-          window.gtag("config", "G-Z9QZ4D45VW");
-
-          (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "xa579i1cky");
-        }
-        ["scroll", "touchstart", "pointerdown", "keydown"].forEach(function(eventName) {
-          window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
-        });
-        window.setTimeout(loadAnalytics, 15000);
-      });
-
-      (function () {
-        var modal = document.getElementById("demo-modal");
-        var frame = document.getElementById("demo-frame");
-        var embedUrl = "https://www.youtube.com/embed/jgtshkQz_ic?autoplay=1&rel=0&modestbranding=1";
-
-        function openDemo() {
-          frame.src = embedUrl;
-          modal.classList.add("open");
-        }
-
-        function closeDemo() {
-          modal.classList.remove("open");
-          frame.src = "";
-        }
-
-        document.querySelectorAll("[data-open-demo]").forEach(function (button) {
-          button.addEventListener("click", openDemo);
-        });
-        document.querySelector("[data-close-demo]").addEventListener("click", closeDemo);
-        modal.addEventListener("click", function (event) {
-          if (event.target === modal) closeDemo();
-        });
-        document.addEventListener("keydown", function (event) {
-          if (event.key === "Escape") closeDemo();
-        });
-      })();
-    </script>
   </body>
 </html>
