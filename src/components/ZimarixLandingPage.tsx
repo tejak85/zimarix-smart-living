@@ -637,17 +637,17 @@ export function CraftsmanshipSection() {
   const details = [
     {
       title: "6061 T6 aluminium grain",
-      alt: "CNC milling close-up of aircraft-grade aluminium 6061 T6 panel grain",
+      alt: "Close-up of CNC-milled aircraft-grade aluminium 6061 T6 grain on a Zimarix smart switch panel",
       image: cncMilledAluminiumGrain,
     },
     {
       title: "20+ micron anodised finish",
-      alt: "Anodised Zimarix aluminium faceplates showing multiple finish tones",
+      alt: "Zimarix anodised aluminium smart switch panels showing multiple premium finish tones",
       image: anodisedFinishPanels,
     },
     {
       title: "Milled touch button",
-      alt: "Close-up of milled metallic touch buttons in multiple finishes",
+      alt: "Close-up of milled metallic Zimarix touch buttons in multiple anodised finishes",
       image: milledTouchButton,
     },
   ];
@@ -742,7 +742,7 @@ export function FinishesSection() {
           >
             <img
               src={zimarixFinishesGroupPhoto}
-              alt="Studio product photo showing Zimarix panels in multiple anodised finishes"
+              alt="Studio product photo showing Zimarix anodised aluminium smart switch panels in graphite, bronze, silver, and gold finishes"
               className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.02]"
               loading="lazy"
             />
@@ -782,7 +782,7 @@ export function FinishesSection() {
             </button>
             <img
               src={zimarixFinishesGroupPhoto}
-              alt="Studio product photo showing Zimarix panels in multiple anodised finishes"
+              alt="Studio product photo showing Zimarix anodised aluminium smart switch panels in graphite, bronze, silver, and gold finishes"
               className="max-h-[92vh] w-full object-contain"
             />
           </div>

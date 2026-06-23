@@ -35,7 +35,7 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img
                 src="/zimarix-logo.png"
-                alt="Zimarix"
+                alt="Zimarix company logo"
                 className="w-10 h-10 rounded-xl object-cover"
               />
               <span className="font-bold text-xl tracking-tight">Zimarix</span>

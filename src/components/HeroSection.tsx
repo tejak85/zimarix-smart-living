@@ -28,7 +28,7 @@ export function HeroSection() {
               <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br from-card to-muted shadow-elevated sm:rounded-3xl">
                 <img
                   src={heroImage}
-                  alt="Zimarix Smart Switch Panel"
+                  alt="Zimarix premium smart switch panel installed in a modern Indian home"
                   className="h-[360px] w-full object-cover object-center sm:h-[520px] lg:h-auto"
                 />
               </div>

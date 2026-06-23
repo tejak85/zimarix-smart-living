@@ -42,7 +42,7 @@ export function InstallationSection() {
               <div className="relative rounded-3xl overflow-hidden shadow-elevated border border-border/50">
                 <img
                   src="/installation-image.png"
-                  alt="Zimarix Installation"
+                  alt="Zimarix smart switch panel installation by a technician in a modern home"
                   className="w-full h-auto"
                 />
 
