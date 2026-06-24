@@ -167,6 +167,12 @@ export function Footer() {
               >
                 Terms of Use
               </Link>
+              <a
+                href="/blog"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Blog
+              </a>
             </div>
 
             {/* Social Links */}

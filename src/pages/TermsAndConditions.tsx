@@ -359,13 +359,13 @@ export default function TermsAndConditions() {
           name="description"
           content="Terms of Use for the Zimarix mobile application, Amazon Alexa Skill, smart switch panels, and connected services."
         />
-        <link rel="canonical" href="/terms" />
+        <link rel="canonical" href="https://www.zimarix.com/terms" />
         <meta property="og:title" content="Zimarix Terms of Use" />
         <meta
           property="og:description"
           content="Terms of Use for the Zimarix mobile app, Amazon Alexa Skill, and connected services."
         />
-        <meta property="og:url" content="/terms" />
+        <meta property="og:url" content="https://www.zimarix.com/terms" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

@@ -1766,13 +1766,13 @@ export function ConsultationSection() {
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   defaultValue=""
                 >
-                  <option value="" disabled>
+                  <option className="bg-white text-slate-500" value="" disabled>
                     Select property type
                   </option>
-                  <option>Apartment</option>
-                  <option>Independent House</option>
-                  <option>Villa</option>
-                  <option>Commercial</option>
+                  <option className="bg-white text-slate-700">Apartment</option>
+                  <option className="bg-white text-slate-700">Independent House</option>
+                  <option className="bg-white text-slate-700">Villa</option>
+                  <option className="bg-white text-slate-700">Commercial</option>
                 </select>
               </label>
             </div>

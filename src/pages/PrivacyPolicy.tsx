@@ -381,13 +381,13 @@ export default function PrivacyPolicy() {
           name="description"
           content="Privacy Policy for the Zimarix mobile application, Amazon Alexa Skill, and connected services operated by Zimarix IoT Private Limited."
         />
-        <link rel="canonical" href="/privacy-policy" />
+        <link rel="canonical" href="https://www.zimarix.com/privacy-policy" />
         <meta property="og:title" content="Zimarix Privacy Policy" />
         <meta
           property="og:description"
           content="Privacy Policy for the Zimarix mobile application and Amazon Alexa Skill."
         />
-        <meta property="og:url" content="/privacy-policy" />
+        <meta property="og:url" content="https://www.zimarix.com/privacy-policy" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
