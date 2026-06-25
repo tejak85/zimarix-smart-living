@@ -25,8 +25,8 @@ import livingRoomInstall from "@/assets/zimarix-smart-switch-panel-premium-livin
 import masterBedroomPanel from "@/assets/zimarix-smart-switch-panel-master-bedroom-bangalore.webp";
 import milledTouchButton from "@/assets/zimarix-precision-touch-controls-smart-switch-panel.webp";
 import villaEntranceFoyer from "@/assets/zimarix-smart-switch-panel-villa-entryway-bangalore.webp";
-import zimarixExplodedView from "@/assets/zimarix-aluminium-6061-t6-smart-switch-panel-exploded-view.webp";
-import zimarixFinishesGroupPhoto from "@/assets/zimarix-smart-switch-panels-five-anodised-finishes-bangalore.webp";
+import zimarixExplodedView from "@/assets/zimarix-smart-home-automation-panel-aluminium-6061-t6.webp";
+import zimarixFinishesGroupPhoto from "@/assets/zimarix-smart-home-switch-panels-anodised-colors.webp";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -738,7 +738,7 @@ export function HeroSection() {
       <div className="absolute inset-0">
         <img
           src="/zimarix-luxury-smart-home-switch-panel-marble-wall-bangalore.webp"
-          alt="Zimarix premium smart home switch panel mounted on marble wall — Bangalore"
+          alt="Zimarix premium smart home switch panel mounted on marble wall — aircraft-grade aluminium anodised finish, Bangalore"
           width={1200}
           height={670}
           className="h-full w-full object-cover object-[22%_50%] opacity-100 contrast-110 saturate-110 sm:object-[24%_50%] lg:object-left"
@@ -935,7 +935,7 @@ export function FinishesSection() {
           >
             <img
               src={zimarixFinishesGroupPhoto}
-              alt="Zimarix smart switch panels in five anodised finishes — premium smart home automation Bangalore"
+              alt="Zimarix smart switch panels in five anodised finishes — Graphite, Espresso, Steel, Platinum and Olive — premium smart home automation Bangalore"
               width={1200}
               height={675}
               className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.02]"
@@ -959,7 +959,7 @@ export function FinishesSection() {
       {isOpen && (
         <ImageLightbox
           label="Finishes product photo preview"
-          alt="Zimarix smart switch panels in five anodised finishes — premium smart home automation Bangalore"
+          alt="Zimarix smart switch panels in five anodised finishes — Graphite, Espresso, Steel, Platinum and Olive — premium smart home automation Bangalore"
           image={zimarixFinishesGroupPhoto}
           width={1200}
           height={675}
@@ -1328,14 +1328,14 @@ export function EngineeringSection() {
           <div className="rounded-[2rem] border border-border bg-gradient-to-br from-muted to-background p-5 shadow-elevated sm:p-8">
             <div
               role="img"
-              aria-label="Zimarix smart switch panel exploded view — aluminium faceplate and FR4 housing"
+              aria-label="Zimarix smart switch panel exploded view showing aircraft-grade aluminium 6061 T6 faceplate, milled touch buttons, and precision FR4 housing"
               className="overflow-hidden rounded-3xl bg-[#0C1016] p-5 text-white sm:p-7"
             >
               <div className="relative overflow-hidden rounded-[1.4rem] bg-[#0C1016] p-3 sm:p-5">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),rgba(12,16,22,0)_58%)]" />
                 <img
                   src={zimarixExplodedView}
-                  alt="Zimarix smart switch panel exploded view showing aluminium faceplate and FR4 housing"
+                  alt="Zimarix smart switch panel exploded view showing aircraft-grade aluminium 6061 T6 faceplate, milled touch buttons, and precision FR4 housing"
                   width={760}
                   height={675}
                   className="relative h-auto w-full object-contain opacity-90 mix-blend-luminosity [filter:brightness(0.72)_contrast(1.18)_saturate(0.65)]"

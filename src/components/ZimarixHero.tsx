@@ -286,7 +286,7 @@ export function ZimarixHero() {
       <div className="absolute inset-0">
         <img
           src="/zimarix-luxury-smart-home-switch-panel-marble-wall-bangalore.webp"
-          alt="Zimarix premium smart home switch panel mounted on marble wall — Bangalore"
+          alt="Zimarix premium smart home switch panel mounted on marble wall — aircraft-grade aluminium anodised finish, Bangalore"
           width={1200}
           height={670}
           className="h-full w-full object-cover object-[22%_50%] opacity-100 contrast-110 saturate-110 sm:object-[24%_50%] lg:object-left"
