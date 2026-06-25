@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.zimarix.com/sitemap.xml
+Sitemap: https://www.zimarix.com/image-sitemap.xml

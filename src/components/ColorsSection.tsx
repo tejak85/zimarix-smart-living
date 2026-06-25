@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import colorOptionsImg from "@/assets/color-options.webp";
+import colorOptionsImg from "@/assets/zimarix-smart-switch-panel-colour-options-bangalore.webp";
 
 const finishes = [
   {
@@ -53,7 +53,7 @@ export function ColorsSection() {
         >
           <img
             src={colorOptionsImg}
-            alt="Zimarix smart switch panels in five finishes"
+            alt="Zimarix smart switch panels in five anodised finishes — Bangalore"
             width={1000}
             height={667}
             className="h-[260px] w-full object-cover object-center sm:h-auto"

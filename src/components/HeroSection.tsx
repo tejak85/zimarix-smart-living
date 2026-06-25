@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import heroImage from "@/assets/hero-switch-panel.webp";
+import heroImage from "@/assets/zimarix-premium-smart-home-switch-panel-bangalore.webp";
 
 export function HeroSection() {
   return (
@@ -28,7 +28,7 @@ export function HeroSection() {
               <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br from-card to-muted shadow-elevated sm:rounded-3xl">
                 <img
                   src={heroImage}
-                  alt="Zimarix premium smart switch panel installed in a modern Indian home"
+                  alt="Zimarix premium smart home switch panel mounted on marble wall — Bangalore"
                   width={1200}
                   height={800}
                   className="h-[360px] w-full object-cover object-center sm:h-[520px] lg:h-auto"

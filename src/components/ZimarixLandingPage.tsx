@@ -13,20 +13,20 @@ import {
   Smartphone,
 } from "lucide-react";
 import appDevices from "@/assets/app-devices.webp";
-import anodisedFinishPanels from "@/assets/anodised-finish-panels.webp";
-import apartmentHallway from "@/assets/apartment-hallway.webp";
+import anodisedFinishPanels from "@/assets/zimarix-anodised-aluminium-smart-switch-panels-bangalore.webp";
+import apartmentHallway from "@/assets/zimarix-smart-switch-panel-luxury-apartment-corridor.webp";
 import appRemote from "@/assets/app-remote.webp";
 import appRooms from "@/assets/app-rooms.webp";
 import appSwitches from "@/assets/app-switches.webp";
-import cncMilledAluminiumGrain from "@/assets/cnc-milled-aluminium-grain.webp";
-import diningRoomAutomation from "@/assets/dining-room-automation.webp";
-import homeTheatreWall from "@/assets/home-theatre-wall.webp";
-import livingRoomInstall from "@/assets/living-room-install.webp";
-import masterBedroomPanel from "@/assets/master-bedroom-panel.webp";
-import milledTouchButton from "@/assets/milled-touch-button.webp";
-import villaEntranceFoyer from "@/assets/villa-entrance-foyer.webp";
-import zimarixExplodedView from "@/assets/zimarix-exploded-view.webp";
-import zimarixFinishesGroupPhoto from "@/assets/zimarix-finishes-group-photo.webp";
+import cncMilledAluminiumGrain from "@/assets/zimarix-cnc-milled-aluminium-6061-t6-switch-panel-grain.webp";
+import diningRoomAutomation from "@/assets/zimarix-smart-home-control-panel-kitchen-dining-area.webp";
+import homeTheatreWall from "@/assets/zimarix-smart-switch-panel-media-room-installation.webp";
+import livingRoomInstall from "@/assets/zimarix-smart-switch-panel-premium-living-area.webp";
+import masterBedroomPanel from "@/assets/zimarix-smart-switch-panel-master-bedroom-bangalore.webp";
+import milledTouchButton from "@/assets/zimarix-precision-touch-controls-smart-switch-panel.webp";
+import villaEntranceFoyer from "@/assets/zimarix-smart-switch-panel-villa-entryway-bangalore.webp";
+import zimarixExplodedView from "@/assets/zimarix-aluminium-6061-t6-smart-switch-panel-exploded-view.webp";
+import zimarixFinishesGroupPhoto from "@/assets/zimarix-smart-switch-panels-five-anodised-finishes-bangalore.webp";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -424,7 +424,7 @@ function VideoPopup({
             {thumbnailUrl && (
               <img
                 src={thumbnailUrl}
-                alt=""
+                alt={`Zimarix smart home demo video preview for ${title}`}
                 className="h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105"
                 loading="eager"
                 decoding="async"
@@ -737,8 +737,8 @@ export function HeroSection() {
     <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-20 text-white sm:pt-24">
       <div className="absolute inset-0">
         <img
-          src="/hero-luxury-background.webp"
-          alt="Zimarix smart switch panel installed on a wall with blue LED accents"
+          src="/zimarix-luxury-smart-home-switch-panel-marble-wall-bangalore.webp"
+          alt="Zimarix premium smart home switch panel mounted on marble wall — Bangalore"
           width={1200}
           height={670}
           className="h-full w-full object-cover object-[22%_50%] opacity-100 contrast-110 saturate-110 sm:object-[24%_50%] lg:object-left"
@@ -822,21 +822,21 @@ export function CraftsmanshipSection() {
   const details = [
     {
       title: "6061 T6 aluminium grain",
-      alt: "Close-up of CNC-milled aircraft-grade aluminium 6061 T6 grain on a Zimarix smart switch panel",
+      alt: "Zimarix smart switch panel aluminium 6061 T6 grain — CNC milled finish",
       image: cncMilledAluminiumGrain,
       width: 900,
       height: 503,
     },
     {
       title: "20+ micron anodised finish",
-      alt: "Zimarix anodised aluminium smart switch panels showing multiple premium finish tones",
+      alt: "Zimarix smart switch panels — anodised aluminium finish tones for Bangalore homes",
       image: anodisedFinishPanels,
       width: 1000,
       height: 637,
     },
     {
       title: "Milled touch button",
-      alt: "Close-up of milled metallic Zimarix touch buttons in multiple anodised finishes",
+      alt: "Zimarix milled touch buttons — anodised aluminium smart switch panel detail",
       image: milledTouchButton,
       width: 760,
       height: 1183,
@@ -935,7 +935,7 @@ export function FinishesSection() {
           >
             <img
               src={zimarixFinishesGroupPhoto}
-              alt="Studio product photo showing Zimarix anodised aluminium smart switch panels in graphite, bronze, silver, and gold finishes"
+              alt="Zimarix smart switch panels in five anodised finishes — premium smart home automation Bangalore"
               width={1200}
               height={675}
               className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.02]"
@@ -959,7 +959,7 @@ export function FinishesSection() {
       {isOpen && (
         <ImageLightbox
           label="Finishes product photo preview"
-          alt="Studio product photo showing Zimarix anodised aluminium smart switch panels in graphite, bronze, silver, and gold finishes"
+          alt="Zimarix smart switch panels in five anodised finishes — premium smart home automation Bangalore"
           image={zimarixFinishesGroupPhoto}
           width={1200}
           height={675}
@@ -1328,14 +1328,14 @@ export function EngineeringSection() {
           <div className="rounded-[2rem] border border-border bg-gradient-to-br from-muted to-background p-5 shadow-elevated sm:p-8">
             <div
               role="img"
-              aria-label="SolidWorks exploded-view render showing Zimarix aluminium faceplate, milled touch buttons, and precision housing"
+              aria-label="Zimarix smart switch panel exploded view — aluminium faceplate and FR4 housing"
               className="overflow-hidden rounded-3xl bg-[#0C1016] p-5 text-white sm:p-7"
             >
               <div className="relative overflow-hidden rounded-[1.4rem] bg-[#0C1016] p-3 sm:p-5">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),rgba(12,16,22,0)_58%)]" />
                 <img
                   src={zimarixExplodedView}
-                  alt="SolidWorks exploded-view render of the Zimarix panel showing faceplate, milled touch buttons, and back housing"
+                  alt="Zimarix smart switch panel exploded view showing aluminium faceplate and FR4 housing"
                   width={760}
                   height={675}
                   className="relative h-auto w-full object-contain opacity-90 mix-blend-luminosity [filter:brightness(0.72)_contrast(1.18)_saturate(0.65)]"

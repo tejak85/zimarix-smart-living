@@ -257,7 +257,7 @@ function VideoPopup({
             {thumbnailUrl && (
               <img
                 src={thumbnailUrl}
-                alt=""
+                alt={`Zimarix smart home demo video preview for ${title}`}
                 className="h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105"
                 loading="eager"
                 decoding="async"
@@ -285,8 +285,8 @@ export function ZimarixHero() {
     <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-20 text-white sm:pt-24">
       <div className="absolute inset-0">
         <img
-          src="/hero-luxury-background.webp"
-          alt="Zimarix smart switch panel installed on a wall with blue LED accents"
+          src="/zimarix-luxury-smart-home-switch-panel-marble-wall-bangalore.webp"
+          alt="Zimarix premium smart home switch panel mounted on marble wall — Bangalore"
           width={1200}
           height={670}
           className="h-full w-full object-cover object-[22%_50%] opacity-100 contrast-110 saturate-110 sm:object-[24%_50%] lg:object-left"
