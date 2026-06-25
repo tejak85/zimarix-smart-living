@@ -18,6 +18,14 @@ export default function WarrantySupport() {
           name="description"
           content="Every Zimarix smart switch panel comes with a 5-year warranty, 48-hour diagnosis, and in-house service."
         />
+        <link rel="canonical" href="https://www.zimarix.com/warranty" />
+        <meta property="og:title" content="5-Year Warranty | Zimarix Support" />
+        <meta
+          property="og:description"
+          content="Every Zimarix smart switch panel comes with a 5-year warranty, 48-hour diagnosis, and in-house service."
+        />
+        <meta property="og:url" content="https://www.zimarix.com/warranty" />
+        <meta property="og:type" content="website" />
       </Helmet>
 
       <Navbar />
