@@ -1383,6 +1383,147 @@ export function EngineeringSection() {
   );
 }
 
+type ComparisonRow = {
+  feature: string;
+  regular: string;
+  zimarix: string;
+};
+
+const comparisonGroups: Array<{ label: string; rows: ComparisonRow[] }> = [
+  {
+    label: "Build quality",
+    rows: [
+      { feature: "Panel material", regular: "Glass or acrylic", zimarix: "Aluminium 6061 T6" },
+      { feature: "Plastic components", regular: "Yes", zimarix: "None" },
+      { feature: "Heat dissipation", regular: "Poor", zimarix: "Excellent" },
+      { feature: "Haptic feedback", regular: "No", zimarix: "Yes" },
+      { feature: "PCB finish", regular: "Standard", zimarix: "ENIG (Electroless Nickel Immersion Gold)" },
+    ],
+  },
+  {
+    label: "Connectivity",
+    rows: [
+      { feature: "Works without WiFi", regular: "No", zimarix: "Yes — Bluetooth fallback" },
+      { feature: "Works without internet", regular: "No", zimarix: "Yes" },
+      { feature: "Works without server", regular: "No", zimarix: "Yes — fully local" },
+      { feature: "Parallel app connections (without internet)", regular: "No", zimarix: "Yes — up to 10" },
+      { feature: "WiFi reconfiguration (walk through all devices)", regular: "No", zimarix: "Yes" },
+    ],
+  },
+  {
+    label: "Intelligence",
+    rows: [
+      { feature: "On-device intelligence", regular: "Low / cloud only", zimarix: "Very high" },
+      { feature: "Local server", regular: "No", zimarix: "Built-in" },
+      { feature: "Scenes without internet", regular: "No", zimarix: "Yes" },
+      { feature: "Scenes without extra device", regular: "No", zimarix: "Yes" },
+      { feature: "OTA upgrade", regular: "Maybe", zimarix: "Yes" },
+    ],
+  },
+  {
+    label: "Integrated hardware",
+    rows: [
+      { feature: "IR blaster", regular: "Separate device needed", zimarix: "Built-in" },
+      { feature: "IR multi-signal programming", regular: "No", zimarix: "Yes — chain commands in sequence" },
+      { feature: "PIR sensor", regular: "External device needed", zimarix: "Built-in" },
+      { feature: "Extra controller needed", regular: "Yes", zimarix: "Not needed" },
+    ],
+  },
+  {
+    label: "Monitoring & safety",
+    rows: [
+      { feature: "Device health monitoring", regular: "No", zimarix: "Yes" },
+      { feature: "Network monitoring", regular: "Maybe", zimarix: "Yes" },
+      { feature: "Internal heat detection", regular: "No", zimarix: "Yes — alerts at 75°C" },
+      { feature: "Home monitoring (without external device)", regular: "No", zimarix: "Yes — built-in PIR" },
+      { feature: "Power saving", regular: "External PIR needed", zimarix: "Internal PIR" },
+      { feature: "Event logs (alerts, errors, activity)", regular: "No", zimarix: "Yes" },
+      { feature: "Device internal stats", regular: "No", zimarix: "Yes" },
+    ],
+  },
+];
+
+function comparisonValueClass(value: string, column: "regular" | "zimarix") {
+  const normalizedValue = value.toLowerCase();
+
+  if (column === "regular") {
+    if (normalizedValue === "no") {
+      return "text-red-500/80";
+    }
+
+    return "text-muted-foreground";
+  }
+
+  if (normalizedValue.startsWith("yes")) {
+    return "font-semibold text-emerald-600";
+  }
+
+  return "font-medium text-foreground";
+}
+
+export function ComparisonSection() {
+  return (
+    <section id="compare" className="section-padding bg-muted/30">
+      <div className="container-tight">
+        <Reveal>
+          <div className="mx-auto max-w-4xl text-center">
+            <Eyebrow>WHY ZIMARIX</Eyebrow>
+            <h2 className="mt-6 font-heading text-[clamp(2.4rem,5.2vw,4.8rem)] font-medium leading-[1.08] tracking-[-0.045em] text-foreground">
+              25 differences. Not one of them small.
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              Regular smart panels vs Zimarix — a complete comparison.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="mx-auto mt-12 max-w-[900px] overflow-hidden rounded-[2rem] border border-border bg-background shadow-soft">
+            <div className="grid grid-cols-[0.95fr_0.95fr_1.1fr] border-b border-border bg-background text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground max-[400px]:text-[9px] sm:text-xs">
+              <div className="px-3 py-4 sm:px-5">Feature</div>
+              <div className="border-l border-border px-3 py-4 sm:px-5">Regular panels</div>
+              <div className="border-l border-accent/15 bg-accent/[0.06] px-3 py-4 text-accent sm:px-5">
+                Zimarix
+              </div>
+            </div>
+
+            {comparisonGroups.map((group) => (
+              <div key={group.label}>
+                <div className="border-b border-border bg-muted/60 px-3 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:px-5">
+                  {group.label}
+                </div>
+                {group.rows.map((row, index) => (
+                  <div
+                    key={`${group.label}-${row.feature}`}
+                    className={`grid grid-cols-[0.95fr_0.95fr_1.1fr] border-b border-border/80 text-xs leading-5 last:border-b-0 max-[400px]:text-[11px] sm:text-sm ${
+                      index % 2 === 0 ? "bg-background" : "bg-muted/25"
+                    }`}
+                  >
+                    <div className="px-3 py-4 font-medium text-foreground sm:px-5 sm:py-5">
+                      {row.feature}
+                    </div>
+                    <div className={`border-l border-border px-3 py-4 sm:px-5 sm:py-5 ${comparisonValueClass(row.regular, "regular")}`}>
+                      {row.regular}
+                    </div>
+                    <div className={`border-l border-accent/15 bg-accent/[0.035] px-3 py-4 sm:px-5 sm:py-5 ${comparisonValueClass(row.zimarix, "zimarix")}`}>
+                      {row.zimarix}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+
+            <div className="flex flex-col gap-2 border-t border-border bg-background px-4 py-4 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-5">
+              <p className="text-muted-foreground">25 differences. Not one of them small.</p>
+              <p className="font-semibold text-accent">zimarix.com</p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export function AppSection() {
   const screens = [
     {
@@ -1818,6 +1959,7 @@ export function ZimarixLandingPage() {
       <ReliabilitySection />
       <IntelligenceSection />
       <EngineeringSection />
+      <ComparisonSection />
       <AppSection />
       <RealHomesSection />
       <WarrantySupportSection />

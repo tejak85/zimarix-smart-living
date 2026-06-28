@@ -7,6 +7,7 @@ const navLinks = [
   { name: "Reliability", href: "/#reliability" },
   { name: "Intelligence", href: "/#intelligence" },
   { name: "Engineering", href: "/#engineering" },
+  { name: "Compare", href: "/#compare" },
   { name: "Warranty", href: "/#warranty-support" },
 ];
 
@@ -47,12 +48,12 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden items-center gap-4 md:flex lg:gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-300 ${
+                className={`text-xs font-medium transition-colors duration-300 lg:text-sm ${
                   isScrolled
                     ? "text-muted-foreground hover:text-foreground"
                     : "text-white/70 hover:text-white"
@@ -63,7 +64,7 @@ export function Navbar() {
             ))}
             <a
               href="/#consultation"
-              className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-all hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="rounded-full bg-accent px-3 py-2 text-xs font-semibold text-accent-foreground transition-all hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background lg:px-4 lg:text-sm"
             >
               Free Demo
             </a>
