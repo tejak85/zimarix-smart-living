@@ -753,6 +753,9 @@ export function HeroSection() {
       <div className="container-tight relative flex min-h-[calc(100vh-5rem)] flex-col justify-center pb-12 sm:pb-16 lg:pb-20">
         <Reveal>
           <div className="max-w-3xl lg:ml-auto lg:w-[56%]">
+            <p className="mb-5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-white/55">
+              SMART HOME AUTOMATION — R&amp;D &amp; MANUFACTURING — BANGALORE
+            </p>
             <h1 className="font-heading font-medium leading-[1.08] tracking-[-0.045em]">
               <span className="block text-[clamp(2.35rem,4.55vw,4.75rem)] text-white">
                 A switch that never feels <span className="text-accent">cheap.</span>
@@ -768,9 +771,6 @@ export function HeroSection() {
 
             <p className="mt-5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-white/55">
               This is Zimarix.
-            </p>
-            <p className="mt-3 text-sm leading-6 text-white/52 sm:text-base">
-              Premium smart home automation, engineered in Bangalore.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">

@@ -42,6 +42,9 @@ export function Footer() {
               />
               <span className="font-bold text-xl tracking-tight">Zimarix</span>
             </div>
+            <p className="mb-3 text-sm font-medium text-muted-foreground">
+              Smart Home Automation | R&amp;D &amp; Manufacturing | Bangalore
+            </p>
             <p className="text-xs text-muted-foreground mb-4 font-medium">
               ZIMARIX IOT PRIVATE LIMITED
             </p>
