@@ -1795,11 +1795,10 @@ export function ConsultationSection() {
       });
 
       form.reset();
-      setSubmitState("success");
-      setSubmitMessage("Thank you. We have received your request and will contact you soon.");
       trackGAEvent("consultation_form_submit", {
         location: "consultation_form",
       });
+      window.location.assign("/thank-you");
     } catch {
       setSubmitState("error");
       setSubmitMessage("Something went wrong. Please call or email us directly.");
