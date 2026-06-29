@@ -20,6 +20,14 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
+    if (!window.location.hash) {
+      return;
+    }
+
+    setLoadBelowFold(true);
+  }, []);
+
+  useEffect(() => {
     if (loadBelowFold) {
       return;
     }
@@ -39,6 +47,40 @@ const Index = () => {
       window.clearTimeout(timeout);
     };
   }, [loadBelowFold, loadRestOfPage]);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+
+    if (!hash) {
+      return;
+    }
+
+    let attempts = 0;
+    const maxAttempts = 30;
+
+    const scrollToHash = () => {
+      const target = document.querySelector(hash);
+
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+        window.clearInterval(interval);
+        return;
+      }
+
+      attempts += 1;
+      if (attempts >= maxAttempts) {
+        window.clearInterval(interval);
+      }
+    };
+
+    const timeout = window.setTimeout(scrollToHash, 300);
+    const interval = window.setInterval(scrollToHash, 100);
+
+    return () => {
+      window.clearTimeout(timeout);
+      window.clearInterval(interval);
+    };
+  }, [loadBelowFold]);
 
   return (
     <div className="min-h-screen bg-background">
