@@ -3,13 +3,16 @@ import { createPortal } from "react-dom";
 import {
   ArrowRight,
   Bluetooth,
+  Clock,
   Cloud,
   Cpu,
   Mail,
+  MapPin,
   Phone,
   PlayCircle,
   Router,
   Server,
+  Shield,
   Smartphone,
 } from "lucide-react";
 import appDevices from "@/assets/app-devices.webp";
@@ -225,7 +228,7 @@ function ConsultationCTA({
           : "border-foreground/15 bg-background/70 text-foreground hover:border-accent hover:text-accent"
       } ${className}`}
     >
-      Book a Free Demo
+      Book a Home Demo
       <ArrowRight className="h-4 w-4" />
     </a>
   );
@@ -732,11 +735,6 @@ function ImageLightbox({
 }
 
 export function HeroSection() {
-  const [activeDemo, setActiveDemo] = useState<{
-    title: string;
-    embedUrl: string;
-  } | null>(null);
-
   return (
     <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-20 text-white sm:pt-24">
       <div className="absolute inset-0">
@@ -782,18 +780,13 @@ export function HeroSection() {
                 trackingLocation="hero"
                 className="border-white/25 bg-white/10 text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md hover:border-accent hover:bg-accent hover:text-accent-foreground"
               />
-              <WatchDemoButton
-                variant="dark"
-                iconPosition="end"
-                onClick={() =>
-                  setActiveDemo({
-                    title: "See It In Action",
-                    embedUrl: FEATURE_DEMO_EMBED,
-                  })
-                }
+              <a
+                href="#reliability"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white/88 transition-all hover:border-accent hover:bg-accent/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
               >
-                See It In Action
-              </WatchDemoButton>
+                See How It Works
+                <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
 
             <p className="mt-6 rounded-full border border-white/12 bg-white/[0.06] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 backdrop-blur-md sm:inline-flex sm:text-left">
@@ -811,13 +804,6 @@ export function HeroSection() {
           </div>
         </Reveal>
       </div>
-      {activeDemo && (
-        <VideoPopup
-          title={activeDemo.title}
-          embedUrl={activeDemo.embedUrl}
-          onClose={() => setActiveDemo(null)}
-        />
-      )}
     </section>
   );
 }
@@ -1814,38 +1800,56 @@ export function ConsultationSection() {
       <div className="container-tight grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <Reveal>
           <div>
-            <Eyebrow>08 — Free Live Demo</Eyebrow>
+            <Eyebrow>How It Works</Eyebrow>
             <h2 className="mt-5 text-4xl font-medium leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-              See it before you decide. No pressure, no obligation.
+              Try it in your home first.
             </h2>
+            <p className="mt-4 max-w-lg text-xl leading-8 text-white/55 sm:text-2xl">
+              Order only when you&apos;re certain.
+            </p>
             <div className="mt-6 max-w-lg space-y-5 text-lg leading-8 text-white/68">
               <p>
-                Home automation has let a lot of people down — cheap builds,
-                unreliable apps, switches that stopped working when a company shut
-                down a server.
+                We install a demo panel in your home — live with it, control your
+                actual devices, see how it feels in your space.
               </p>
               <p>
-                We built Zimarix to be different. But we don't expect you to take our
-                word for it.
+                Not satisfied? We remove it and refund everything.
+                <br />
+                Satisfied? Then we talk about your home.
               </p>
-              <p>
-                Book a live demo. Watch it work — clusters, automation, intrusion
-                detection, temperature monitoring — in real time, on a real device.
-                Ask us anything.
-              </p>
-              <p>
-                If it feels right for your home, we'll talk. If it doesn't, you've
-                lost nothing but an hour.
-              </p>
+              <p>We don&apos;t take orders from people who aren&apos;t certain.</p>
             </div>
-            <p className="mt-5 max-w-lg text-sm leading-7 text-white/52">
-              What to expect: a 45-minute hands-on session at your location or ours,
-              where you control the device yourself.
-            </p>
-            <p className="mt-3 max-w-lg text-sm leading-7 text-white/52">
-              Serving premium homes across Bangalore, Whitefield, Koramangala,
-              Indiranagar, and HSR Layout.
-            </p>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-3">
+              {[
+                {
+                  icon: MapPin,
+                  label: "Book a home demo",
+                  description:
+                    "We bring a working panel to your home and install it so you can experience it in your actual space.",
+                },
+                {
+                  icon: Clock,
+                  label: "Live with it",
+                  description:
+                    "Control your lights, fans, AC, and appliances. See how it feels. No pressure, no timeline.",
+                },
+                {
+                  icon: Shield,
+                  label: "Order only if certain",
+                  description:
+                    "Not satisfied? We remove it and refund everything. We only take orders from people who are certain.",
+                },
+              ].map((step) => (
+                <div key={step.label}>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/10">
+                    <step.icon className="h-5 w-5 text-accent" />
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold text-white">{step.label}</h3>
+                  <p className="mt-2 text-sm leading-7 text-white/58">{step.description}</p>
+                </div>
+              ))}
+            </div>
 
             <div className="mt-8 space-y-3 text-white/75">
               <a className="flex items-center gap-3 hover:text-white" href="mailto:contact@zimarix.com">
@@ -1869,6 +1873,11 @@ export function ConsultationSection() {
             className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl sm:p-8"
             onSubmit={handleConsultationSubmit}
           >
+            <p className="mb-6 text-center text-sm leading-7 text-white/45">
+              Not satisfied after the home demo? We remove the panel and refund everything.
+              No questions.
+            </p>
+            <h3 className="mb-6 text-2xl font-semibold text-white">Book your home demo</h3>
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="block">
                 <span className="text-sm font-medium text-white/75">Name</span>
@@ -1930,7 +1939,7 @@ export function ConsultationSection() {
               }
               className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
             >
-              {submitState === "submitting" ? "Submitting..." : "Book a Free Live Demo →"}
+              {submitState === "submitting" ? "Submitting..." : "Request a Home Demo"}
             </button>
             {submitMessage && (
               <p

@@ -108,7 +108,7 @@ function ConsultationCTA({ trackingLocation }: { trackingLocation: string }) {
       }
       className="inline-flex items-center justify-center gap-3 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-7"
     >
-      Book a Free Demo
+      Book a Home Demo
       <span aria-hidden="true">→</span>
     </a>
   );
@@ -276,11 +276,6 @@ function VideoPopup({
 }
 
 export function ZimarixHero() {
-  const [activeDemo, setActiveDemo] = useState<{
-    title: string;
-    embedUrl: string;
-  } | null>(null);
-
   return (
     <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-20 text-white sm:pt-24">
       <div className="absolute inset-0">
@@ -322,16 +317,15 @@ export function ZimarixHero() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <ConsultationCTA trackingLocation="hero" />
-            <WatchDemoButton
-              onClick={() =>
-                setActiveDemo({
-                  title: "See It In Action",
-                  embedUrl: FEATURE_DEMO_EMBED,
-                })
-              }
+            <a
+              href="#reliability"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white/88 transition-all hover:border-accent hover:bg-accent/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
             >
-              See It In Action
-            </WatchDemoButton>
+              See How It Works
+              <span aria-hidden="true" className="text-[0.7rem] leading-none">
+                →
+              </span>
+            </a>
           </div>
 
           <p className="mt-6 rounded-full border border-white/12 bg-white/[0.06] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 backdrop-blur-md sm:inline-flex sm:text-left">
@@ -348,14 +342,6 @@ export function ZimarixHero() {
           </div>
         </div>
       </div>
-
-      {activeDemo && (
-        <VideoPopup
-          title={activeDemo.title}
-          embedUrl={activeDemo.embedUrl}
-          onClose={() => setActiveDemo(null)}
-        />
-      )}
     </section>
   );
 }
