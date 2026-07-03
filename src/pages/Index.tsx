@@ -48,6 +48,37 @@ const Index = () => {
     };
   }, [loadBelowFold, loadRestOfPage]);
 
+  // The below-fold chunks only *render* once the user interacts (see above) —
+  // that keeps the initial hero paint fast. But if we wait until the first
+  // scroll event to even start fetching the JS, anyone who scrolls quickly
+  // right after the page loads can outrun the network request and hit a
+  // visibly blank section for a moment. So we warm the module cache in the
+  // background as soon as the browser is idle, well before the user is
+  // likely to have scrolled — the render itself still waits for interaction.
+  useEffect(() => {
+    if (loadBelowFold) {
+      return;
+    }
+
+    const prefetch = () => {
+      import("@/components/ZimarixLandingPage");
+      import("@/components/Footer");
+    };
+
+    const win = window as Window & {
+      requestIdleCallback?: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (typeof win.requestIdleCallback === "function") {
+      const handle = win.requestIdleCallback(prefetch, { timeout: 2000 });
+      return () => win.cancelIdleCallback?.(handle);
+    }
+
+    const timeoutId = window.setTimeout(prefetch, 1000);
+    return () => window.clearTimeout(timeoutId);
+  }, [loadBelowFold]);
+
   useEffect(() => {
     const hash = window.location.hash;
 

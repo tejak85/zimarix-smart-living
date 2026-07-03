@@ -70,7 +70,7 @@ function usePrefersReducedMotion() {
   return reduceMotion;
 }
 
-function useActivateOnView<T extends HTMLElement>(threshold = 0.75) {
+function useActivateOnView<T extends HTMLElement>(threshold = 0.2) {
   const reduceMotion = usePrefersReducedMotion();
   const ref = useRef<T>(null);
   const [isActive, setIsActive] = useState(false);
@@ -92,7 +92,11 @@ function useActivateOnView<T extends HTMLElement>(threshold = 0.75) {
           observer.disconnect();
         }
       },
-      { threshold },
+      // Extend the trigger zone below the viewport so content finishes
+      // revealing itself before it's actually scrolled into view, instead
+      // of fading in while the user is already looking at it (or worse,
+      // still being blank if they scroll past it quickly).
+      { threshold, rootMargin: "0px 0px 300px 0px" },
     );
 
     observer.observe(node);
