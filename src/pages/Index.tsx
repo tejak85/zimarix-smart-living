@@ -1,4 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { FloatingCTA } from "@/components/FloatingCTA";
 import { Navbar } from "@/components/Navbar";
 import { ZimarixHero } from "@/components/ZimarixHero";
 
@@ -17,6 +18,32 @@ const Index = () => {
   const [loadBelowFold, setLoadBelowFold] = useState(false);
   const loadRestOfPage = useCallback(() => {
     setLoadBelowFold(true);
+  }, []);
+
+  const scrollToConsultation = useCallback(() => {
+    setLoadBelowFold(true);
+
+    const scroll = () => {
+      const target = document.getElementById("consultation");
+
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+        return true;
+      }
+
+      return false;
+    };
+
+    if (scroll()) {
+      return;
+    }
+
+    let attempts = 0;
+    const interval = window.setInterval(() => {
+      if (scroll() || ++attempts >= 30) {
+        window.clearInterval(interval);
+      }
+    }, 100);
   }, []);
 
   useEffect(() => {
@@ -129,6 +156,7 @@ const Index = () => {
           <Footer />
         </Suspense>
       )}
+      <FloatingCTA onBookDemo={scrollToConsultation} />
     </div>
   );
 };

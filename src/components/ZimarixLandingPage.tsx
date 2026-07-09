@@ -1768,8 +1768,8 @@ export function ConsultationSection() {
     const payload = new URLSearchParams({
       name: String(formData.get("name") || ""),
       phone: String(formData.get("phone") || ""),
-      city: String(formData.get("city") || ""),
-      propertyType: String(formData.get("propertyType") || ""),
+      city: "Bangalore",
+      propertyType: "",
       source: "zimarix.com",
       submittedAt: new Date().toISOString(),
     });
@@ -1873,14 +1873,29 @@ export function ConsultationSection() {
             className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl sm:p-8"
             onSubmit={handleConsultationSubmit}
           >
-            <p className="mb-6 text-center text-sm leading-7 text-white/45">
-              Not satisfied after the home demo? We remove the panel and refund everything.
-              No questions.
+            <h3 className="mb-4 text-2xl font-semibold text-white">
+              Book a home demo — we&apos;ll call you within 24 hours.
+            </h3>
+            <p className="mb-6 text-base leading-7 text-white/58">
+              Because every Zimarix panel is milled and anodised in-house, we work with a
+              limited number of homes at a time. Share your number and we&apos;ll be in touch
+              within 24 hours.
             </p>
-            <h3 className="mb-6 text-2xl font-semibold text-white">Book your home demo</h3>
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-5">
               <label className="block">
-                <span className="text-sm font-medium text-white/75">Name</span>
+                <span className="text-sm font-medium text-white/75">Your phone number</span>
+                <input
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  required
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  placeholder="+91 98765 43210"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-white/75">Your name</span>
                 <input
                   name="name"
                   type="text"
@@ -1890,45 +1905,10 @@ export function ConsultationSection() {
                   placeholder="Your name"
                 />
               </label>
-              <label className="block">
-                <span className="text-sm font-medium text-white/75">Phone</span>
-                <input
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  required
-                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                  placeholder="+91"
-                />
-              </label>
-              <label className="block">
-                <span className="text-sm font-medium text-white/75">City</span>
-                <input
-                  name="city"
-                  type="text"
-                  autoComplete="address-level2"
-                  required
-                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-white/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                />
-              </label>
-              <label className="block">
-                <span className="text-sm font-medium text-white/75">Property Type</span>
-                <select
-                  name="propertyType"
-                  required
-                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                  defaultValue=""
-                >
-                  <option className="bg-white text-slate-500" value="" disabled>
-                    Select property type
-                  </option>
-                  <option className="bg-white text-slate-700">Apartment</option>
-                  <option className="bg-white text-slate-700">Independent House</option>
-                  <option className="bg-white text-slate-700">Villa</option>
-                  <option className="bg-white text-slate-700">Commercial</option>
-                </select>
-              </label>
             </div>
+            <p className="mt-5 text-xs leading-5 text-white/45">
+              Not satisfied after the demo? We remove the panel and refund everything.
+            </p>
             <button
               type="submit"
               disabled={submitState === "submitting"}
@@ -1937,9 +1917,9 @@ export function ConsultationSection() {
                   location: "consultation_form",
                 })
               }
-              className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
+              className="mt-4 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
             >
-              {submitState === "submitting" ? "Submitting..." : "Request a Home Demo"}
+              {submitState === "submitting" ? "Sending..." : "Request a Demo Call"}
             </button>
             {submitMessage && (
               <p
