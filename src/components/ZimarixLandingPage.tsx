@@ -1796,7 +1796,7 @@ export function ConsultationSection() {
   };
 
   return (
-    <section id="consultation" className="section-padding bg-[#07090C] text-white">
+    <section id="consultation" className="section-padding scroll-mt-24 bg-[#07090C] text-white">
       <div className="container-tight grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <Reveal>
           <div>

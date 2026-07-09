@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { FloatingCTA } from "@/components/FloatingCTA";
 import { Navbar } from "@/components/Navbar";
 import { ZimarixHero } from "@/components/ZimarixHero";
@@ -14,36 +14,119 @@ const Footer = lazy(() =>
   })),
 );
 
+const NAVBAR_OFFSET = 88;
+
 const Index = () => {
   const [loadBelowFold, setLoadBelowFold] = useState(false);
+  const pendingConsultationScrollRef = useRef(false);
+  const consultationScrollCleanupRef = useRef<(() => void) | null>(null);
+
   const loadRestOfPage = useCallback(() => {
     setLoadBelowFold(true);
   }, []);
 
-  const scrollToConsultation = useCallback(() => {
-    setLoadBelowFold(true);
+  const alignToConsultation = useCallback((smooth: boolean) => {
+    const target = document.getElementById("consultation");
 
-    const scroll = () => {
-      const target = document.getElementById("consultation");
-
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-        return true;
-      }
-
+    if (!target) {
       return false;
-    };
-
-    if (scroll()) {
-      return;
     }
 
+    const absoluteTop = target.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET;
+    window.scrollTo({
+      top: Math.max(0, absoluteTop),
+      behavior: smooth ? "smooth" : "auto",
+    });
+    return true;
+  }, []);
+
+  const scrollToConsultation = useCallback(() => {
+    setLoadBelowFold(true);
+    pendingConsultationScrollRef.current = true;
+    consultationScrollCleanupRef.current?.();
+
     let attempts = 0;
-    const interval = window.setInterval(() => {
-      if (scroll() || ++attempts >= 30) {
-        window.clearInterval(interval);
+    const maxAttempts = 60;
+    let hasScrolledOnce = false;
+    let settleTimer: number | undefined;
+    let pollTimer: number | undefined;
+    let resizeObserver: ResizeObserver | null = null;
+
+    const stop = () => {
+      pendingConsultationScrollRef.current = false;
+      if (settleTimer !== undefined) {
+        window.clearTimeout(settleTimer);
       }
-    }, 100);
+      if (pollTimer !== undefined) {
+        window.clearTimeout(pollTimer);
+      }
+      resizeObserver?.disconnect();
+      consultationScrollCleanupRef.current = null;
+    };
+
+    const scheduleSettleStop = () => {
+      if (settleTimer !== undefined) {
+        window.clearTimeout(settleTimer);
+      }
+      // Keep correcting for a short window while images above the form load.
+      settleTimer = window.setTimeout(stop, 1800);
+    };
+
+    const tick = () => {
+      if (!pendingConsultationScrollRef.current) {
+        return;
+      }
+
+      const target = document.getElementById("consultation");
+
+      if (!target) {
+        attempts += 1;
+        if (attempts < maxAttempts) {
+          pollTimer = window.setTimeout(tick, 100);
+        } else {
+          stop();
+        }
+        return;
+      }
+
+      const absoluteTop = target.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET;
+      const distanceFromTarget = Math.abs(window.scrollY - absoluteTop);
+
+      if (!hasScrolledOnce || distanceFromTarget > 48) {
+        alignToConsultation(!hasScrolledOnce);
+        hasScrolledOnce = true;
+      }
+
+      scheduleSettleStop();
+
+      if (!resizeObserver) {
+        resizeObserver = new ResizeObserver(() => {
+          if (!pendingConsultationScrollRef.current) {
+            return;
+          }
+          alignToConsultation(false);
+          scheduleSettleStop();
+        });
+        resizeObserver.observe(document.documentElement);
+      }
+
+      attempts += 1;
+      if (attempts < 20) {
+        pollTimer = window.setTimeout(tick, 120);
+      }
+    };
+
+    consultationScrollCleanupRef.current = stop;
+
+    window.requestAnimationFrame(() => {
+      pollTimer = window.setTimeout(tick, 50);
+    });
+  }, [alignToConsultation]);
+
+  useEffect(() => {
+    return () => {
+      consultationScrollCleanupRef.current?.();
+    };
   }, []);
 
   useEffect(() => {
