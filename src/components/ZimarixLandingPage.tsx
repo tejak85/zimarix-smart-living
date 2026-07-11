@@ -3,16 +3,13 @@ import { createPortal } from "react-dom";
 import {
   ArrowRight,
   Bluetooth,
-  Clock,
   Cloud,
   Cpu,
   Mail,
-  MapPin,
   Phone,
   PlayCircle,
   Router,
   Server,
-  Shield,
   Smartphone,
 } from "lucide-react";
 import appDevices from "@/assets/app-devices.webp";
@@ -30,6 +27,13 @@ import milledTouchButton from "@/assets/zimarix-precision-touch-controls-smart-s
 import villaEntranceFoyer from "@/assets/zimarix-smart-switch-panel-villa-entryway-bangalore.webp";
 import zimarixExplodedView from "@/assets/zimarix-smart-home-automation-panel-aluminium-6061-t6.webp";
 import zimarixFinishesGroupPhoto from "@/assets/zimarix-smart-home-switch-panels-anodised-colors.webp";
+import {
+  BATCH_NAME,
+  BATCH_SPOTS_REMAINING,
+  BATCH_SPOTS_TOTAL,
+  BATCH_YEAR,
+  isBatchFull,
+} from "@/config/batchAvailability";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -1745,9 +1749,12 @@ export function WarrantySupportSection() {
   );
 }
 
+/** Update BATCH_SPOTS_REMAINING in src/config/batchAvailability.ts as spots fill. */
+
 export function ConsultationSection() {
   const [submitState, setSubmitState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
+  const batchFull = isBatchFull();
 
   const handleConsultationSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -1800,55 +1807,21 @@ export function ConsultationSection() {
       <div className="container-tight grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <Reveal>
           <div>
-            <Eyebrow>How It Works</Eyebrow>
+            <Eyebrow>Founding Homes — Limited Availability</Eyebrow>
             <h2 className="mt-5 text-4xl font-medium leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-              Try it in your home first.
+              Now accepting installations.
             </h2>
             <p className="mt-4 max-w-lg text-xl leading-8 text-white/55 sm:text-2xl">
-              Order only when you&apos;re certain.
+              {batchFull
+                ? `${BATCH_NAME} ${BATCH_YEAR} batch is full.`
+                : `${BATCH_NAME} ${BATCH_YEAR} batch — ${BATCH_SPOTS_REMAINING} spots remaining.`}
             </p>
             <div className="mt-6 max-w-lg space-y-5 text-lg leading-8 text-white/68">
               <p>
-                We install a demo panel in your home — live with it, control your
-                actual devices, see how it feels in your space.
+                Every Zimarix panel is milled and anodised in-house. We work with a
+                limited number of homes at a time. This batch closes when all{" "}
+                {BATCH_SPOTS_TOTAL} spots are filled.
               </p>
-              <p>
-                Not satisfied? We remove it and refund everything.
-                <br />
-                Satisfied? Then we talk about your home.
-              </p>
-              <p>We don&apos;t take orders from people who aren&apos;t certain.</p>
-            </div>
-
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
-              {[
-                {
-                  icon: MapPin,
-                  label: "Book a home demo",
-                  description:
-                    "We bring a working panel to your home and install it so you can experience it in your actual space.",
-                },
-                {
-                  icon: Clock,
-                  label: "Live with it",
-                  description:
-                    "Control your lights, fans, AC, and appliances. See how it feels. No pressure, no timeline.",
-                },
-                {
-                  icon: Shield,
-                  label: "Order only if certain",
-                  description:
-                    "Not satisfied? We remove it and refund everything. We only take orders from people who are certain.",
-                },
-              ].map((step) => (
-                <div key={step.label}>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/10">
-                    <step.icon className="h-5 w-5 text-accent" />
-                  </div>
-                  <h3 className="mt-4 text-base font-semibold text-white">{step.label}</h3>
-                  <p className="mt-2 text-sm leading-7 text-white/58">{step.description}</p>
-                </div>
-              ))}
             </div>
 
             <div className="mt-8 space-y-3 text-white/75">
@@ -1873,14 +1846,6 @@ export function ConsultationSection() {
             className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl sm:p-8"
             onSubmit={handleConsultationSubmit}
           >
-            <h3 className="mb-4 text-2xl font-semibold text-white">
-              Book a home demo — we&apos;ll call you within 24 hours.
-            </h3>
-            <p className="mb-6 text-base leading-7 text-white/58">
-              Because every Zimarix panel is milled and anodised in-house, we work with a
-              limited number of homes at a time. Share your number and we&apos;ll be in touch
-              within 24 hours.
-            </p>
             <div className="grid gap-5">
               <label className="block">
                 <span className="text-sm font-medium text-white/75">Your phone number</span>
@@ -1906,9 +1871,6 @@ export function ConsultationSection() {
                 />
               </label>
             </div>
-            <p className="mt-5 text-xs leading-5 text-white/45">
-              Not satisfied after the demo? We remove the panel and refund everything.
-            </p>
             <button
               type="submit"
               disabled={submitState === "submitting"}
@@ -1917,10 +1879,32 @@ export function ConsultationSection() {
                   location: "consultation_form",
                 })
               }
-              className="mt-4 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
+              className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
             >
-              {submitState === "submitting" ? "Sending..." : "Request a Demo Call"}
+              {submitState === "submitting"
+                ? "Sending..."
+                : batchFull
+                  ? "Join the Waitlist"
+                  : "Reserve My Spot"}
             </button>
+            <p className="mt-4 text-sm leading-6 text-white/55">
+              No payment now. We&apos;ll call you within 24 hours to confirm your spot and
+              discuss your home.
+            </p>
+            <p className="mt-3 text-sm font-semibold leading-6 text-accent">
+              {batchFull ? (
+                <>
+                  {BATCH_NAME} batch is full.
+                  <br />
+                  Join the waitlist for October {BATCH_YEAR}.
+                </>
+              ) : (
+                <>
+                  {BATCH_SPOTS_REMAINING} of {BATCH_SPOTS_TOTAL} spots remaining in{" "}
+                  {BATCH_NAME} batch
+                </>
+              )}
+            </p>
             {submitMessage && (
               <p
                 className={`mt-4 rounded-2xl border px-4 py-3 text-sm leading-6 ${
@@ -1934,7 +1918,7 @@ export function ConsultationSection() {
               </p>
             )}
             <p className="mt-4 text-sm leading-6 text-white/45">
-              Your details are used only to contact you about your Zimarix consultation.
+              Your details are used only to contact you about your Zimarix installation.
             </p>
           </form>
         </Reveal>

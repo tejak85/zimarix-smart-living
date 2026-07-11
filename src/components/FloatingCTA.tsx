@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BATCH_SPOTS_REMAINING, isBatchFull } from "@/config/batchAvailability";
 
 declare global {
   interface Window {
@@ -23,6 +24,9 @@ const CONSULTATION_HIDE_THRESHOLD = 100;
 
 export function FloatingCTA({ onBookDemo }: FloatingCTAProps) {
   const [visible, setVisible] = useState(false);
+  const ctaLabel = isBatchFull()
+    ? "Join Waitlist — Batch Full →"
+    : `Reserve a Spot — ${BATCH_SPOTS_REMAINING} Left →`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,13 +70,13 @@ export function FloatingCTA({ onBookDemo }: FloatingCTAProps) {
       onClick={handleClick}
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
-      className={`fixed z-[999] inline-flex items-center justify-center rounded-full bg-accent px-7 py-[14px] text-sm font-semibold text-accent-foreground shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C] max-sm:inset-x-4 max-sm:bottom-5 max-sm:w-[calc(100%-2rem)] sm:bottom-8 sm:right-8 sm:max-w-[240px] ${
+      className={`fixed z-[999] inline-flex items-center justify-center rounded-full bg-accent px-7 py-[14px] text-sm font-semibold text-accent-foreground shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C] max-sm:inset-x-4 max-sm:bottom-5 max-sm:w-[calc(100%-2rem)] sm:bottom-8 sm:right-8 sm:max-w-[320px] ${
         visible
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-2 opacity-0"
       }`}
     >
-      Book a Home Demo →
+      {ctaLabel}
     </button>
   );
 }
