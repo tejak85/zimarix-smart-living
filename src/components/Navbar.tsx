@@ -11,7 +11,11 @@ const navLinks = [
   { name: "Warranty", href: "/#warranty-support" },
 ];
 
-export function Navbar() {
+export function Navbar({
+  topOffsetClassName = "top-0",
+}: {
+  topOffsetClassName?: string;
+}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -25,7 +29,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ${topOffsetClassName} ${
         isScrolled
           ? "bg-background/80 text-foreground backdrop-blur-xl border-b border-border/50 shadow-soft"
           : "bg-transparent text-white"

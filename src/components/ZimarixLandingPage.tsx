@@ -27,13 +27,7 @@ import milledTouchButton from "@/assets/zimarix-precision-touch-controls-smart-s
 import villaEntranceFoyer from "@/assets/zimarix-smart-switch-panel-villa-entryway-bangalore.webp";
 import zimarixExplodedView from "@/assets/zimarix-smart-home-automation-panel-aluminium-6061-t6.webp";
 import zimarixFinishesGroupPhoto from "@/assets/zimarix-smart-home-switch-panels-anodised-colors.webp";
-import {
-  BATCH_NAME,
-  BATCH_SPOTS_REMAINING,
-  BATCH_SPOTS_TOTAL,
-  BATCH_YEAR,
-  isBatchFull,
-} from "@/config/batchAvailability";
+import { useSpots } from "@/hooks/useSpots";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -1749,12 +1743,12 @@ export function WarrantySupportSection() {
   );
 }
 
-/** Update BATCH_SPOTS_REMAINING in src/config/batchAvailability.ts as spots fill. */
+/** Spots remaining comes from /api/spots via SpotsProvider (refreshes every 60s). */
 
 export function ConsultationSection() {
   const [submitState, setSubmitState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
-  const batchFull = isBatchFull();
+  const { remaining, total, batch, year, isFull: batchFull } = useSpots();
 
   const handleConsultationSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -1803,7 +1797,7 @@ export function ConsultationSection() {
   };
 
   return (
-    <section id="consultation" className="section-padding scroll-mt-24 bg-[#07090C] text-white">
+    <section id="consultation" className="section-padding scroll-mt-36 bg-[#07090C] text-white">
       <div className="container-tight grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <Reveal>
           <div>
@@ -1813,14 +1807,14 @@ export function ConsultationSection() {
             </h2>
             <p className="mt-4 max-w-lg text-xl leading-8 text-white/55 sm:text-2xl">
               {batchFull
-                ? `${BATCH_NAME} ${BATCH_YEAR} batch is full.`
-                : `${BATCH_NAME} ${BATCH_YEAR} batch — ${BATCH_SPOTS_REMAINING} spots remaining.`}
+                ? `${batch} ${year} batch is full.`
+                : `${batch} ${year} batch — ${remaining} spots remaining.`}
             </p>
             <div className="mt-6 max-w-lg space-y-5 text-lg leading-8 text-white/68">
               <p>
                 Every Zimarix panel is milled and anodised in-house. We work with a
-                limited number of homes at a time. This batch closes when all{" "}
-                {BATCH_SPOTS_TOTAL} spots are filled.
+                limited number of homes at a time. This batch closes when all {total}{" "}
+                spots are filled.
               </p>
             </div>
 
@@ -1894,14 +1888,13 @@ export function ConsultationSection() {
             <p className="mt-3 text-sm font-semibold leading-6 text-accent">
               {batchFull ? (
                 <>
-                  {BATCH_NAME} batch is full.
+                  {batch} batch is full.
                   <br />
-                  Join the waitlist for October {BATCH_YEAR}.
+                  Join the waitlist for October {year}.
                 </>
               ) : (
                 <>
-                  {BATCH_SPOTS_REMAINING} of {BATCH_SPOTS_TOTAL} spots remaining in{" "}
-                  {BATCH_NAME} batch
+                  {remaining} of {total} spots remaining in {batch} batch
                 </>
               )}
             </p>

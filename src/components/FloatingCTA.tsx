@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BATCH_SPOTS_REMAINING, isBatchFull } from "@/config/batchAvailability";
+import { useSpots } from "@/hooks/useSpots";
 
 declare global {
   interface Window {
@@ -24,9 +24,10 @@ const CONSULTATION_HIDE_THRESHOLD = 100;
 
 export function FloatingCTA({ onBookDemo }: FloatingCTAProps) {
   const [visible, setVisible] = useState(false);
-  const ctaLabel = isBatchFull()
+  const { remaining, isFull } = useSpots();
+  const ctaLabel = isFull
     ? "Join Waitlist — Batch Full →"
-    : `Reserve a Spot — ${BATCH_SPOTS_REMAINING} Left →`;
+    : `Reserve — ${remaining} Spots Left →`;
 
   useEffect(() => {
     const handleScroll = () => {

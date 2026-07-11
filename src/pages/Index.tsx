@@ -1,7 +1,9 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { FloatingCTA } from "@/components/FloatingCTA";
 import { Navbar } from "@/components/Navbar";
 import { ZimarixHero } from "@/components/ZimarixHero";
+import { SpotsProvider } from "@/hooks/useSpots";
 
 const ZimarixLandingPage = lazy(() =>
   import("@/components/ZimarixLandingPage").then((module) => ({
@@ -14,7 +16,7 @@ const Footer = lazy(() =>
   })),
 );
 
-const NAVBAR_OFFSET = 88;
+const NAVBAR_OFFSET = 128;
 
 const Index = () => {
   const [loadBelowFold, setLoadBelowFold] = useState(false);
@@ -224,23 +226,26 @@ const Index = () => {
   }, [loadBelowFold]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main>
-        <ZimarixHero />
+    <SpotsProvider>
+      <div className="min-h-screen bg-background">
+        <AnnouncementBar onReserve={scrollToConsultation} />
+        <Navbar topOffsetClassName="top-10" />
+        <main>
+          <ZimarixHero />
+          {loadBelowFold && (
+            <Suspense fallback={null}>
+              <ZimarixLandingPage />
+            </Suspense>
+          )}
+        </main>
         {loadBelowFold && (
           <Suspense fallback={null}>
-            <ZimarixLandingPage />
+            <Footer />
           </Suspense>
         )}
-      </main>
-      {loadBelowFold && (
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
-      )}
-      <FloatingCTA onBookDemo={scrollToConsultation} />
-    </div>
+        <FloatingCTA onBookDemo={scrollToConsultation} />
+      </div>
+    </SpotsProvider>
   );
 };
 

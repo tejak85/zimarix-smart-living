@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useSpots } from "@/hooks/useSpots";
 
 const FEATURE_DEMO_EMBED =
   "https://www.youtube.com/embed/kSxo5FUI3A8?autoplay=1&rel=0&modestbranding=1";
@@ -98,6 +99,8 @@ function usePopupHistory(onDismiss: () => void) {
 }
 
 function ConsultationCTA({ trackingLocation }: { trackingLocation: string }) {
+  const { remaining, isFull } = useSpots();
+
   return (
     <a
       href="#consultation"
@@ -108,8 +111,7 @@ function ConsultationCTA({ trackingLocation }: { trackingLocation: string }) {
       }
       className="inline-flex items-center justify-center gap-3 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-7"
     >
-      Reserve Your Spot
-      <span aria-hidden="true">→</span>
+      {isFull ? "Join the Waitlist →" : `Reserve Your Spot — ${remaining} Left →`}
     </a>
   );
 }
@@ -277,7 +279,7 @@ function VideoPopup({
 
 export function ZimarixHero() {
   return (
-    <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-20 text-white sm:pt-24">
+    <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-[7.5rem] text-white sm:pt-[8.5rem]">
       <div className="absolute inset-0">
         <img
           src="/zimarix-luxury-smart-home-switch-panel-marble-wall-bangalore.webp"
@@ -297,6 +299,9 @@ export function ZimarixHero() {
         <div className="max-w-3xl lg:ml-auto lg:w-[56%]">
           <p className="mb-5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-white/55">
             SMART HOME AUTOMATION — R&amp;D &amp; MANUFACTURING — BANGALORE
+          </p>
+          <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.28em] text-accent">
+            Founding Homes — September 2026
           </p>
           <h1 className="font-heading font-medium leading-[1.08] tracking-[-0.045em]">
             <span className="block text-[clamp(2.35rem,4.55vw,4.75rem)] text-white">
