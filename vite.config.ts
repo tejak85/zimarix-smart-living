@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 const DEFAULT_SPOTS = {
-  remaining: Number(process.env.SPOTS_REMAINING ?? 8),
+  remaining: Number(process.env.SPOTS_REMAINING ?? 3),
   total: Number(process.env.SPOTS_TOTAL ?? 8),
   batch: process.env.SPOTS_BATCH || "September",
   year: Number(process.env.SPOTS_YEAR ?? 2026),

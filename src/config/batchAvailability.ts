@@ -5,7 +5,7 @@
 export const BATCH_NAME = "September";
 export const BATCH_YEAR = 2026;
 export const BATCH_SPOTS_TOTAL = 8;
-export const BATCH_SPOTS_REMAINING = 8;
+export const BATCH_SPOTS_REMAINING = 3;
 
 export const isBatchFull = (remaining = BATCH_SPOTS_REMAINING) => remaining <= 0;
 

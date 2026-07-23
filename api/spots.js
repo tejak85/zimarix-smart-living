@@ -6,7 +6,7 @@
  * GET /api/spots → { remaining, total, batch, year }
  */
 const DEFAULTS = {
-  remaining: 8,
+  remaining: 3,
   total: 8,
   batch: "September",
   year: 2026,
