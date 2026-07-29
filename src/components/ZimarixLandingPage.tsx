@@ -27,6 +27,7 @@ import milledTouchButton from "@/assets/zimarix-precision-touch-controls-smart-s
 import villaEntranceFoyer from "@/assets/zimarix-smart-switch-panel-villa-entryway-bangalore.webp";
 import zimarixExplodedView from "@/assets/zimarix-smart-home-automation-panel-aluminium-6061-t6.webp";
 import zimarixFinishesGroupPhoto from "@/assets/zimarix-smart-home-switch-panels-anodised-colors.webp";
+import zimarixPanelSizesLineup from "@/assets/zimarix-smart-switch-panel-sizes-1x3-1x4-2x3-scene-controller-bangalore.webp";
 import { useSpots } from "@/hooks/useSpots";
 
 type RevealProps = {
@@ -909,6 +910,7 @@ export function CraftsmanshipSection() {
 
 export function FinishesSection() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSizesOpen, setIsSizesOpen] = useState(false);
 
   return (
     <section id="finishes" className="section-padding bg-muted/30">
@@ -949,10 +951,29 @@ export function FinishesSection() {
           </p>
         </Reveal>
 
-        <Reveal>
+        <Reveal delay={0.1}>
           <p className="mt-10 border-t border-border pt-5 text-lg font-semibold leading-relaxed text-foreground">
             Available across every panel size — 1x3, 1x4, and 2x3. And the scene
             controller, finished to match.
+          </p>
+          <button
+            type="button"
+            onClick={() => setIsSizesOpen(true)}
+            className="group mt-6 block overflow-hidden rounded-[2rem] bg-background shadow-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            aria-label="Open panel sizes and scene controller product photo"
+          >
+            <img
+              src={zimarixPanelSizesLineup}
+              alt="Zimarix smart switch panel sizes — 1x3, 1x4 and 2x3 — with matching scene controller, premium smart home automation Bangalore"
+              width={1400}
+              height={725}
+              className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            Shown: the full panel lineup and scene controller. Click to enlarge.
           </p>
         </Reveal>
       </div>
@@ -965,6 +986,19 @@ export function FinishesSection() {
           width={1200}
           height={675}
           onClose={() => setIsOpen(false)}
+          containerClassName="bg-white"
+          showCaption={false}
+        />
+      )}
+
+      {isSizesOpen && (
+        <ImageLightbox
+          label="Panel sizes and scene controller product photo preview"
+          alt="Zimarix smart switch panel sizes — 1x3, 1x4 and 2x3 — with matching scene controller, premium smart home automation Bangalore"
+          image={zimarixPanelSizesLineup}
+          width={1400}
+          height={725}
+          onClose={() => setIsSizesOpen(false)}
           containerClassName="bg-white"
           showCaption={false}
         />
