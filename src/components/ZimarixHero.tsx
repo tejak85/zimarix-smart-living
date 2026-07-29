@@ -312,7 +312,8 @@ export function ZimarixHero({ onBookDemo }: { onBookDemo: () => void }) {
           </p>
           <h1 className="font-heading font-medium leading-[1.08] tracking-[-0.045em]">
             <span className="block text-[clamp(2.35rem,4.55vw,4.75rem)] text-white">
-              A switch that never feels <span className="text-accent">cheap.</span>
+              A panel milled from aircraft-grade alloy — not glass, not{" "}
+              <span className="text-accent">plastic.</span>
             </span>
             <span className="mt-3 block text-[clamp(1.95rem,3.75vw,4.05rem)] text-white">
               A touch that never <span className="text-accent">lags.</span>
