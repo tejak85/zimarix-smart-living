@@ -205,21 +205,34 @@ function ConsultationCTA({
   variant = "primary",
   className = "",
   trackingLocation = "unknown",
+  onBookDemo,
 }: {
   variant?: "primary" | "secondary";
   className?: string;
   trackingLocation?: string;
+  onBookDemo?: () => void;
 }) {
   const isPrimary = variant === "primary";
 
+  const handleClick = () => {
+    trackGAEvent("book_consultation_click", {
+      location: trackingLocation,
+    });
+
+    if (onBookDemo) {
+      onBookDemo();
+      return;
+    }
+
+    // Fallback for call sites that haven't been wired up to the
+    // navbar-offset-aware scroll helper yet.
+    document.getElementById("consultation")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <a
-      href="#consultation"
-      onClick={() =>
-        trackGAEvent("book_consultation_click", {
-          location: trackingLocation,
-        })
-      }
+    <button
+      type="button"
+      onClick={handleClick}
       className={`inline-flex items-center justify-center gap-3 rounded-full border px-6 py-3 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-7 ${
         isPrimary
           ? "border-accent bg-accent text-accent-foreground shadow-blue hover:-translate-y-0.5 hover:bg-accent/90"
@@ -228,7 +241,7 @@ function ConsultationCTA({
     >
       Book a Home Demo
       <ArrowRight className="h-4 w-4" />
-    </a>
+    </button>
   );
 }
 
@@ -960,7 +973,7 @@ export function FinishesSection() {
   );
 }
 
-export function ReliabilitySection() {
+export function ReliabilitySection({ onBookDemo }: { onBookDemo?: () => void } = {}) {
   const paths = [
     { icon: Router, label: "Local socket", note: "Primary path", primary: true },
     { icon: Server, label: "Server", note: "When away" },
@@ -1004,6 +1017,7 @@ export function ReliabilitySection() {
               variant="secondary"
               trackingLocation="reliability"
               className="mt-9 border-white/20 bg-white/5 text-white"
+              onBookDemo={onBookDemo}
             />
           </div>
         </Reveal>
@@ -1134,7 +1148,7 @@ export function ReliabilitySection() {
   );
 }
 
-export function IntelligenceSection() {
+export function IntelligenceSection({ onBookDemo }: { onBookDemo?: () => void } = {}) {
   const scenarios = [
     {
       visual: "cluster",
@@ -1221,7 +1235,11 @@ export function IntelligenceSection() {
           <p className="max-w-2xl text-2xl font-semibold leading-snug text-foreground">
             This is what your switches do when they're actually thinking.
           </p>
-          <ConsultationCTA variant="secondary" trackingLocation="intelligence" />
+          <ConsultationCTA
+            variant="secondary"
+            trackingLocation="intelligence"
+            onBookDemo={onBookDemo}
+          />
         </Reveal>
       </div>
       {activeDemo && (
@@ -1606,7 +1624,7 @@ export function AppSection() {
   );
 }
 
-export function RealHomesSection() {
+export function RealHomesSection({ onBookDemo }: { onBookDemo?: () => void } = {}) {
   const homes = [
     {
       label: "Living room application",
@@ -1662,7 +1680,11 @@ export function RealHomesSection() {
               How it looks, <span className="text-accent">where it lives.</span>
             </h2>
           </div>
-          <ConsultationCTA variant="secondary" trackingLocation="design_reference" />
+          <ConsultationCTA
+            variant="secondary"
+            trackingLocation="design_reference"
+            onBookDemo={onBookDemo}
+          />
         </Reveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -1920,17 +1942,17 @@ export function ConsultationSection() {
   );
 }
 
-export function ZimarixLandingPage() {
+export function ZimarixLandingPage({ onBookDemo }: { onBookDemo?: () => void } = {}) {
   return (
     <>
       <CraftsmanshipSection />
       <FinishesSection />
-      <ReliabilitySection />
-      <IntelligenceSection />
+      <ReliabilitySection onBookDemo={onBookDemo} />
+      <IntelligenceSection onBookDemo={onBookDemo} />
       <EngineeringSection />
       <ComparisonSection />
       <AppSection />
-      <RealHomesSection />
+      <RealHomesSection onBookDemo={onBookDemo} />
       <WarrantySupportSection />
       <ConsultationSection />
     </>

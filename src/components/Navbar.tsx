@@ -2,6 +2,20 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+function trackGAEvent(eventName: string, eventParams?: Record<string, string>) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", eventName, eventParams ?? {});
+}
+
 const navLinks = [
   { name: "Craft", href: "/#craftsmanship" },
   { name: "Reliability", href: "/#reliability" },
@@ -13,11 +27,21 @@ const navLinks = [
 
 export function Navbar({
   topOffsetClassName = "top-0",
+  onBookDemo,
 }: {
   topOffsetClassName?: string;
+  onBookDemo?: () => void;
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Pages other than the homepage don't have the consultation section
+  // mounted, so fall back to a real cross-page navigation to it.
+  const handleBookDemo =
+    onBookDemo ??
+    (() => {
+      window.location.href = "/#consultation";
+    });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,12 +90,16 @@ export function Navbar({
                 {link.name}
               </a>
             ))}
-            <a
-              href="/#consultation"
+            <button
+              type="button"
+              onClick={() => {
+                trackGAEvent("book_consultation_click", { location: "navbar_desktop" });
+                handleBookDemo();
+              }}
               className="rounded-full bg-accent px-3 py-2 text-xs font-semibold text-accent-foreground transition-all hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background lg:px-4 lg:text-sm"
             >
               Free Demo
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,13 +130,17 @@ export function Navbar({
                 {link.name}
               </a>
             ))}
-            <a
-              href="/#consultation"
+            <button
+              type="button"
               className="mt-2 rounded-xl bg-accent px-3 py-3 text-center font-semibold text-accent-foreground transition-colors hover:bg-accent/90"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                trackGAEvent("book_consultation_click", { location: "navbar_mobile" });
+                setIsMobileMenuOpen(false);
+                handleBookDemo();
+              }}
             >
               Free Demo
-            </a>
+            </button>
           </div>
         </div>
       )}

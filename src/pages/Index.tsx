@@ -229,12 +229,12 @@ const Index = () => {
     <SpotsProvider>
       <div className="min-h-screen bg-background">
         <AnnouncementBar onReserve={scrollToConsultation} />
-        <Navbar topOffsetClassName="top-10" />
+        <Navbar topOffsetClassName="top-10" onBookDemo={scrollToConsultation} />
         <main>
-          <ZimarixHero />
+          <ZimarixHero onBookDemo={scrollToConsultation} />
           {loadBelowFold && (
             <Suspense fallback={null}>
-              <ZimarixLandingPage />
+              <ZimarixLandingPage onBookDemo={scrollToConsultation} />
             </Suspense>
           )}
         </main>

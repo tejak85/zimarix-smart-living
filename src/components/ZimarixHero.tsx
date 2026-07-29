@@ -98,21 +98,28 @@ function usePopupHistory(onDismiss: () => void) {
   }, []);
 }
 
-function ConsultationCTA({ trackingLocation }: { trackingLocation: string }) {
+function ConsultationCTA({
+  trackingLocation,
+  onBookDemo,
+}: {
+  trackingLocation: string;
+  onBookDemo: () => void;
+}) {
   const { remaining, isFull } = useSpots();
 
   return (
-    <a
-      href="#consultation"
-      onClick={() =>
+    <button
+      type="button"
+      onClick={() => {
         trackGAEvent("book_consultation_click", {
           location: trackingLocation,
-        })
-      }
+        });
+        onBookDemo();
+      }}
       className="inline-flex items-center justify-center gap-3 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-7"
     >
       {isFull ? "Join the Waitlist →" : `Reserve Your Spot — ${remaining} Left →`}
-    </a>
+    </button>
   );
 }
 
@@ -277,7 +284,7 @@ function VideoPopup({
   );
 }
 
-export function ZimarixHero() {
+export function ZimarixHero({ onBookDemo }: { onBookDemo: () => void }) {
   return (
     <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-[7.5rem] text-white sm:pt-[8.5rem]">
       <div className="absolute inset-0">
@@ -321,7 +328,7 @@ export function ZimarixHero() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <ConsultationCTA trackingLocation="hero" />
+            <ConsultationCTA trackingLocation="hero" onBookDemo={onBookDemo} />
             <a
               href="#reliability"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white/88 transition-all hover:border-accent hover:bg-accent/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#07090C]"
