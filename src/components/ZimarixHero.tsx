@@ -6,6 +6,18 @@ const FEATURE_DEMO_EMBED =
   "https://www.youtube.com/embed/kSxo5FUI3A8?autoplay=1&rel=0&modestbranding=1";
 const MODAL_HISTORY_STATE = "__zimarixModal";
 
+// Hero background rotation.
+// Add more image paths here (drop the files into /public first) to enable
+// auto-rotation — with only one entry the hero simply stays static.
+const HERO_BACKGROUND_IMAGES: string[] = [
+  "/zimarix-luxury-smart-home-switch-panel-marble-wall-bangalore.webp",
+  "/zimarix-smart-home-switch-panel-marble-luxury-interior-bangalore.webp",
+  "/zimarix-smart-home-automation-controller-macro-detail.webp",
+  "/zimarix-smart-home-switch-panel-bedside-marble-bangalore.webp",
+];
+const HERO_ROTATION_INTERVAL_MS = 3500;
+const HERO_CROSSFADE_MS = 500;
+
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -34,6 +46,25 @@ function usePrefersReducedMotion() {
   }, []);
 
   return reduceMotion;
+}
+
+function useHeroBackgroundRotation(images: string[], intervalMs: number) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const reduceMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (images.length <= 1 || reduceMotion) {
+      return;
+    }
+
+    const id = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % images.length);
+    }, intervalMs);
+
+    return () => window.clearInterval(id);
+  }, [images.length, intervalMs, reduceMotion]);
+
+  return activeIndex;
 }
 
 function usePopupHistory(onDismiss: () => void) {
@@ -285,18 +316,30 @@ function VideoPopup({
 }
 
 export function ZimarixHero({ onBookDemo }: { onBookDemo: () => void }) {
+  const activeBackgroundIndex = useHeroBackgroundRotation(
+    HERO_BACKGROUND_IMAGES,
+    HERO_ROTATION_INTERVAL_MS,
+  );
+
   return (
     <section id="hero" className="relative overflow-hidden bg-[#07090C] pt-[7.5rem] text-white sm:pt-[8.5rem]">
       <div className="absolute inset-0">
-        <img
-          src="/zimarix-luxury-smart-home-switch-panel-marble-wall-bangalore.webp"
-          alt="Zimarix premium smart home switch panel mounted on marble wall — aircraft-grade aluminium anodised finish, Bangalore"
-          width={1200}
-          height={670}
-          className="h-full w-full object-cover object-[22%_50%] opacity-100 contrast-110 saturate-110 sm:object-[24%_50%] lg:object-left"
-          fetchPriority="high"
-          decoding="async"
-        />
+        {HERO_BACKGROUND_IMAGES.map((src, index) => (
+          <img
+            key={src}
+            src={src}
+            alt="Zimarix premium smart home switch panel mounted on marble wall — aircraft-grade aluminium anodised finish, Bangalore"
+            width={1200}
+            height={670}
+            className={`absolute inset-0 h-full w-full object-cover object-[22%_50%] contrast-110 saturate-110 transition-opacity ease-in-out sm:object-[24%_50%] lg:object-left ${
+              index === activeBackgroundIndex ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ transitionDuration: `${HERO_CROSSFADE_MS}ms` }}
+            fetchPriority={index === 0 ? "high" : undefined}
+            loading={index === 0 ? undefined : "lazy"}
+            decoding="async"
+          />
+        ))}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_46%,rgba(30,140,255,0.12),transparent_22%),radial-gradient(circle_at_28%_48%,transparent_0%,transparent_36%,rgba(7,9,12,0.08)_56%,rgba(7,9,12,0.84)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,12,0)_0%,rgba(7,9,12,0.02)_34%,rgba(7,9,12,0.48)_62%,rgba(7,9,12,0.94)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,9,12,0.2)_0%,rgba(7,9,12,0)_42%,#07090C_100%)]" />
