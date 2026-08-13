@@ -36,8 +36,8 @@ export function Footer() {
               <img
                 src="/zimarix-logo.webp"
                 alt="Zimarix company logo"
-                width={256}
-                height={256}
+                width={128}
+                height={128}
                 className="w-10 h-10 rounded-xl object-cover"
               />
               <span className="font-bold text-xl tracking-tight">Zimarix</span>
