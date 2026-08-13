@@ -5,6 +5,7 @@ import Index from "./pages/Index";
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const WarrantySupport = lazy(() => import("./pages/WarrantySupport"));
+const Products = lazy(() => import("./pages/Products"));
 const ThankYou = lazy(() => import("./pages/ThankYou"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -16,6 +17,7 @@ const App = () => (
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/warranty" element={<WarrantySupport />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/alexa-terms-of-use" element={<Navigate to="/terms#alexa-skill" replace />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

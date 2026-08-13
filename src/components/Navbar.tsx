@@ -17,6 +17,7 @@ function trackGAEvent(eventName: string, eventParams?: Record<string, string>) {
 }
 
 const navLinks = [
+  { name: "Products", href: "/products" },
   { name: "Craft", href: "/#craftsmanship" },
   { name: "Reliability", href: "/#reliability" },
   { name: "Intelligence", href: "/#intelligence" },
