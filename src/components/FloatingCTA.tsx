@@ -26,7 +26,7 @@ export function FloatingCTA({ onBookDemo }: FloatingCTAProps) {
   const [visible, setVisible] = useState(false);
   const { remaining, isFull } = useSpots();
   const ctaLabel = isFull
-    ? "Join Waitlist — Batch Full →"
+    ? "At Capacity — Enter for a Callback →"
     : `Reserve — ${remaining} Spots Left →`;
 
   useEffect(() => {

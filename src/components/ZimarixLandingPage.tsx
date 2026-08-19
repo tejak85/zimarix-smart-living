@@ -1857,20 +1857,22 @@ export function ConsultationSection() {
       <div className="container-tight grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <Reveal>
           <div>
-            <Eyebrow>Founding Homes — Limited Availability</Eyebrow>
+            <Eyebrow>
+              {batchFull ? "Founding Homes — At Full Capacity" : "Founding Homes — Limited Availability"}
+            </Eyebrow>
             <h2 className="mt-5 text-4xl font-medium leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-              Now accepting installations.
+              {batchFull ? "Production is at full capacity." : "Now accepting installations."}
             </h2>
             <p className="mt-4 max-w-lg text-xl leading-8 text-white/55 sm:text-2xl">
               {batchFull
-                ? `${batch} ${year} batch is full.`
+                ? `${batch} ${year} batch is full. Enter your number for a callback.`
                 : `${batch} ${year} batch — ${remaining} spots remaining.`}
             </p>
             <div className="mt-6 max-w-lg space-y-5 text-lg leading-8 text-white/68">
               <p>
-                Every Zimarix panel is milled and anodised in-house. We work with a
-                limited number of homes at a time. This batch closes when all {total}{" "}
-                spots are filled.
+                {batchFull
+                  ? `Every Zimarix panel is milled and anodised in-house, so we work with a limited number of homes at a time. This batch's all ${total} spots are filled — leave your number and we'll call you back the moment the next batch opens.`
+                  : `Every Zimarix panel is milled and anodised in-house. We work with a limited number of homes at a time. This batch closes when all ${total} spots are filled.`}
               </p>
             </div>
 
@@ -1934,19 +1936,20 @@ export function ConsultationSection() {
               {submitState === "submitting"
                 ? "Sending..."
                 : batchFull
-                  ? "Join the Waitlist"
+                  ? "Enter for a Callback"
                   : "Reserve My Spot"}
             </button>
             <p className="mt-4 text-sm leading-6 text-white/55">
-              No payment now. We&apos;ll call you within 24 hours to confirm your spot and
-              discuss your home.
+              {batchFull
+                ? "No payment now. We'll call you back as soon as the next slot opens."
+                : "No payment now. We'll call you within 24 hours to confirm your spot and discuss your home."}
             </p>
             <p className="mt-3 text-sm font-semibold leading-6 text-accent">
               {batchFull ? (
                 <>
-                  {batch} batch is full.
+                  {batch} {year} batch is full — production at full capacity.
                   <br />
-                  Join the waitlist for October {year}.
+                  Enter your number and we&apos;ll call you back.
                 </>
               ) : (
                 <>

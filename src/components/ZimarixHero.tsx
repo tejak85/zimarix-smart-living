@@ -149,7 +149,7 @@ function ConsultationCTA({
       }}
       className="inline-flex items-center justify-center gap-3 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(30,140,255,0.18)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-7"
     >
-      {isFull ? "Join the Waitlist →" : `Reserve Your Spot — ${remaining} Left →`}
+      {isFull ? "Enter for a Callback →" : `Reserve Your Spot — ${remaining} Left →`}
     </button>
   );
 }
