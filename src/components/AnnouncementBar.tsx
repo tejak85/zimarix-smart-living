@@ -19,14 +19,9 @@ export function AnnouncementBar({ onReserve }: AnnouncementBarProps) {
       }
     >
       {isFull ? (
-        <>
-          <span className="text-[13px] font-medium tracking-[0.04em] text-accent sm:hidden">
-            Production at full capacity · Enter for a callback →
-          </span>
-          <span className="hidden text-[13px] font-medium tracking-[0.04em] text-accent sm:inline">
-            September 2026 batch is full · Production at full capacity · Enter for a callback →
-          </span>
-        </>
+        <span className="text-[13px] font-medium tracking-[0.04em] text-accent">
+          Production at full capacity · Enter for a callback →
+        </span>
       ) : (
         <>
           <span className="text-[13px] font-medium tracking-[0.04em] text-accent sm:hidden">

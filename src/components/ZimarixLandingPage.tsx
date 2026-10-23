@@ -1865,7 +1865,7 @@ export function ConsultationSection() {
             </h2>
             <p className="mt-4 max-w-lg text-xl leading-8 text-white/55 sm:text-2xl">
               {batchFull
-                ? `${batch} ${year} batch is full. Enter your number for a callback.`
+                ? "Enter your number for a callback."
                 : `${batch} ${year} batch — ${remaining} spots remaining.`}
             </p>
             <div className="mt-6 max-w-lg space-y-5 text-lg leading-8 text-white/68">
@@ -1947,7 +1947,7 @@ export function ConsultationSection() {
             <p className="mt-3 text-sm font-semibold leading-6 text-accent">
               {batchFull ? (
                 <>
-                  {batch} {year} batch is full — production at full capacity.
+                  Production at full capacity.
                   <br />
                   Enter your number and we&apos;ll call you back.
                 </>
